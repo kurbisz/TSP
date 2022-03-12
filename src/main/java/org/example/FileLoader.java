@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.parser.AtspParser;
 import org.example.parser.Parser;
+import org.example.parser.TspParser;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -58,12 +59,14 @@ public class FileLoader {
 			if (line.contains("TYPE")) {
 				try {
 					String type = line.split(":")[1].trim();
-					if(type == null) return null;
 					if(type.equals("ATSP")) return new AtspParser(str);
-					return null;
-				} catch (NumberFormatException | IndexOutOfBoundsException e) {
-					return null;
-				}
+				} catch (NumberFormatException | IndexOutOfBoundsException e) { }
+			}
+			else if (line.contains("EDGE_WEIGHT_FORMAT")) {
+				try {
+					String type = line.split(":")[1].trim();
+					if(type.equals("LOWER_DIAG_ROW")) return new TspParser(str);
+				} catch (NumberFormatException | IndexOutOfBoundsException e) { }
 			}
 		}
 		return null;

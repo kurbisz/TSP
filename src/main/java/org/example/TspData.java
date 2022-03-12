@@ -8,6 +8,10 @@ public class TspData {
 	public TspData(int n, int dist[][]) {
 		this.n = n;
 		this.distance = dist;
+		// Set all distances point to same point to -1
+		for(int i = 0; i < n; i++) {
+			dist[i][i] = -1;
+		}
 	}
 
 	public int[][] getDistance() {
@@ -22,7 +26,7 @@ public class TspData {
 	 * Gives distance between two points.
 	 * @param from index of 'from point'
 	 * @param to index of 'to point'
-	 * @return distance if points are valid; -2 otherwise
+	 * @return distance if points are valid; -1 when from == to; -2 otherwise
 	 */
 	public int getDistance(int from, int to) {
 		if(from < 0 || from >= n || to < 0 || to >= n) return -2;
