@@ -1,6 +1,8 @@
 package org.example;
 
+import org.example.data.TspData;
 import org.example.parser.AtspParser;
+import org.example.parser.EucParser;
 import org.example.parser.Parser;
 import org.example.parser.TspParser;
 
@@ -24,9 +26,18 @@ public class FileLoader {
 	public void load() {
 		try {
 			FileInputStream fileInputStream = new FileInputStream(fileName);
-			GZIPInputStream gzipInputStream = new GZIPInputStream(fileInputStream);
-			BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(gzipInputStream, "UTF-8"));
+			BufferedReader bufferedReader;
+			boolean gzip = fileName.contains(".gz");
+			GZIPInputStream gzipInputStream = null;
+			if(gzip) {
+				gzipInputStream = new GZIPInputStream(fileInputStream);
+				bufferedReader = new BufferedReader(
+						new InputStreamReader(gzipInputStream, "UTF-8"));
+			}
+			else {
+				bufferedReader = new BufferedReader(
+						new InputStreamReader(fileInputStream, "UTF-8"));
+			}
 			StringBuilder builder = new StringBuilder();
 			String line;
 			while((line = bufferedReader.readLine()) != null) {
@@ -35,7 +46,9 @@ public class FileLoader {
 			}
 			String fileStr = builder.toString();
 			bufferedReader.close();
-			gzipInputStream.close();
+			if(gzip) {
+				gzipInputStream.close();
+			}
 			fileInputStream.close();
 
 			Parser parser = getParser(fileStr);
@@ -56,7 +69,13 @@ public class FileLoader {
 		if(str == null) return null;
 		String spl[] = str.split("\n");
 		for(String line : spl) {
-			if (line.contains("TYPE")) {
+			if (line.contains("EDGE_WEIGHT_TYPE")) {
+				try {
+					String type = line.split(":")[1].trim();
+					if(type.equals("EUC_2D")) return new EucParser(str);
+				} catch (NumberFormatException | IndexOutOfBoundsException e) { }
+			}
+			else if (line.contains("TYPE")) {
 				try {
 					String type = line.split(":")[1].trim();
 					if(type.equals("ATSP")) return new AtspParser(str);

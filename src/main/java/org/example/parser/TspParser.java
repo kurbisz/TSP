@@ -1,6 +1,6 @@
 package org.example.parser;
 
-import org.example.TspData;
+import org.example.data.TspData;
 
 public class TspParser extends Parser {
 

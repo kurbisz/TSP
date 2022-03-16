@@ -1,6 +1,6 @@
 package org.example.algorithm;
 
-import org.example.TspData;
+import org.example.data.TspData;
 
 public abstract class Algorithm {
 

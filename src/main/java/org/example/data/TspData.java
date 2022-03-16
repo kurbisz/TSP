@@ -1,4 +1,4 @@
-package org.example;
+package org.example.data;
 
 public class TspData {
 
@@ -36,6 +36,7 @@ public class TspData {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
+		builder.append("Type: Normal");
 		builder.append(n);
 		builder.append('\n');
 		for(int i = 0; i < n; i++) {
