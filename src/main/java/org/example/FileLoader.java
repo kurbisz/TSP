@@ -67,7 +67,7 @@ public class FileLoader {
 
 	private Parser getParser(String str) {
 		if(str == null) return null;
-		String spl[] = str.split("\n");
+		String[] spl = str.split("\n");
 		for(String line : spl) {
 			if (line.contains("EDGE_WEIGHT_TYPE")) {
 				try {
