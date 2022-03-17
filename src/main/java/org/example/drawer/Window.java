@@ -19,6 +19,6 @@ public class Window extends JFrame {
     public void generateDrawingPanel(){
         drawingPanel = new JPanel();
         drawingPanel.setBackground(bgdCol);
-
+        //TODO
     }
 }

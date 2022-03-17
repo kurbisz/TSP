@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="Implemented loading euc2d files and storing data">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/data/Result.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/KRandom.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/NearestNeighbour.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/ThreeOpt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/TwoOpt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/algorithm/SimpleAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/SimpleAlgorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/drawer/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/drawer/Window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/random/EuclideanTSPGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/random/EuclideanTSPGen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

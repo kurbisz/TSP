@@ -1,5 +1,6 @@
 package org.example.algorithm;
 
+import org.example.data.Result;
 import org.example.data.TspData;
 
 public abstract class Algorithm {
@@ -17,7 +18,6 @@ public abstract class Algorithm {
 		}
 	}
 
-	public abstract void calculate();
-
+	public abstract Result calculate();
 
 }

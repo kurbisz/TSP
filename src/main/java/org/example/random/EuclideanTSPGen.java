@@ -126,6 +126,7 @@ public class EuclideanTSPGen extends TSPGenerator{
             for(int j = metroCount; j>0 && i > 0; j--, i--){
                 WritePoint sateliteCity = new WritePoint();
 //                sateliteCity.x
+                //TODO (opt)
             }
         }
 

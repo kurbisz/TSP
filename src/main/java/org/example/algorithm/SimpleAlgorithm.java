@@ -1,5 +1,6 @@
 package org.example.algorithm;
 
+import org.example.data.Result;
 import org.example.data.TspData;
 
 public class SimpleAlgorithm extends Algorithm {
@@ -9,7 +10,7 @@ public class SimpleAlgorithm extends Algorithm {
 	}
 
 	@Override
-	public void calculate() {
+	public Result calculate() {
 
 	}
 
