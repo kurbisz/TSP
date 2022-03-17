@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="Implemented loading euc2d files and storing data">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/RunClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/RunClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/TspData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/TspData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/data/Result.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,32 +112,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="540" y="114" key="CommitChangelistDialog2" timestamp="1647536415137">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="540" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1647536415137" />
-    <state x="184" y="86" key="DiffContextDialog" timestamp="1647536382763">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="184" y="86" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647536382763" />
-    <state x="184" y="86" key="MergeDialog" timestamp="1647536265991">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="184" y="86" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647536265991" />
-    <state x="672" y="236" key="MultipleFileMergeDialog" timestamp="1647536266003">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="672" y="236" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647536266003" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1647535612103">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1647535612103" />
-    <state x="649" y="311" key="git4idea.merge.GitMergeDialog" timestamp="1647536287930">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="649" y="311" key="git4idea.merge.GitMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647536287930" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>

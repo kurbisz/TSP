@@ -20,12 +20,4 @@ public abstract class Algorithm {
 	public abstract void calculate();
 
 
-	public int objectiveFunction() {
-		int sum = 0;
-		for(int i = 0; i < tspData.getSize() - 1; i++) {
-			sum += tspData.getDistance(result[i], result[i+1]);
-		}
-		return sum;
-	}
-
 }
