@@ -8,10 +8,17 @@ import java.util.Random;
 public class EuclideanTSPGen extends TSPGenerator{
 
     private final double max_x, max_y;
+    private double metroSize = 50.0;
 
     public EuclideanTSPGen(double max_x, double max_y) {
         this.max_x = max_x;
         this.max_y = max_y;
+    }
+
+    public EuclideanTSPGen(double max_x, double max_y, double metroSize){
+        this.max_y = max_y;
+        this.max_x = max_x;
+        this.metroSize = metroSize;
     }
 
     public enum Type{
@@ -105,6 +112,23 @@ public class EuclideanTSPGen extends TSPGenerator{
         }
     }
     private void generateMetro(String filename, int count){
+        generateHeader(filename, count);
+        Random generator = new Random(System.currentTimeMillis());
+        ArrayList<WritePoint> generated = new ArrayList<>();
+        int i = count;
+        while(i > 0){
+            int metroCount = generator.nextInt(count/5);
+            WritePoint mainCity = new WritePoint();
+            mainCity.x = generator.nextDouble()*max_x;
+            mainCity.y = generator.nextDouble()*max_y;
+            generated.add(mainCity);
+            i--;
+            for(int j = metroCount; j>0 && i > 0; j--, i--){
+                WritePoint sateliteCity = new WritePoint();
+//                sateliteCity.x
+            }
+        }
+
 
     }
     private void generateSpreaded(String filename, int count){
