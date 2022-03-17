@@ -2,12 +2,14 @@ package org.example.data;
 
 public class TspData {
 
+	protected boolean symmetric;
 	protected int n;
 	protected int distance[][];
 
-	public TspData(int n, int dist[][]) {
+	public TspData(int n, int dist[][], boolean symmetric) {
 		this.n = n;
 		this.distance = dist;
+		this.symmetric = symmetric;
 		// Set all distances point to same point to -1
 		for(int i = 0; i < n; i++) {
 			dist[i][i] = -1;

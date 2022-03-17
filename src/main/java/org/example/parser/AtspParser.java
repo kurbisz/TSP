@@ -28,7 +28,7 @@ public class AtspParser extends Parser {
 		}
 		if(dim < 0) return null;
 		int distance[][] = getDistances(spl, counter, dim);
-		return new TspData(dim, distance);
+		return new TspData(dim, distance, false);
 	}
 
 	private int[][] getDistances(String[] spl, int counter, int dim) {

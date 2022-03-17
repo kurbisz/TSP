@@ -29,7 +29,7 @@ public class TspParser extends Parser {
 		}
 		if(dim < 0) return null;
 		int distance[][] = getDistances(spl, counter, dim);
-		return new TspData(dim, distance);
+		return new TspData(dim, distance, true);
 	}
 
 	private int[][] getDistances(String[] spl, int counter, int dim) {

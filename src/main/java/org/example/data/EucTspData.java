@@ -7,7 +7,7 @@ public class EucTspData extends TspData {
 	private Point[] points;
 
 	public EucTspData(int n, Point[] points, int[][] dist) {
-		super(n, dist);
+		super(n, dist, true);
 		this.points = points;
 	}
 
