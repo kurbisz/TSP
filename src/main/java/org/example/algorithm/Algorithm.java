@@ -10,12 +10,5 @@ public abstract class Algorithm {
 		this.tspData = tspData;
 	}
 
-	private void drawPoint() {
-		// TODO
-	}
-
-	private void drawLine() {
-		// TODO
-	}
 
 }

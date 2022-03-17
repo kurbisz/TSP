@@ -5,19 +5,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/drawer/Drawer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/drawer/Window.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/random/EuclideanTSPGen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/random/MatrixTSPGen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/random/TSPGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TSP.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/FileLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/FileLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/RunClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/RunClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/RunClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/RunClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/algorithm/Algorithm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/algorithm/Algorithm.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/Point.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/FileLoader.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/RunClass.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/drawer/Drawer.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/data/EucTspData.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/parser/EucParser.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/parser/AtspParser.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/parser/Parser.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -32,6 +63,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RunManager">
@@ -67,7 +99,9 @@
       <updated>1646935848076</updated>
       <workItem from="1647471571874" duration="1896000" />
       <workItem from="1647520099127" duration="607000" />
-      <workItem from="1647521307424" duration="607000" />
+      <workItem from="1647521307424" duration="1565000" />
+      <workItem from="1647523496903" duration="75000" />
+      <workItem from="1647523605473" duration="3396000" />
     </task>
     <servers />
   </component>
