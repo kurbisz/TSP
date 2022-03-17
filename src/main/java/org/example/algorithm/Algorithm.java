@@ -19,13 +19,6 @@ public abstract class Algorithm {
 
 	public abstract void calculate();
 
-	private void drawPoint() {
-		// TODO
-	}
-
-	private void drawLine() {
-		// TODO
-	}
 
 	public int objectiveFunction() {
 		int sum = 0;
