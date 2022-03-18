@@ -4,7 +4,7 @@ import org.example.random.EuclideanTSPGen;
 
 public class RunClass {
     public static void main(String[] args) {
-        loaderTest("atsp.gz");
+//        loaderTest("atsp.gz");
 //        generatorTest();
     }
 
@@ -16,6 +16,7 @@ public class RunClass {
 
     public static void generatorTest(){
         EuclideanTSPGen gen = new EuclideanTSPGen(1000.0, 1000.0);
-        gen.generate("test", 1000);
+        gen.setType(EuclideanTSPGen.Type.METROPOLIS);
+        gen.generate("testMetro", 1000);
     }
 }

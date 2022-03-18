@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="Implemented loading euc2d files and storing data">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/KRandom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/NearestNeighbour.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/ThreeOpt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/TwoOpt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/algorithm/SimpleAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/SimpleAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/drawer/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/drawer/Window.java" afterDir="false" />
+    <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/RunClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/RunClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/random/EuclideanTSPGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/random/EuclideanTSPGen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,7 +81,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -103,6 +99,7 @@
       <workItem from="1647523605473" duration="4272000" />
       <workItem from="1647532173527" duration="36000" />
       <workItem from="1647533852322" duration="1269000" />
+      <workItem from="1647606595909" duration="4020000" />
     </task>
     <servers />
   </component>

@@ -8,17 +8,10 @@ import java.util.Random;
 public class EuclideanTSPGen extends TSPGenerator{
 
     private final double max_x, max_y;
-    private double metroSize = 50.0;
 
     public EuclideanTSPGen(double max_x, double max_y) {
         this.max_x = max_x;
         this.max_y = max_y;
-    }
-
-    public EuclideanTSPGen(double max_x, double max_y, double metroSize){
-        this.max_y = max_y;
-        this.max_x = max_x;
-        this.metroSize = metroSize;
     }
 
     public enum Type{
@@ -66,10 +59,10 @@ public class EuclideanTSPGen extends TSPGenerator{
         }
     }
 
-    private void generateHeader(String filename, int count){
+    private void generateHeader(String filename, int count, String type){
         try {
             writer.write("NAME : "+filename+"\n");
-            writer.write("COMMENT : "+count+" city problem.\n");
+            writer.write("COMMENT : "+count+" city problem. Cities are placed "+type+"\n");
             writer.write("TYPE : TSP\n");
             writer.write("DIMENSION : "+count+"\n");
             writer.write("EDGE_WEIGHT_TYPE : EUC_2D\n");
@@ -79,7 +72,7 @@ public class EuclideanTSPGen extends TSPGenerator{
         }
     }
     private void generateRnd(String filename, int count){
-        generateHeader(filename, count);
+        generateHeader(filename, count, "random");
         Random generator = new Random(System.currentTimeMillis());
         ArrayList<WritePoint> generated = new ArrayList<>();
         int i = count;
@@ -112,22 +105,37 @@ public class EuclideanTSPGen extends TSPGenerator{
         }
     }
     private void generateMetro(String filename, int count){
-        generateHeader(filename, count);
+        final int maxCitiesPerCluster = count/5;
+        final double metroSize = 50.0;
+        generateHeader(filename, count, "in clusters");
         Random generator = new Random(System.currentTimeMillis());
         ArrayList<WritePoint> generated = new ArrayList<>();
         int i = count;
         while(i > 0){
-            int metroCount = generator.nextInt(count/5);
+            int metroCount = generator.nextInt(generator.nextInt(maxCitiesPerCluster));
             WritePoint mainCity = new WritePoint();
             mainCity.x = generator.nextDouble()*max_x;
             mainCity.y = generator.nextDouble()*max_y;
             generated.add(mainCity);
             i--;
+            generator.setSeed((int)(mainCity.x));
             for(int j = metroCount; j>0 && i > 0; j--, i--){
                 WritePoint sateliteCity = new WritePoint();
-//                sateliteCity.x
-                //TODO (opt)
+                sateliteCity.x = mainCity.x + generator.nextDouble(2.0 * metroSize) - metroSize;
+                sateliteCity.y = mainCity.y + generator.nextDouble(2.0 * metroSize) - metroSize;
+                generated.add(sateliteCity);
             }
+        }
+
+        try {
+            i = 1;
+            for(WritePoint point: generated){
+                writer.write(i+" "+point.toString()+"\n");
+                i++;
+            }
+            writer.write("EOF\n");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 

@@ -11,7 +11,7 @@ public class SimpleAlgorithm extends Algorithm {
 
 	@Override
 	public Result calculate() {
-
+		return null;
 	}
 
 
