@@ -32,4 +32,23 @@ public class Result {
         way[currInd]=0;
     }
 
+    public Result clone() {
+        Result result = new Result(problem);
+        for(int i = 0; i < problem.getSize(); i++) {
+            result.way[i] = way[i];
+        }
+        result.currInd = currInd;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = 0; i < problem.getSize(); i++) {
+            stringBuilder.append(way[i]);
+            stringBuilder.append(' ');
+        }
+        return stringBuilder.toString();
+    }
+
 }
