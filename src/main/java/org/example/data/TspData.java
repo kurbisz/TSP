@@ -35,6 +35,10 @@ public class TspData {
 		return distance[from][to];
 	}
 
+	public boolean isSymmetric() {
+		return symmetric;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

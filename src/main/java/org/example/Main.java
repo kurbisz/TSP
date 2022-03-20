@@ -1,7 +1,10 @@
 package org.example;
 
 import org.example.algorithm.Algorithm;
+import org.example.algorithm.KRandom;
 import org.example.algorithm.SimpleAlgorithm;
+import org.example.algorithm.TwoOpt;
+import org.example.data.Result;
 import org.example.data.TspData;
 
 import java.io.IOException;
@@ -23,8 +26,10 @@ public class Main {
         TspData tspData = fileLoader.getTspData();
         //System.out.println(tspData.toString());
 
-        Algorithm algorithm = new SimpleAlgorithm(tspData);
-        algorithm.calculate();
+        Algorithm algorithm = new TwoOpt(tspData, false);
+        Result r = algorithm.calculate();
+        System.out.println("Wynik: " + r.calcObjectiveFunction());
+        System.out.println("Rozwiazanie: " + r);
         //System.out.println(algorithm.objectiveFunction());
     }
 

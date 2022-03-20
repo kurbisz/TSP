@@ -121,8 +121,8 @@ public class EuclideanTSPGen extends TSPGenerator{
             generator.setSeed((int)(mainCity.x));
             for(int j = metroCount; j>0 && i > 0; j--, i--){
                 WritePoint sateliteCity = new WritePoint();
-                sateliteCity.x = mainCity.x + generator.nextDouble(2.0 * metroSize) - metroSize;
-                sateliteCity.y = mainCity.y + generator.nextDouble(2.0 * metroSize) - metroSize;
+                sateliteCity.x = mainCity.x + generator.nextDouble() * 2.0 * metroSize - metroSize;
+                sateliteCity.y = mainCity.y + generator.nextDouble() * 2.0 * metroSize - metroSize;
                 generated.add(sateliteCity);
             }
         }
