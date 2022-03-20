@@ -12,8 +12,9 @@ public class Point extends Ellipse2D.Double implements Drawable {
 
 	public enum State{
 		VISITED,
-		NORMAL
-	}
+		NORMAL,
+        STARTING
+    }
 
 	public Point(double x, double y, State state) {
 		this.x = x;
@@ -55,5 +56,6 @@ public class Point extends Ellipse2D.Double implements Drawable {
 	public void setState(State state){
 		if(state == State.NORMAL) color = Color.BLACK;
 		if(state == State.VISITED) color = Color.RED;
+		if(state == State.STARTING) color = Color.GREEN;
 	}
 }

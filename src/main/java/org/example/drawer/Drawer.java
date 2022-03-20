@@ -23,13 +23,15 @@ public class Drawer {
             p.setState(Point.State.NORMAL);
         }
         int last = result.way[0];
-        points[last].setState(Point.State.VISITED);
+        int next = 0;
+        points[last].setState(Point.State.STARTING);
         for(int i=1; i<result.way.length ; i++){
-            int next = result.way[i];
+            next = result.way[i];
             points[next].setState(Point.State.VISITED);
             lines.add(new Line(points[last], points[next]));
             last = next;
         }
+        lines.add(new Line(points[next], points[result.way[0]]));
         generateMap((EucTspData) result.problem);
     }
 
@@ -40,7 +42,6 @@ public class Drawer {
         }
         for(Line l: lines){
             surface.addObj(l);
-            //
         }
         surface.repaint();
     }

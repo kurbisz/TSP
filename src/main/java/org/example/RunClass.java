@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.algorithm.NearestNeighbour;
 import org.example.data.EucTspData;
 import org.example.data.Result;
 import org.example.data.TspData;
@@ -13,10 +14,17 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
-        loaderTest("testMetro.tsp");
+        loaderTest("test3Metro.tsp");
 //        generatorTest();
 //        windowTest();
-        mapTest();
+//        mapTest();
+        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData());
+        draw(nearestNeighbour.calculate());
+    }
+
+    private static void draw(Result res) {
+        Drawer drawer = new Drawer();
+        drawer.showResult(res);
     }
 
     private static void mapTest() {
@@ -48,6 +56,6 @@ public class RunClass {
     public static void generatorTest(){
         EuclideanTSPGen gen = new EuclideanTSPGen(1000.0, 1000.0);
         gen.setType(EuclideanTSPGen.Type.METROPOLIS);
-        gen.generate("testMetro", 1000);
+        gen.generate("test3Metro", 150);
     }
 }

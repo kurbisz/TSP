@@ -106,7 +106,7 @@ public class EuclideanTSPGen extends TSPGenerator{
     }
     private void generateMetro(String filename, int count){
         final int maxCitiesPerCluster = count/5;
-        final double metroSize = 50.0;
+        final double metroSize = 100.0;
         generateHeader(filename, count, "in clusters");
         Random generator = new Random(System.currentTimeMillis());
         ArrayList<WritePoint> generated = new ArrayList<>();
