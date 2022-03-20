@@ -37,6 +37,7 @@ public class Drawer {
         }
         for(Line l: lines){
             surface.addObj(l);
+            //
         }
         surface.repaint();
     }
