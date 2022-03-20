@@ -26,7 +26,7 @@ public class Main {
         TspData tspData = fileLoader.getTspData();
         //System.out.println(tspData.toString());
 
-        Algorithm algorithm = new TwoOpt(tspData, false);
+        Algorithm algorithm = new KRandom(tspData);
         Result r = algorithm.calculate();
         System.out.println("Wynik: " + r.calcObjectiveFunction());
         System.out.println("Rozwiazanie: " + r);

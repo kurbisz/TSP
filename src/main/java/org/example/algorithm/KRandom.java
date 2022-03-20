@@ -40,10 +40,14 @@ public class KRandom extends Algorithm{
             t[i] = new Thread() {
                 @Override
                 public void run() {
-                    result[l] = new Result(tspData);
+                    Result r = new Result(tspData);
                     for(int j = 0; j < tspData.getSize(); j++) {
-                        result[l].way[j] = result[l].way[rand.nextInt(tspData.getSize())];
+                        int ra = rand.nextInt(tspData.getSize());
+                        int tmp = r.way[ra];
+                        r.way[ra] = r.way[j];
+                        r.way[j] = tmp;
                     }
+                    result[l] = r;
                     dist[l] = result[l].calcObjectiveFunction();
                 }
             };
@@ -71,8 +75,12 @@ public class KRandom extends Algorithm{
         for(int i = 0; i < k; i++) {
             Result r = new Result(tspData);
             for(int j = 0; j < tspData.getSize(); j++) {
-                r.way[j] = r.way[rand.nextInt(tspData.getSize())];
+                int ra = rand.nextInt(tspData.getSize());
+                int tmp = r.way[ra];
+                r.way[ra] = r.way[j];
+                r.way[j] = tmp;
             }
+            System.out.println(r);
             int d = r.calcObjectiveFunction();
             if(dist < 0) {
                 result = r;
