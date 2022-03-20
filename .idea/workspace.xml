@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="Implemented loading euc2d files and storing data">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/algorithm/KRandom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/KRandom.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647799435895</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="KRandom edited">
+      <created>1647813390429</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647813390429</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,37 +163,42 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Implemented loading euc2d files and storing data" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented loading euc2d files and storing data" />
+    <MESSAGE value="KRandom edited" />
+    <option name="LAST_COMMIT_MESSAGE" value="KRandom edited" />
   </component>
   <component name="WindowStateProjectService">
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1647806945559">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647806945559" />
-    <state x="550" y="114" key="CommitChangelistDialog2" timestamp="1647813314960">
+    <state x="550" y="114" key="CommitChangelistDialog2" timestamp="1647813388751">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="550" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1647813314960" />
-    <state width="1055" height="183" key="GridCell.Tab.0.bottom" timestamp="1647813254412">
+    <state x="550" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1647813388751" />
+    <state width="1055" height="183" key="GridCell.Tab.0.bottom" timestamp="1647813416566">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1055" height="183" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1647813254412" />
-    <state width="1055" height="183" key="GridCell.Tab.0.center" timestamp="1647813254412">
+    <state width="1055" height="183" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1647813416566" />
+    <state width="1055" height="183" key="GridCell.Tab.0.center" timestamp="1647813416566">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1055" height="183" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1647813254412" />
-    <state width="1055" height="183" key="GridCell.Tab.0.left" timestamp="1647813254412">
+    <state width="1055" height="183" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1647813416566" />
+    <state width="1055" height="183" key="GridCell.Tab.0.left" timestamp="1647813416565">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1055" height="183" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1647813254412" />
-    <state width="1055" height="183" key="GridCell.Tab.0.right" timestamp="1647813254412">
+    <state width="1055" height="183" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1647813416565" />
+    <state width="1055" height="183" key="GridCell.Tab.0.right" timestamp="1647813416566">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1055" height="183" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1647813254412" />
+    <state width="1055" height="183" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1647813416566" />
     <state x="440" y="94" key="SettingsEditor" timestamp="1647802511542">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1647802511542" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1647813395868">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1647813395868" />
     <state x="769" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1647813285630">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -80,7 +80,6 @@ public class KRandom extends Algorithm{
                 r.way[ra] = r.way[j];
                 r.way[j] = tmp;
             }
-            System.out.println(r);
             int d = r.calcObjectiveFunction();
             if(dist < 0) {
                 result = r;
