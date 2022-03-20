@@ -3,7 +3,6 @@ package org.example.drawer;
 import org.example.Point;
 import org.example.data.EucTspData;
 import org.example.data.Result;
-import org.example.data.TspData;
 
 import java.util.ArrayList;
 
