@@ -1,0 +1,14 @@
+Algorytmy:
+ - k random
+ - najblizszy sasiad
+ - 2 opt
+ 
+Złożnośc przeliczenia funkcji celu -> O(n^2) jezeli nie przelicza sie wszystkich tylko podmienia te ktora sa zamienione
+
+na 5: 
+zaimplementowac kazdy z tych 4 algorytmow, wybieramy dowolny element jezeli 
+
+na 5.5:
+- najblizszy sasiad: rekurencyjnie sprawdzic wszystkie mozliwosci i zastanowic sie nad zlosliwym przypadkiem
+- dodac 3 OPT - analogicznie tylko przeciecie w 3 miejscach - czyli 3 mozliwosci?
+- wielowatkowosc w jednym z algorytmów  

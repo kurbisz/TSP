@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="Implemented loading euc2d files and storing data">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/KRandom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/NearestNeighbour.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/ThreeOpt.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/TwoOpt.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/algorithm/SimpleAlgorithm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/algorithm/SimpleAlgorithm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/drawer/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/drawer/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/random/EuclideanTSPGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/random/EuclideanTSPGen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -39,13 +34,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/main/java/org/example/Point.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/parser/EucParser.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/parser/Parser.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/org/example/FileLoader.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/parser/AtspParser.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/data/EucTspData.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/org/example/RunClass.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/org/example/drawer/Drawer.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/data/EucTspData.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/parser/EucParser.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/parser/AtspParser.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/main/java/org/example/parser/Parser.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/main/java/org/example/algorithm/Algorithm.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -85,7 +80,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="false" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -104,6 +99,14 @@
       <workItem from="1647532173527" duration="36000" />
       <workItem from="1647533852322" duration="1269000" />
     </task>
+    <task id="LOCAL-00001" summary="Implemented loading euc2d files and storing data">
+      <created>1647799435895</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647799435895</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -114,11 +117,51 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Implemented loading euc2d files and storing data" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented loading euc2d files and storing data" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="550" y="114" key="CommitChangelistDialog2" timestamp="1647799479776">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="550" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1647799479776" />
+    <state x="184" y="86" key="DiffContextDialog" timestamp="1647799849318">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="184" y="86" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647799849318" />
+    <state x="672" y="236" key="MultipleFileMergeDialog" timestamp="1647619259475">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="672" y="236" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647619259475" />
+    <state x="658" y="231" key="RollbackChangesDialog" timestamp="1647799885762">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="658" y="231" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647799885762" />
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1647725270218">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="656" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647725270218" />
+    <state x="769" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1647798988598">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="769" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1647798988598" />
+    <state x="649" y="311" key="git4idea.merge.GitMergeDialog" timestamp="1647799631642">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="649" y="311" key="git4idea.merge.GitMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647799631642" />
+    <state x="649" y="311" key="git4idea.merge.GitPullDialog" timestamp="1647799811897">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="649" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647799811897" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
