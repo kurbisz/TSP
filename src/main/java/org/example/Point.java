@@ -1,12 +1,33 @@
 package org.example;
 
-public class Point {
+import org.example.drawer.Drawable;
+
+import java.awt.*;
+import java.awt.geom.Ellipse2D;
+
+public class Point extends Ellipse2D.Double implements Drawable {
 
 	private double x, y;
+	int index;
+	Color color;
 
-	public Point(double x, double y) {
+	public enum State{
+		VISITED,
+		NORMAL
+	}
+
+	public Point(int index, double x, double y, State state) {
 		this.x = x;
 		this.y = y;
+		setState(state);
+		setFrame(x,y, pointSize, pointSize);
+	}
+
+	public Point(int index, double x, double y){
+		this.x = x;
+		this.y = y;
+		setState(State.NORMAL);
+		setFrame(x,y, pointSize, pointSize);
 	}
 
 	public double getX() {
@@ -25,4 +46,19 @@ public class Point {
 		return x*x;
 	}
 
+	public int getInd() {
+		return index;
+	}
+
+	@Override
+	public void draw(Graphics2D g2d) {
+		g2d.setPaint(color);
+		g2d.fill(this);
+		g2d.draw(this);
+	}
+
+	public void setState(State state){
+		if(state == State.NORMAL) color = Color.BLACK;
+		if(state == State.VISITED) color = Color.RED;
+	}
 }
