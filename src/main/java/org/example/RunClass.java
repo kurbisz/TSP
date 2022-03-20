@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
 import org.example.data.EucTspData;
 import org.example.data.Result;
@@ -20,6 +21,8 @@ public class RunClass {
 //        mapTest();
         NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData());
         draw(nearestNeighbour.calculate());
+        KRandom krandom = new KRandom(loader.getTspData());
+        draw(krandom.calculate());
     }
 
     private static void draw(Result res) {
