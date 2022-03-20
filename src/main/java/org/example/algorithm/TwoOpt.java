@@ -42,6 +42,7 @@ public class TwoOpt extends Algorithm{
                     if(p < 0) p += n;
                     int q = j+1;
                     if(q >= n) q -= n;
+                    if(p == j) continue;
                     way -= tspData.getDistance(result.way[p], result.way[i]);
                     way -= tspData.getDistance(result.way[j], result.way[q]);
                     way += tspData.getDistance(result.way[p], result.way[j]);
@@ -53,7 +54,7 @@ public class TwoOpt extends Algorithm{
                     }
                 }
             }
-            System.out.println(betterI + " " + betterJ);
+            //System.out.println(betterI + " " + betterJ + " " + tspData.getDistance(result.way[0], result.way[n-1]));
         }
         return result;
     }

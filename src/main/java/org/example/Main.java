@@ -6,6 +6,7 @@ import org.example.algorithm.SimpleAlgorithm;
 import org.example.algorithm.TwoOpt;
 import org.example.data.Result;
 import org.example.data.TspData;
+import org.example.drawer.Drawer;
 
 import java.io.IOException;
 
@@ -26,10 +27,12 @@ public class Main {
         TspData tspData = fileLoader.getTspData();
         //System.out.println(tspData.toString());
 
-        Algorithm algorithm = new KRandom(tspData);
+        Algorithm algorithm = new TwoOpt(tspData);
         Result r = algorithm.calculate();
         System.out.println("Wynik: " + r.calcObjectiveFunction());
         System.out.println("Rozwiazanie: " + r);
+        Drawer drawer = new Drawer();
+        drawer.showResult(r);
         //System.out.println(algorithm.objectiveFunction());
     }
 
