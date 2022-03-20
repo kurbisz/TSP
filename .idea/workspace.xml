@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/drawer/Drawable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/drawer/Line.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/RunClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/RunClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/data/Result.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/data/Result.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/drawer/Drawer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/drawer/Drawer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/drawer/Window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/drawer/Window.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/parser/EucParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/parser/EucParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testMetro.tsp" beforeDir="false" afterPath="$PROJECT_DIR$/testMetro.tsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +110,8 @@
       <workItem from="1647532173527" duration="36000" />
       <workItem from="1647533852322" duration="1269000" />
       <workItem from="1647606595909" duration="7345000" />
-      <workItem from="1647764553469" duration="3618000" />
+      <workItem from="1647764553469" duration="6057000" />
+      <workItem from="1647780829383" duration="53000" />
     </task>
     <servers />
   </component>

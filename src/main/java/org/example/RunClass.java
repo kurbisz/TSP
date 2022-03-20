@@ -1,15 +1,36 @@
 package org.example;
 
+import org.example.data.EucTspData;
+import org.example.data.Result;
+import org.example.data.TspData;
+import org.example.drawer.Drawer;
 import org.example.drawer.Line;
-import org.example.Point;
 import org.example.drawer.Window;
 import org.example.random.EuclideanTSPGen;
 
 public class RunClass {
+
+    public static FileLoader loader;
+
     public static void main(String[] args) {
-//        loaderTest("atsp.gz");
-//        generatorTest();
+        loaderTest("testMetro.tsp");
+        generatorTest();
 //        windowTest();
+        mapTest();
+    }
+
+    private static void mapTest() {
+        Drawer drawer = new Drawer();
+        TspData data = loader.getTspData();
+        Result testResult = new Result(data);
+
+        testResult.addWaypoint(((EucTspData) data).getPoints()[3]);
+        testResult.addWaypoint(((EucTspData) data).getPoints()[6]);
+        testResult.addWaypoint(((EucTspData) data).getPoints()[0]);
+        testResult.addWaypoint(((EucTspData) data).getPoints()[3]);
+
+        drawer.showResult(testResult);
+
     }
 
     private static void windowTest() {
@@ -24,7 +45,7 @@ public class RunClass {
     }
 
     public static void loaderTest(String filename){
-        FileLoader loader = new FileLoader(filename);
+        loader = new FileLoader(filename);
         loader.load();
         System.out.println(loader.getTspData().toString());
     }

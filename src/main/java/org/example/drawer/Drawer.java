@@ -9,35 +9,35 @@ import java.util.ArrayList;
 
 public class Drawer {
     Window mainWindow;
-    Window.DrawingSurface surface = mainWindow.drawingPanel;
-    Point[] points;
-    Line[] lines;
+    Window.DrawingSurface surface;
+    ArrayList<Line> lines;
 
-    public Drawer(TspData data){
+    public Drawer(){
+        lines = new ArrayList<>();
         mainWindow = new Window();
+        surface = mainWindow.drawingPanel;
     }
 
     public void showResult(Result result){
-        ArrayList<Integer> toUpdate = new ArrayList<>();
-        for(int pInd: result.way){
-            toUpdate.add(pInd);
+        Point last = result.way[0];
+        result.way[0].setState(Point.State.VISITED);
+        for(int i=1; i<result.currInd; i++){
+            Point next = result.way[i];
+            next.setState(Point.State.VISITED);
+            lines.add(new Line(last, next));
+            last = next;
         }
+        generateMap((EucTspData) result.problem);
     }
 
-    public void draw(){
-
-        for(Point p: points){
-            surface.addObj(new Point(p.getInd(), p.getX(), p.getY(), Point.State.NORMAL));
+    public void generateMap(EucTspData data){
+        surface.refresh();
+        for(Point p: data.getPoints()){
+            surface.addObj(p);
         }
         for(Line l: lines){
             surface.addObj(l);
         }
-    }
-
-    public void generateMap(EucTspData data){
-        points = new Point[data.getSize()];
-        int i = 1;
-        for(Point p: data.getPoints()){
-        }
+        surface.repaint();
     }
 }
