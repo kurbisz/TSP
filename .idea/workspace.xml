@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="Implemented loading euc2d files and storing data">
+    <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -103,6 +103,13 @@
       <workItem from="1647523605473" duration="4272000" />
       <workItem from="1647532173527" duration="36000" />
       <workItem from="1647533852322" duration="1269000" />
+<<<<<<< HEAD
+      <workItem from="1647606595909" duration="7345000" />
+      <workItem from="1647764553469" duration="6057000" />
+      <workItem from="1647780829383" duration="303000" />
+      <workItem from="1647784582040" duration="173000" />
+=======
+>>>>>>> b7ecaded114a2cfcb651c24d684dd70d936f9eda
     </task>
     <task id="LOCAL-00001" summary="Implemented loading euc2d files and storing data">
       <created>1647799435895</created>
