@@ -8,7 +8,7 @@ public class Line extends Line2D.Double implements Drawable{
     Color color;
 
     public Line(Point start, Point end){
-        super(start.getX(), start.getY(), end.getX(), end.getY());
+        super(start.getX() + pointSize/2, start.getY() + pointSize/2, end.getX() + pointSize/2, end.getY() + pointSize/2);
         color = lineCol;
     }
 

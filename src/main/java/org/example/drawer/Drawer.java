@@ -18,12 +18,16 @@ public class Drawer {
     }
 
     public void showResult(Result result){
-        Point last = result.way[0];
-        result.way[0].setState(Point.State.VISITED);
+        Point[] points = ((EucTspData)result.problem).getPoints();
+        for(Point p: points){
+            p.setState(Point.State.NORMAL);
+        }
+        int last = result.way[0];
+        points[last].setState(Point.State.VISITED);
         for(int i=1; i<result.currInd; i++){
-            Point next = result.way[i];
-            next.setState(Point.State.VISITED);
-            lines.add(new Line(last, next));
+            int next = result.way[i];
+            points[next].setState(Point.State.VISITED);
+            lines.add(new Line(points[last], points[next]));
             last = next;
         }
         generateMap((EucTspData) result.problem);

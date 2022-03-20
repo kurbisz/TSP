@@ -8,7 +8,6 @@ import java.awt.geom.Ellipse2D;
 public class Point extends Ellipse2D.Double implements Drawable {
 
 	private double x, y;
-	int index;
 	Color color;
 
 	public enum State{
@@ -16,14 +15,14 @@ public class Point extends Ellipse2D.Double implements Drawable {
 		NORMAL
 	}
 
-	public Point(int index, double x, double y, State state) {
+	public Point(double x, double y, State state) {
 		this.x = x;
 		this.y = y;
 		setState(state);
 		setFrame(x,y, pointSize, pointSize);
 	}
 
-	public Point(int index, double x, double y){
+	public Point(double x, double y){
 		this.x = x;
 		this.y = y;
 		setState(State.NORMAL);
@@ -44,10 +43,6 @@ public class Point extends Ellipse2D.Double implements Drawable {
 
 	private double pow(double x) {
 		return x*x;
-	}
-
-	public int getInd() {
-		return index;
 	}
 
 	@Override
