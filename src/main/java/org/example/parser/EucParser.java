@@ -44,7 +44,7 @@ public class EucParser extends Parser {
 		Point points[] = new Point[dim];
 		for(int i = 0; i < dim; i++) {
 			String line[] = spl[i+counter].split(" ");
-			points[i] = new Point(Double.parseDouble(line[1]), Double.parseDouble(line[2]));
+			points[i] = new Point(i+1, Double.parseDouble(line[1]), Double.parseDouble(line[2]));
 		}
 		return points;
 	}

@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0795deec-438c-433c-9c3d-61b83ff8d1cd" name="Default Changelist" comment="Implemented loading euc2d files and storing data">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,8 +56,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\krzys\OneDrive - Politechnika Wroclawska\Pulpit\studia\sem4\AH\TSP\.idea" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="RunClass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -158,10 +163,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="649" y="311" key="git4idea.merge.GitMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647799631642" />
-    <state x="649" y="311" key="git4idea.merge.GitPullDialog" timestamp="1647799811897">
+    <state x="649" y="311" key="git4idea.merge.GitPullDialog" timestamp="1647799939337">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="649" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647799811897" />
+    <state x="649" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647799939337" />
   </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
