@@ -24,7 +24,7 @@ public class Drawer {
         }
         int last = result.way[0];
         points[last].setState(Point.State.VISITED);
-        for(int i=1; i<result.currInd; i++){
+        for(int i=1; i<result.way.length ; i++){
             int next = result.way[i];
             points[next].setState(Point.State.VISITED);
             lines.add(new Line(points[last], points[next]));
