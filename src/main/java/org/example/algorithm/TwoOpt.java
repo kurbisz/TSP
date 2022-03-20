@@ -30,9 +30,7 @@ public class TwoOpt extends Algorithm{
         int betterWay = result.calcObjectiveFunction();
         int bestWay;
         int betterI = 0, betterJ = 0;
-        int counter = 0;
         while(betterI >= 0) {
-            counter++;
             bestWay = betterWay;
             reverse(result, betterI, betterJ);
             betterI = -1;
@@ -44,10 +42,11 @@ public class TwoOpt extends Algorithm{
                     if(p < 0) p += n;
                     int q = j+1;
                     if(q >= n) q -= n;
-                    way -= tspData.getDistance(p, i);
-                    way -= tspData.getDistance(j, q);
-                    way += tspData.getDistance(p, j);
-                    way += tspData.getDistance(i, q);
+                    if(p == j) continue;
+                    way -= tspData.getDistance(result.way[p], result.way[i]);
+                    way -= tspData.getDistance(result.way[j], result.way[q]);
+                    way += tspData.getDistance(result.way[p], result.way[j]);
+                    way += tspData.getDistance(result.way[i], result.way[q]);
                     if(way < betterWay) {
                         betterWay = way;
                         betterI = i;
@@ -55,7 +54,7 @@ public class TwoOpt extends Algorithm{
                     }
                 }
             }
-            System.out.println(betterI + " " + betterJ);
+            //System.out.println(betterI + " " + betterJ + " " + tspData.getDistance(result.way[0], result.way[n-1]));
         }
         return result;
     }
