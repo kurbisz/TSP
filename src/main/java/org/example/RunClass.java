@@ -16,16 +16,16 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
-        loaderTest("test.tsp");
+        loaderTest("euc2d.gz");
 //        generatorTest();
 //        windowTest();
 //        mapTest();
-//        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData());
-//        draw(nearestNeighbour.calculate());
+        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData());
+        draw(nearestNeighbour.calculate());
 //        KRandom krandom = new KRandom(loader.getTspData());
 //        draw(krandom.calculate());
-        TwoOpt tOpt = new TwoOpt(loader.getTspData());
-        draw(tOpt.calculate());
+//        TwoOpt tOpt = new TwoOpt(loader.getTspData());
+//        draw(tOpt.calculate());
     }
 
     private static void draw(Result res) {

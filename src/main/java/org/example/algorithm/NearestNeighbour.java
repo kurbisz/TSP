@@ -5,20 +5,66 @@ import org.example.data.TspData;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class NearestNeighbour extends Algorithm{
 
-    ArrayList<Result> candidates;
+    private class NearestNeighRunner implements Runnable{
+
+        int start;
+        Result res;
+
+        NearestNeighRunner(int start){
+            this.start = start;
+        }
+
+        @Override
+        public void run() {
+            res = new Result(tspData);
+            simpleNearestNeighbour(res, start);
+            addCandidate(res);
+        }
+    }
+
+    public ArrayList<Result> candidates;
 
     public NearestNeighbour(TspData tspData) {
         super(tspData);
+        candidates = new ArrayList<>();
     }
 
     @Override
     public Result calculate() {
-        Result res = new Result(tspData);
-        simpleNearestNeighbour(res, 0);
-        return res;
+        ExecutorService pool = Executors.newFixedThreadPool(40);
+        ArrayList<NearestNeighRunner> list = new ArrayList<>();
+        for(int i = 0; i< tspData.getSize(); i++){
+            list.add(new NearestNeighRunner(i));
+            pool.execute(list.get(i));
+        }
+        pool.shutdown();
+        try {
+            pool.awaitTermination(10, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for(NearestNeighRunner r: list){
+            addCandidate(r.res);
+        }
+
+        Result toReturn = candidates.get(0);
+        int bestWay = toReturn.calcObjectiveFunction();
+        for(Result r: candidates){
+            int temp = r.calcObjectiveFunction();
+            if(temp < bestWay){
+                toReturn = r;
+                bestWay = temp;
+            }
+        }
+        return toReturn;
     }
 
     /**
@@ -44,35 +90,14 @@ public class NearestNeighbour extends Algorithm{
         }
     }
 
-//    public void simpleNearestNeighbour(Result res){
-//        boolean[] visited = new boolean[tspData.getSize()];
-//        for(int i = 0; i< tspData.getSize(); i++) visited[i] = false;
-//
-//        for(int i = 0; i < tspData.getSize()-1; i++){
-//            visited[res.way[i]] = true;
-//            int nearest = (res.way[i]+1)% tspData.getSize();
-//            int nearestDist = tspData.getDistance(res.way[i],nearest);
-//            for(int j=0; j< tspData.getSize(); j++){
-//                if(!visited[j]){
-//                    int tempDist = tspData.getDistance(res.way[i], j);
-//                    if(tempDist < nearestDist) {
-//                        nearest = j;
-//                        nearestDist = tempDist;
-//                    }
-//                }
-//            }
-//            //mamy znalezionego najbliższego sąsiada do res.way[i]
-//            res.way[i+1] = nearest;
-//            System.out.println("Nearest is: "+nearest);
-//        }
-//    }
-
-    public void simpleNearestNeighbour(Result res, int start){
+    public void simpleNearestNeighbour(Result res, int start, int startWaypoint){
         ArrayList<Integer> nonVisited = new ArrayList<>();
         for(int i = 0; i < tspData.getSize(); i++) nonVisited.add(i);
-        res.way[0] = start;
-        nonVisited.remove(start);
-        int i = 0;
+        res.way[startWaypoint] = start;
+        for(int i =0; i <= startWaypoint; i++){
+            nonVisited.remove(res.way[i]);
+        }
+        int i = startWaypoint;
 
         while(nonVisited.size()>0){
             int nearest = nonVisited.get(0);
@@ -90,7 +115,10 @@ public class NearestNeighbour extends Algorithm{
             res.way[i] = nearest;
             nonVisited.remove(Integer.valueOf(nearest));
         }
+    }
 
+    private void addCandidate(Result res){
+        candidates.add(res);
     }
 
     //TODO optimalizaton (optional)
