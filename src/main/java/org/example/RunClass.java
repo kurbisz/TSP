@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
+import org.example.algorithm.TwoOpt;
 import org.example.data.EucTspData;
 import org.example.data.Result;
 import org.example.data.TspData;
@@ -15,14 +16,16 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
-        loaderTest("test3Metro.tsp");
+        loaderTest("euc2d.gz");
 //        generatorTest();
 //        windowTest();
 //        mapTest();
         NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData());
         draw(nearestNeighbour.calculate());
-        KRandom krandom = new KRandom(loader.getTspData());
-        draw(krandom.calculate());
+//        KRandom krandom = new KRandom(loader.getTspData());
+//        draw(krandom.calculate());
+//        TwoOpt tOpt = new TwoOpt(loader.getTspData());
+//        draw(tOpt.calculate());
     }
 
     private static void draw(Result res) {

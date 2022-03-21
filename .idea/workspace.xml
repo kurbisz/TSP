@@ -165,52 +165,6 @@
     <MESSAGE value="KRandom edited" />
     <option name="LAST_COMMIT_MESSAGE" value="KRandom edited" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1647806945559">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647806945559" />
-    <state x="550" y="114" key="CommitChangelistDialog2" timestamp="1647813388751">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="550" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1647813388751" />
-    <state width="1055" height="183" key="GridCell.Tab.0.bottom" timestamp="1647813416566">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1055" height="183" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1647813416566" />
-    <state width="1055" height="183" key="GridCell.Tab.0.center" timestamp="1647813416566">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1055" height="183" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1647813416566" />
-    <state width="1055" height="183" key="GridCell.Tab.0.left" timestamp="1647813416565">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1055" height="183" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1647813416565" />
-    <state width="1055" height="183" key="GridCell.Tab.0.right" timestamp="1647813416566">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1055" height="183" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1647813416566" />
-    <state x="440" y="94" key="SettingsEditor" timestamp="1647802511542">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="440" y="94" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1647802511542" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1647813395868">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1647813395868" />
-    <state x="769" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1647813285630">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="769" y="437" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1647813285630" />
-    <state x="649" y="311" key="git4idea.merge.GitMergeDialog" timestamp="1647812541783">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="649" y="311" key="git4idea.merge.GitMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647812541783" />
-    <state x="649" y="311" key="git4idea.merge.GitPullDialog" timestamp="1647812953857">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="649" y="311" key="git4idea.merge.GitPullDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1647812953857" />
-  </component>
   <component name="simpleUML.UMLToolWindowPlugin">
     <General>
       <option name="birdViewUpdateDelay" value="2000" />
