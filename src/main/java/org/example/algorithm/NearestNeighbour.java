@@ -24,7 +24,7 @@ public class NearestNeighbour extends Algorithm{
         @Override
         public void run() {
             res = new Result(tspData);
-            simpleNearestNeighbour(res, start);
+            simpleNearestNeighbour(res, start, 0);
             addCandidate(res);
         }
     }
