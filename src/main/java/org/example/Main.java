@@ -1,9 +1,6 @@
 package org.example;
 
-import org.example.algorithm.Algorithm;
-import org.example.algorithm.KRandom;
-import org.example.algorithm.SimpleAlgorithm;
-import org.example.algorithm.TwoOpt;
+import org.example.algorithm.*;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
@@ -27,7 +24,7 @@ public class Main {
         TspData tspData = fileLoader.getTspData();
         //System.out.println(tspData.toString());
 
-        Algorithm algorithm = new TwoOpt(tspData);
+        Algorithm algorithm = new ThreeOpt(tspData);
         Result r = algorithm.calculate();
         System.out.println("Wynik: " + r.calcObjectiveFunction());
         System.out.println("Rozwiazanie: " + r);

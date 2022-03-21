@@ -54,7 +54,6 @@ public class TwoOpt extends Algorithm{
                     }
                 }
             }
-            //System.out.println(betterI + " " + betterJ + " " + tspData.getDistance(result.way[0], result.way[n-1]));
         }
         return result;
     }
