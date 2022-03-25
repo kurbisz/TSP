@@ -10,6 +10,7 @@ public class KRandom extends Algorithm{
     private int k;
     private boolean async = false;
     private Random rand = new Random();
+    private long time = -1;
 
     public KRandom(TspData tspData) {
         this(tspData, 100, false);
@@ -25,8 +26,14 @@ public class KRandom extends Algorithm{
         this.async = async;
     }
 
+    public KRandom(TspData tspData, long time) {
+        super(tspData);
+        this.time = time;
+    }
+
     @Override
     public Result calculate() {
+        if(time >= 0) return calcTime();
         if(async) return calcAsync();
         return calcSync();
     }
@@ -73,6 +80,31 @@ public class KRandom extends Algorithm{
         Result result = null;
         int dist = -1;
         for(int i = 0; i < k; i++) {
+            Result r = new Result(tspData);
+            for(int j = 0; j < tspData.getSize(); j++) {
+                int ra = rand.nextInt(tspData.getSize());
+                int tmp = r.way[ra];
+                r.way[ra] = r.way[j];
+                r.way[j] = tmp;
+            }
+            int d = r.calcObjectiveFunction();
+            if(dist < 0) {
+                result = r;
+                dist = d;
+            }
+            else if(dist > d) {
+                result = r;
+                dist = d;
+            }
+        }
+        return result;
+    }
+
+    private Result calcTime() {
+        Result result = null;
+        int dist = -1;
+        long t = System.nanoTime();
+        while (System.nanoTime() - t < time) {
             Result r = new Result(tspData);
             for(int j = 0; j < tspData.getSize(); j++) {
                 int ra = rand.nextInt(tspData.getSize());
