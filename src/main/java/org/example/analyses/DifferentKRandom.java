@@ -16,16 +16,18 @@ public class DifferentKRandom {
 			file.delete();
 			file.createNewFile();
 			FileWriter fileWriter = new FileWriter(file, true);
-			for (int k = 10; k < 100; k++) {
-				KRandom kRandom = new KRandom(tspData, k);
-				Result result = kRandom.calculate();
-				fileWriter.write(k + ";" + result.calcObjectiveFunction() + '\n');
-			}
-//			for (int k = 100; k < 1000000; k += 100) {
+//			for (int k = 10; k < 100; k++) {
 //				KRandom kRandom = new KRandom(tspData, k);
 //				Result result = kRandom.calculate();
 //				fileWriter.write(k + ";" + result.calcObjectiveFunction() + '\n');
 //			}
+			for (int k = 100; k < 100000;) {
+				KRandom kRandom = new KRandom(tspData, k);
+				Result result = kRandom.calculate();
+				fileWriter.write(k + ";" + result.calcObjectiveFunction() + '\n');
+				if(k>=10000) k+=1000;
+				else k+=100;
+			}
 			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -44,10 +46,7 @@ public class DifferentKRandom {
 			for(int k = 1000; k < 10000; k += 1000) {
 				fileWriter.write(k + ";" + generateAverage(tspData, k) + '\n');
 			}
-			for(int k = 10000; k < 100000; k += 10000) {
-				fileWriter.write(k + ";" + generateAverage(tspData, k) + '\n');
-			}
-			for(int k = 100000; k < 1000000; k += 100000) {
+			for(int k = 10000; k < 110000; k += 10000) {
 				fileWriter.write(k + ";" + generateAverage(tspData, k) + '\n');
 			}
 

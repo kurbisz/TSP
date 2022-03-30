@@ -8,6 +8,7 @@ import java.util.List;
 public class TwoOpt extends Algorithm{
 
     boolean async;
+    long time = -1;
 
     public TwoOpt(TspData tspData) {
         this(tspData, false);
@@ -30,6 +31,7 @@ public class TwoOpt extends Algorithm{
         int betterWay = result.calcObjectiveFunction();
         int bestWay;
         int betterI = 0, betterJ = 0;
+        long t = System.nanoTime();
         while(betterI >= 0) {
             bestWay = betterWay;
             reverse(result, betterI, betterJ);
@@ -54,6 +56,7 @@ public class TwoOpt extends Algorithm{
                     }
                 }
             }
+            if(time > 0 && System.nanoTime() - t > time) break;
         }
         return result;
     }
@@ -63,6 +66,7 @@ public class TwoOpt extends Algorithm{
         int n = tspData.getSize();
         int bestWay = result.calcObjectiveFunction();
         int betterI = 0, betterJ = 0;
+        long t = System.nanoTime();
         while(betterI >= 0) {
             reverse(result, betterI, betterJ);
             betterI = -1;
@@ -77,8 +81,17 @@ public class TwoOpt extends Algorithm{
                         betterI = i;
                         betterJ = j;
                     }
+                    Result r2 = result.clone();
+                    reverse(r2, j, i);
+                    way = r.calcObjectiveFunction();
+                    if(way < bestWay) {
+                        bestWay = way;
+                        betterI = j;
+                        betterJ = i;
+                    }
                 }
             }
+            if(time > 0 && System.nanoTime() - t > time) break;
         }
         return result;
     }
@@ -100,4 +113,7 @@ public class TwoOpt extends Algorithm{
         }
     }
 
+    public void setTime(long time) {
+        this.time = time;
+    }
 }

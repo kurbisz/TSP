@@ -4,6 +4,9 @@ import org.example.data.Result;
 import org.example.data.TspData;
 
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class KRandom extends Algorithm{
 
@@ -11,6 +14,8 @@ public class KRandom extends Algorithm{
     private boolean async = false;
     private Random rand = new Random();
     private long time = -1;
+    private int threads = 8;
+    private long doTime = 0;
 
     public KRandom(TspData tspData) {
         this(tspData, 100, false);
@@ -31,6 +36,10 @@ public class KRandom extends Algorithm{
         this.time = time;
     }
 
+    public void setThreads(int threads) {
+        this.threads = threads;
+    }
+
     @Override
     public Result calculate() {
         if(time >= 0) return calcTime();
@@ -38,31 +47,36 @@ public class KRandom extends Algorithm{
         return calcSync();
     }
 
+
+
     private Result calcAsync() {
+        long time = System.nanoTime();
         final Result result[] = new Result[k];
         final int dist[] = new int[k];
-        Thread t[] = new Thread[k];
-        for(int i = 0; i < k; i++) {
-            final int l = i;
-            t[i] = new Thread() {
+        final Thread thread[] = new Thread[threads];
+        for(int i = 0; i < threads; i++) {
+            final int index = i;
+            thread[i] = new Thread() {
                 @Override
                 public void run() {
-                    Result r = new Result(tspData);
-                    for(int j = 0; j < tspData.getSize(); j++) {
-                        int ra = rand.nextInt(tspData.getSize());
-                        int tmp = r.way[ra];
-                        r.way[ra] = r.way[j];
-                        r.way[j] = tmp;
+                    for(int l = (k*index)/threads; l < (k*(index+1)/threads); l++) {
+                        Result r = new Result(tspData);
+                        for (int j = 0; j < tspData.getSize(); j++) {
+                            int ra = rand.nextInt(tspData.getSize());
+                            int tmp = r.way[ra];
+                            r.way[ra] = r.way[j];
+                            r.way[j] = tmp;
+                        }
+                        result[l] = r;
+                        dist[l] = result[l].calcObjectiveFunction();
                     }
-                    result[l] = r;
-                    dist[l] = result[l].calcObjectiveFunction();
                 }
             };
-            t[i].start();
+            thread[i].start();
         }
-        for(int i = 0; i < k; i++) {
+        for(int i = 0; i < threads; i++) {
             try {
-                t[i].join();
+                thread[i].join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -73,6 +87,7 @@ public class KRandom extends Algorithm{
                 min = i;
             }
         }
+        this.doTime = System.nanoTime() - time;
         return result[min];
     }
 
@@ -125,4 +140,7 @@ public class KRandom extends Algorithm{
         return result;
     }
 
+    public long getTime() {
+        return doTime;
+    }
 }

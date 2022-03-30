@@ -2,6 +2,7 @@ package org.example.data;
 
 public class TspData {
 
+	protected String name;
 	protected boolean symmetric;
 	protected int n;
 	protected int distance[][];
@@ -14,6 +15,14 @@ public class TspData {
 		for(int i = 0; i < n; i++) {
 			dist[i][i] = -1;
 		}
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public int[][] getDistance() {
