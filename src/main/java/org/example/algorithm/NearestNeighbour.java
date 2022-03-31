@@ -10,9 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 public class NearestNeighbour extends Algorithm{
 
-    private boolean upgraded = true;
-    private boolean multiThreaded = false;
     private int threadCount = 40;
+    Strategy strategy;
 
     private class NearestNeighRunner implements Runnable{
 
@@ -21,6 +20,7 @@ public class NearestNeighbour extends Algorithm{
 
         NearestNeighRunner(int start){
             this.start = start;
+            strategy = Strategy.UPGRADED_SINGLE;
         }
 
         @Override
@@ -31,6 +31,13 @@ public class NearestNeighbour extends Algorithm{
         }
     }
 
+    public enum Strategy{
+        SIMPLE,
+        UPGRADED_MULTI,
+        UPGRADED_SINGLE,
+        CHECKALL_SINGLE
+    }
+
     public ArrayList<Result> candidates;
 
     public NearestNeighbour(TspData tspData) {
@@ -38,16 +45,15 @@ public class NearestNeighbour extends Algorithm{
         candidates = new ArrayList<>();
     }
 
-    public NearestNeighbour(TspData tspData, boolean multiThreaded, boolean upgraded){
+    public NearestNeighbour(TspData tspData, Strategy strategy){
         super(tspData);
         candidates = new ArrayList<>();
-        this.multiThreaded = multiThreaded;
-        this.upgraded = upgraded;
+        this.strategy = strategy;
     }
 
     @Override
     public Result calculate() {
-        if(multiThreaded) { //multiThreaded nearest neighbour
+        if(strategy == Strategy.UPGRADED_MULTI) { //multiThreaded nearest neighbour
             ExecutorService pool = Executors.newFixedThreadPool(threadCount);
             ArrayList<NearestNeighRunner> list = new ArrayList<>();
             for (int i = 0; i < tspData.getSize(); i++) {
@@ -65,18 +71,22 @@ public class NearestNeighbour extends Algorithm{
                 addCandidate(r.res);
             }
 
-        } else if(upgraded){    //upgraded nearest neighbour (starting from each city)
+        } else if(strategy == Strategy.UPGRADED_SINGLE){    //upgraded nearest neighbour (starting from each city)
             candidates.clear();
             for(int i = 0; i < tspData.getSize(); i++){
                 Result res = new Result(tspData);
                 simpleNearestNeighbour(res, i, 0);
                 addCandidate(res);
             }
-        } else {    //simple nearest neighbour starting from city no 0
+        } else if (strategy == Strategy.SIMPLE) {    //simple nearest neighbour starting from city no 0
             candidates.clear();
             Result res = new Result(tspData);
             simpleNearestNeighbour(res, 0, 0);
-//            nearestNeighbourCheckAllEqual(res, 0, 0);
+            addCandidate(res);
+        } else if (strategy == Strategy.CHECKALL_SINGLE) {
+            candidates.clear();
+            Result res = new Result(tspData);
+            nearestNeighbourCheckAllEqual(res, 0, 0);
             addCandidate(res);
         }
 
