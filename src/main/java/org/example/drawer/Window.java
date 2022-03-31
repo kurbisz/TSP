@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public class Window extends JFrame {
 
     private final Color bgdCol = new Color(125, 192, 239);
+    private int width = 1000;
+    private int height = 1000;
     public DrawingSurface drawingPanel;
 
     public Window(){
@@ -14,7 +16,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(1,1));
         setBackground(bgdCol);
-        setSize(1000,1000);
+        setSize(width,height);
         drawingPanel = new DrawingSurface();
         drawingPanel.setBackground(bgdCol);
         add(drawingPanel);

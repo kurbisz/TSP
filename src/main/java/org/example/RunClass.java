@@ -16,11 +16,11 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
-        loaderTest("euc2d.gz");
+        loaderTest("test3metro.tsp");
 //        generatorTest();
 //        windowTest();
 //        mapTest();
-        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData());
+        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData(), false, true);
         draw(nearestNeighbour.calculate());
 //        KRandom krandom = new KRandom(loader.getTspData());
 //        draw(krandom.calculate());

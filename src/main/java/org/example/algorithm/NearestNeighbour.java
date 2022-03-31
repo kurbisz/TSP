@@ -12,6 +12,9 @@ import java.util.concurrent.TimeUnit;
 
 public class NearestNeighbour extends Algorithm{
 
+    private boolean upgraded = true;
+    private boolean multiThreaded = false;
+
     private class NearestNeighRunner implements Runnable{
 
         int start;
@@ -25,7 +28,7 @@ public class NearestNeighbour extends Algorithm{
         public void run() {
             res = new Result(tspData);
             simpleNearestNeighbour(res, start, 0);
-            addCandidate(res);
+//            addCandidate(res);
         }
     }
 
@@ -36,30 +39,53 @@ public class NearestNeighbour extends Algorithm{
         candidates = new ArrayList<>();
     }
 
+    public NearestNeighbour(TspData tspData, boolean multiThreaded, boolean upgraded){
+        super(tspData);
+        candidates = new ArrayList<>();
+        this.multiThreaded = multiThreaded;
+        this.upgraded = upgraded;
+    }
+
     @Override
     public Result calculate() {
-        ExecutorService pool = Executors.newFixedThreadPool(40);
-        ArrayList<NearestNeighRunner> list = new ArrayList<>();
-        for(int i = 0; i< tspData.getSize(); i++){
-            list.add(new NearestNeighRunner(i));
-            pool.execute(list.get(i));
-        }
-        pool.shutdown();
-        try {
-            pool.awaitTermination(10, TimeUnit.SECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        if(multiThreaded) { //multiThreaded nearest neighbour
+            ExecutorService pool = Executors.newFixedThreadPool(40);
+            ArrayList<NearestNeighRunner> list = new ArrayList<>();
+            for (int i = 0; i < tspData.getSize(); i++) {
+                list.add(new NearestNeighRunner(i));
+                pool.execute(list.get(i));
+            }
+            pool.shutdown();
+            try {
+                pool.awaitTermination(10, TimeUnit.SECONDS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            for (NearestNeighRunner r : list) {
+                addCandidate(r.res);
+            }
+
+        } else if(upgraded){    //upgraded nearest neighbour (starting from each city)
+            candidates.clear();
+            for(int i = 0; i < tspData.getSize(); i++){
+                Result res = new Result(tspData);
+                simpleNearestNeighbour(res, i, 0);
+                addCandidate(res);
+            }
+        } else {    //simple nearest neighbour starting from city no 0
+            candidates.clear();
+            Result res = new Result(tspData);
+            simpleNearestNeighbour(res, 0, 0);
+            addCandidate(res);
         }
 
-        for(NearestNeighRunner r: list){
-            addCandidate(r.res);
-        }
-
+        //wybranie najlepszego rozwiązania
         Result toReturn = candidates.get(0);
         int bestWay = toReturn.calcObjectiveFunction();
-        for(Result r: candidates){
+        for (Result r : candidates) {
             int temp = r.calcObjectiveFunction();
-            if(temp < bestWay){
+            if (temp < bestWay) {
                 toReturn = r;
                 bestWay = temp;
             }
