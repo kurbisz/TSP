@@ -1,7 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.stats as stats
+
 
 l = 0.25
+
 
 def draw():
     file = open('compareKrAndTwoOpt.csv')
@@ -22,6 +25,7 @@ def draw():
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
     plt.savefig('krAndTwoOpt.png')
+    print(stats.wilcoxon(kr, to))
 
 
 draw()

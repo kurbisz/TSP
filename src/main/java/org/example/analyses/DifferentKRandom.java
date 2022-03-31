@@ -16,11 +16,6 @@ public class DifferentKRandom {
 			file.delete();
 			file.createNewFile();
 			FileWriter fileWriter = new FileWriter(file, true);
-//			for (int k = 10; k < 100; k++) {
-//				KRandom kRandom = new KRandom(tspData, k);
-//				Result result = kRandom.calculate();
-//				fileWriter.write(k + ";" + result.calcObjectiveFunction() + '\n');
-//			}
 			for (int k = 100; k < 100000;) {
 				KRandom kRandom = new KRandom(tspData, k);
 				Result result = kRandom.calculate();

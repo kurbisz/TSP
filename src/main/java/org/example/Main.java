@@ -3,6 +3,7 @@ package org.example;
 import org.example.algorithm.*;
 import org.example.analyses.AlgorithmsComparison;
 import org.example.analyses.DifferentKRandom;
+import org.example.analyses.TwoOptComparison;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
@@ -36,17 +37,23 @@ public class Main {
         TspData tspData = fileLoader.getTspData();
         //System.out.println(tspData.toString());
 
-        List<TspData> list = new ArrayList<>();
-        for(int i = 0; i < files.length; i++) {
-            fileLoader.setFileName(files[i]);
-            fileLoader.load();
-            TspData data = fileLoader.getTspData();
-            data.setName(names[i]);
-            list.add(data);
-        }
+        fileLoader.setFileName(files[2]); // Troche wiekszy plik dla wiekszego czasu
+        fileLoader.load();
+        tspData = fileLoader.getTspData();
+        TwoOptComparison.calc("twoOptTimeComparison.csv", tspData);
+
+//        List<TspData> list = new ArrayList<>();
+//        for(int i = 0; i < files.length; i++) {
+//            fileLoader.setFileName(files[i]);
+//            fileLoader.load();
+//            TspData data = fileLoader.getTspData();
+//            data.setName(names[i]);
+//            list.add(data);
+//        }
         //AlgorithmsComparison.compareKRAndNN("compareKrAndNn.csv", list);
         //AlgorithmsComparison.compareTwoOptAndNN("compareTwoOptAndNn.csv", list);
-        AlgorithmsComparison.compareKrAndTwoOpt("compareKrAndTwoOpt.csv", list);
+        //AlgorithmsComparison.compareKrAndTwoOpt("compareKrAndTwoOpt.csv", list);
+        //AlgorithmsComparison.compareAll("compareAll.csv", list);
 
 
         //System.out.println("Liczba dostepnych procesorow: " + Runtime.getRuntime().availableProcessors());

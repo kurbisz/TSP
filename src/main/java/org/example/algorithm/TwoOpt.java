@@ -9,6 +9,7 @@ public class TwoOpt extends Algorithm{
 
     boolean async;
     long time = -1;
+    Result starting;
 
     public TwoOpt(TspData tspData) {
         this(tspData, false);
@@ -27,6 +28,7 @@ public class TwoOpt extends Algorithm{
 
     private Result calcSymmetric() {
         Result result = new Result(tspData);
+        if(this.starting!=null) result = this.starting;
         int n = tspData.getSize();
         int betterWay = result.calcObjectiveFunction();
         int bestWay;
@@ -63,6 +65,7 @@ public class TwoOpt extends Algorithm{
 
     private Result calcAsymmetric() {
         Result result = new Result(tspData);
+        if(this.starting!=null) result = this.starting;
         int n = tspData.getSize();
         int bestWay = result.calcObjectiveFunction();
         int betterI = 0, betterJ = 0;
@@ -116,4 +119,9 @@ public class TwoOpt extends Algorithm{
     public void setTime(long time) {
         this.time = time;
     }
+
+    public void setStarting(Result starting) {
+        this.starting = starting;
+    }
+
 }
