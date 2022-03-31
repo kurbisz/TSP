@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.algorithm.NearestNeighbour;
+import org.example.analyses.MultiThreadedNNComparisoon;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
@@ -13,15 +14,15 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
-        loaderTest("dane/d657.tsp");
+        loaderTest("dane/d1291.tsp");
 //        generatorTest();
 //        windowTest();
 //        mapTest();
-        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData(), NearestNeighbour.Strategy.UPGRADED_MULTI);
+//        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData(), NearestNeighbour.Strategy.UPGRADED_MULTI);
 //        draw(nearestNeighbour.calculate());
-        nearestNeighbour.setThreadCount(6);
-        nearestNeighbour.calculate();
-        System.out.println(nearestNeighbour.getTime()/1000000000.0);
+//        nearestNeighbour.setThreadCount(6);
+//        nearestNeighbour.calculate();
+//        System.out.println(nearestNeighbour.getTime()/1000000000.0);
 //        KRandom krandom = new KRandom(loader.getTspData(), 100000, true);
 //        krandom.setThreads(30);
 //        draw(krandom.calculate());
@@ -29,6 +30,7 @@ public class RunClass {
 //        System.out.println(krandom.getTime()/1000000000.0);
 //        TwoOpt tOpt = new TwoOpt(loader.getTspData());
 //        draw(tOpt.calculate());
+        MultiThreadedNNComparisoon.calc("mulithreadNNComp_d1291.csv", loader.getTspData());
     }
 
     private static void draw(Result res) {
