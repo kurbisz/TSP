@@ -3,17 +3,16 @@ package org.example.algorithm;
 import org.example.data.Result;
 import org.example.data.TspData;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class NearestNeighbour extends Algorithm{
 
     private boolean upgraded = true;
     private boolean multiThreaded = false;
+    private int threadCount = 40;
 
     private class NearestNeighRunner implements Runnable{
 
@@ -49,7 +48,7 @@ public class NearestNeighbour extends Algorithm{
     @Override
     public Result calculate() {
         if(multiThreaded) { //multiThreaded nearest neighbour
-            ExecutorService pool = Executors.newFixedThreadPool(40);
+            ExecutorService pool = Executors.newFixedThreadPool(threadCount);
             ArrayList<NearestNeighRunner> list = new ArrayList<>();
             for (int i = 0; i < tspData.getSize(); i++) {
                 list.add(new NearestNeighRunner(i));
@@ -77,6 +76,7 @@ public class NearestNeighbour extends Algorithm{
             candidates.clear();
             Result res = new Result(tspData);
             simpleNearestNeighbour(res, 0, 0);
+//            nearestNeighbourCheckAllEqual(res, 0, 0);
             addCandidate(res);
         }
 
@@ -143,8 +143,45 @@ public class NearestNeighbour extends Algorithm{
         }
     }
 
+    public void nearestNeighbourCheckAllEqual(Result res, int start, int startWaypoint){
+        ArrayList<Integer> nonVisited = new ArrayList<>();
+        for(int i = 0; i < tspData.getSize(); i++) nonVisited.add(i);
+        res.way[startWaypoint] = start;
+        for(int i =0; i <= startWaypoint; i++){
+            nonVisited.remove(Integer.valueOf(res.way[i]));
+        }
+        int i = startWaypoint;
+
+        while(nonVisited.size()>0){
+            int nearest = nonVisited.get(0);
+            int nearestDist = tspData.getDistance(res.way[i], nearest);
+            for(int city: nonVisited){
+                if(city == nearest) continue;
+                int tempDist = tspData.getDistance(res.way[i], city);
+                if(tempDist < nearestDist){
+                    nearest = city;
+                    nearestDist = tempDist;
+                } else if (tempDist == nearestDist){
+                    Result tempRes = new Result(tspData);
+                    System.arraycopy(res.way, 0, tempRes.way, 0, i+1);
+                    nearestNeighbourCheckAllEqual(tempRes, city, i+1);
+                    addCandidate(tempRes);
+                }
+            }
+            i++;
+//            System.out.print(nearest+", ");
+//            System.out.println(i);
+            res.way[i] = nearest;
+            nonVisited.remove(Integer.valueOf(nearest));
+        }
+    }
+
     private void addCandidate(Result res){
         candidates.add(res);
+    }
+
+    public void setThreadCount(int threadCount) {
+        this.threadCount = threadCount;
     }
 
     //TODO optimalizaton (optional)

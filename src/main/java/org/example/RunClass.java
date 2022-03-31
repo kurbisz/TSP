@@ -16,16 +16,16 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
-        loaderTest("dane/d198.tsp");
+        loaderTest("test2Metro.tsp");
 //        generatorTest();
 //        windowTest();
 //        mapTest();
-//        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData(), false, true);
-//        draw(nearestNeighbour.calculate());
+        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData(), false, false);
+        draw(nearestNeighbour.calculate());
 //        KRandom krandom = new KRandom(loader.getTspData());
 //        draw(krandom.calculate());
-        TwoOpt tOpt = new TwoOpt(loader.getTspData());
-        draw(tOpt.calculate());
+//        TwoOpt tOpt = new TwoOpt(loader.getTspData());
+//        draw(tOpt.calculate());
     }
 
     private static void draw(Result res) {
