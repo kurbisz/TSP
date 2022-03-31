@@ -7,6 +7,7 @@ import java.awt.geom.Ellipse2D;
 
 public class Point extends Ellipse2D.Double implements Drawable {
 
+	private double realX, realY;
 	private double x, y;
 	Color color;
 
@@ -17,17 +18,21 @@ public class Point extends Ellipse2D.Double implements Drawable {
     }
 
 	public Point(double x, double y, State state) {
+		this.realX = x;
+		this.realY = y;
 		this.x = x;
 		this.y = y;
 		setState(state);
-		setFrame(x,y, pointSize, pointSize);
+		setFrame(this.x,this.y, pointSize, pointSize);
 	}
 
 	public Point(double x, double y){
+		this.realX = x;
+		this.realY = y;
 		this.x = x;
 		this.y = y;
 		setState(State.NORMAL);
-		setFrame(x,y, pointSize, pointSize);
+		setFrame(this.x,this.y, pointSize, pointSize);
 	}
 
 	public double getX() {
@@ -38,8 +43,16 @@ public class Point extends Ellipse2D.Double implements Drawable {
 		return y;
 	}
 
+	public double getRealX() {
+		return realX;
+	}
+
+	public double getRealY() {
+		return realY;
+	}
+
 	public int getDistance(Point p) {
-		return (int) (0.5 + Math.sqrt(pow(x - p.getX()) + pow(y-p.getY())));
+		return (int) (0.5 + Math.sqrt(pow(x - p.getX()) + pow(realY -p.getY())));
 	}
 
 	private double pow(double x) {
@@ -57,5 +70,11 @@ public class Point extends Ellipse2D.Double implements Drawable {
 		if(state == State.NORMAL) color = Color.BLACK;
 		if(state == State.VISITED) color = Color.RED;
 		if(state == State.STARTING) color = Color.GREEN;
+	}
+
+	public void scale(double scaleX, double scaleY){
+		x = realX * scaleX;
+		y = realY * scaleY;
+		setFrame(x,y, pointSize, pointSize);
 	}
 }
