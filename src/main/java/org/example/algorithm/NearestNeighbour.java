@@ -12,6 +12,7 @@ public class NearestNeighbour extends Algorithm{
 
     private int threadCount = 40;
     Strategy strategy;
+    long doTime = 0;
 
     private class NearestNeighRunner implements Runnable{
 
@@ -53,6 +54,7 @@ public class NearestNeighbour extends Algorithm{
 
     @Override
     public Result calculate() {
+        long time = System.nanoTime();
         if(strategy == Strategy.UPGRADED_MULTI) { //multiThreaded nearest neighbour
             ExecutorService pool = Executors.newFixedThreadPool(threadCount);
             ArrayList<NearestNeighRunner> list = new ArrayList<>();
@@ -100,6 +102,7 @@ public class NearestNeighbour extends Algorithm{
                 bestWay = temp;
             }
         }
+        doTime = System.nanoTime() - time;
         return toReturn;
     }
 
@@ -194,5 +197,7 @@ public class NearestNeighbour extends Algorithm{
         this.threadCount = threadCount;
     }
 
-    //TODO optimalizaton (optional)
+    public long getTime() {
+        return doTime;
+    }
 }
