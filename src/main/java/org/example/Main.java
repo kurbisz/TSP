@@ -1,12 +1,7 @@
 package org.example;
 
-import org.example.algorithm.*;
-import org.example.analyses.AlgorithmsComparison;
-import org.example.analyses.DifferentKRandom;
-import org.example.analyses.TwoOptComparison;
-import org.example.data.Result;
+import org.example.analyses.*;
 import org.example.data.TspData;
-import org.example.drawer.Drawer;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +16,7 @@ public class Main {
                                     folder + "pr299.tsp", folder + "rbg323.atsp", folder + "rbg443.atsp",
                                     folder + "ry48p.atsp"};
     public static String[] names = {"S198", "S657", "S1291", "A53", "A35", "S100", "S299", "A323", "A443", "A48"};
+    public static int[] best = {15780, 48912, 50801, 6905, 1473, 22141, 48191, 1326, 2720, 14422};
 
     /**
      *
@@ -40,20 +36,27 @@ public class Main {
         fileLoader.setFileName(files[2]); // Troche wiekszy plik dla wiekszego czasu
         fileLoader.load();
         tspData = fileLoader.getTspData();
-        TwoOptComparison.calc("twoOptTimeComparison.csv", tspData);
+        //TwoOptComparison.calc("twoOptTimeComparison.csv", tspData);
+        //ThreeOptComparison.calc("threeOptTimeComparison.csv", tspData);
 
-//        List<TspData> list = new ArrayList<>();
-//        for(int i = 0; i < files.length; i++) {
-//            fileLoader.setFileName(files[i]);
-//            fileLoader.load();
-//            TspData data = fileLoader.getTspData();
-//            data.setName(names[i]);
-//            list.add(data);
-//        }
+        List<TspData> list = new ArrayList<>();
+        for(int i = 0; i < files.length; i++) {
+            fileLoader.setFileName(files[i]);
+            fileLoader.load();
+            TspData data = fileLoader.getTspData();
+            data.setName(names[i]);
+            list.add(data);
+        }
         //AlgorithmsComparison.compareKRAndNN("compareKrAndNn.csv", list);
         //AlgorithmsComparison.compareTwoOptAndNN("compareTwoOptAndNn.csv", list);
         //AlgorithmsComparison.compareKrAndTwoOpt("compareKrAndTwoOpt.csv", list);
         //AlgorithmsComparison.compareAll("compareAll.csv", list);
+        //AlgorithmsComparison.compareAllTimes("compareAllTimes.csv", list);
+//        BetterNearestNeighbourComparison.compareKR("compareBnnAndKr.csv", list);
+//        BetterNearestNeighbourComparison.compareNN("compareBnnAndNn.csv", list);
+//        BetterNearestNeighbourComparison.compareTwoOpt("compareBnnAndTwoOpt.csv", list);
+//        AlgorithmsComparison2.compareTwoOpt("twoOptStarting.csv", list);
+//        AlgorithmsComparison2.compareTwoOptTime("twoOptStartingTime.csv", list);
 
 
         //System.out.println("Liczba dostepnych procesorow: " + Runtime.getRuntime().availableProcessors());

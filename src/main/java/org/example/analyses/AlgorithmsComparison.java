@@ -3,6 +3,7 @@ package org.example.analyses;
 import org.example.Main;
 import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
+import org.example.algorithm.ThreeOpt;
 import org.example.algorithm.TwoOpt;
 import org.example.data.TspData;
 
@@ -86,20 +87,20 @@ public class AlgorithmsComparison {
 
 	public static void compareKrAndTwoOpt(String fileName, List<TspData> data) {
 		int n = data.size();
-		int to[] = new int[n], nn[] = new int[n];
+		int kr[] = new int[n], to[] = new int[n];
 		long time[] = new long[n];
 		int i = 0;
 		for(TspData tspData : data) {
 			time[i] = System.nanoTime();
 			TwoOpt twoOpt = new TwoOpt(tspData);
-			nn[i] = twoOpt.calculate().calcObjectiveFunction();
+			to[i] = twoOpt.calculate().calcObjectiveFunction();
 			time[i] = System.nanoTime() - time[i];
 			i++;
 		}
 		i=0;
 		for(TspData tspData : data) {
 			KRandom kRandom = new KRandom(tspData, time[i]);
-			to[i] = kRandom.calculate().calcObjectiveFunction();
+			kr[i] = kRandom.calculate().calcObjectiveFunction();
 			i++;
 		}
 		try {
@@ -109,7 +110,7 @@ public class AlgorithmsComparison {
 			FileWriter fileWriter = new FileWriter(file, true);
 			fileWriter.write("file;2-OPT;K-Random;TimeInNanos\n");
 			for (int k = 0; k < n; k++) {
-				fileWriter.write( Main.names[k] + ";" + to[k] + ";" + nn[k] + ";" + time[k] + "\n");
+				fileWriter.write( Main.names[k] + ";" + to[k] + ";" + kr[k] + ";" + time[k] + "\n");
 			}
 
 			fileWriter.close();
@@ -119,8 +120,96 @@ public class AlgorithmsComparison {
 		}
 	}
 
-	public static void compareNNAndNN2(String fileName, List<TspData> data) {
+	public static void compareAll(String fileName, List<TspData> data) {
+		int n = data.size();
+		int kr[] = new int[n], kr2[] = new int[n], nn[] = new int[n], nn2[] = new int[n],
+				to[] = new int[n];
+		int i = 0;
+		for(TspData tspData : data) {
+			KRandom kRandom = new KRandom(tspData, 100);
+			kr[i] = kRandom.calculate().calcObjectiveFunction();
 
+			KRandom kRandom2 = new KRandom(tspData, tspData.getSize()*2);
+			kr2[i] = kRandom2.calculate().calcObjectiveFunction();
+
+			NearestNeighbour nearestNeighbour = new NearestNeighbour(tspData);
+			nn[i] = nearestNeighbour.calculate().calcObjectiveFunction();
+
+			// TODO change to Better nearest neighbour
+			NearestNeighbour betterNearestNeighbour = new NearestNeighbour(tspData);
+			nn2[i] = betterNearestNeighbour.calculate().calcObjectiveFunction();
+
+			TwoOpt twoOpt = new TwoOpt(tspData);
+			to[i] = twoOpt.calculate().calcObjectiveFunction();
+			i++;
+		}
+		try {
+			File file = new File(fileName);
+			file.delete();
+			file.createNewFile();
+			FileWriter fileWriter = new FileWriter(file, true);
+			fileWriter.write("file;K-Random-100;K-Random-2n;NearestNeighbour;NearestNeighbour2;2-OPT\n");
+			for (int k = 0; k < n; k++) {
+				fileWriter.write(Main.names[k] + ";" + kr[k] + ";" + kr2[k] + ";" + nn[k] + ";" + nn2[k] + ";"
+						+ to[k] + "\n");
+			}
+
+			fileWriter.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void compareAllTimes(String fileName, List<TspData> data) {
+		int n = data.size();
+		long kr[] = new long[n], kr2[] = new long[n], nn[] = new long[n], nn2[] = new long[n],
+				to[] = new long[n];
+		int i = 0;
+		for(TspData tspData : data) {
+			long time = System.nanoTime();
+			KRandom kRandom = new KRandom(tspData, 100);
+			kRandom.calculate().calcObjectiveFunction();
+			kr[i] = System.nanoTime() - time;
+
+			time = System.nanoTime();
+			KRandom kRandom2 = new KRandom(tspData, tspData.getSize()*2);
+			kRandom2.calculate().calcObjectiveFunction();
+			kr2[i] = System.nanoTime() - time;
+
+			time = System.nanoTime();
+			NearestNeighbour nearestNeighbour = new NearestNeighbour(tspData);
+			nearestNeighbour.calculate().calcObjectiveFunction();
+			nn[i] = System.nanoTime() - time;
+
+			// TODO change to Better nearest neighbour
+			time = System.nanoTime();
+			NearestNeighbour betterNearestNeighbour = new NearestNeighbour(tspData);
+			betterNearestNeighbour.calculate().calcObjectiveFunction();
+			nn2[i] = System.nanoTime() - time;
+
+			time = System.nanoTime();
+			TwoOpt twoOpt = new TwoOpt(tspData);
+			twoOpt.calculate().calcObjectiveFunction();
+			to[i] = System.nanoTime() - time;
+			i++;
+		}
+		try {
+			File file = new File(fileName);
+			file.delete();
+			file.createNewFile();
+			FileWriter fileWriter = new FileWriter(file, true);
+			fileWriter.write("file;K-Random-100;K-Random-2n;NearestNeighbour;NearestNeighbour2;2-OPT;BestSolution\n");
+			for (int k = 0; k < n; k++) {
+				fileWriter.write(Main.names[k] + ";" + kr[k] + ";" + kr2[k] + ";" + nn[k] + ";" + nn2[k] + ";"
+						+ to[k] + ";" + Main.best[k] + "\n");
+			}
+
+			fileWriter.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
