@@ -23,6 +23,10 @@ public class FileLoader {
 		this.fileName = fileName;
 	}
 
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 	public void load() {
 		try {
 			FileInputStream fileInputStream = new FileInputStream(fileName);

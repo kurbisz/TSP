@@ -1,0 +1,26 @@
+Zlozonosci obliczeniowe:
+- k-random - O(k*n)
+- najblizszy sasiad - O(n^2) - (n-1) + (n-2) + ...
+- 2. wersja najblizszego sasiada - O(n^3)
+- 2-OPT - O(n^3) dla 1 kroku, ile dla wszystkich???
+
+W sprawozdaniu ma byc zlozonosc pamieciowa i obliczeniowa (nie trzeba przy rownoleglych)
+
+Sposob empiryczny:
+a) 
+	zbior instancji problemu i porownanie dla dwoch algorytmow: instacje ze strony
+	tabelka z wynikiem kazdego z algorytmow i najlepszego wyniku (pogrubione dla tych gdzie to bylo najlepsze) i roznicą
+	
+b) (analiza statystyczna): 
+	testy statyczne Wilcoxon (sparowany - pairwise) na podstawie tabeli wygenerowanej w sposobie 1
+	instancje musza byc rozne od siebie (losowe lub tsplib), krandom odpalic iles razy i obliczyc srednia 
+	(dobrze tez min, max i odchylenie standardowe), mozna histogram ale nie trzeba
+
+c) 
+	dac tyle samo czasu dla obu algorytmow i sprawdzic jakie dadza wyniki
+	podac czas kazdego z algorytmow i podac ich wyniki
+	liczba wywolan funkcji celu
+
+Oszacowanie dolne - minimalna droga (nie wiemy czy faktycznie istnieje), z tsplib znamy akurat rozw aptymalne
+Roznica miedzy rozw opt a aktualnym - podawane w %: (pi - pi2)/pi2 * 100% - pi to nasze rozw a pi2 to optymalne
+Testy parametryczne i nieparametryczne (te 2 wymagaja mniej zalozen)
