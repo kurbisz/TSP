@@ -46,6 +46,12 @@ public class NearestNeighbour extends Algorithm{
         candidates = new ArrayList<>();
     }
 
+    public NearestNeighbour(TspData tspData, boolean upgraded) {
+        this(tspData);
+        if(upgraded) this.strategy = Strategy.UPGRADED_SINGLE;
+        else this.strategy = Strategy.SIMPLE;
+    }
+
     public NearestNeighbour(TspData tspData, Strategy strategy){
         super(tspData);
         candidates = new ArrayList<>();
