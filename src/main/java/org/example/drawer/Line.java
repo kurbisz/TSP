@@ -16,7 +16,7 @@ public class Line extends Line2D.Double implements Drawable{
     public void draw(Graphics2D g2d) {
         g2d.setPaint(color);
         g2d.fill(this);
-        g2d.setStroke(new BasicStroke(2));
+        g2d.setStroke(new BasicStroke(1.4f));
         g2d.draw(this);
     }
 }

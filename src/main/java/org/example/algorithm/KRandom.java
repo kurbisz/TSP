@@ -3,6 +3,7 @@ package org.example.algorithm;
 import org.example.data.Result;
 import org.example.data.TspData;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -44,7 +45,7 @@ public class KRandom extends Algorithm{
     @Override
     public Result calculate() {
         if(time >= 0) return calcTime();
-        if(async) return calcAsync();
+        if(async) return calcAsync2();
         return calcSync();
     }
 
@@ -91,6 +92,55 @@ public class KRandom extends Algorithm{
         this.doTime = System.nanoTime() - time;
         return result[min];
     }
+
+    private Result calcAsync2(){
+        long time = System.nanoTime();
+
+        ArrayList<KRunner> jobs = new ArrayList<>();
+
+        ExecutorService pool = Executors.newFixedThreadPool(threads);
+
+        for(int i = 0; i < k; i++) {
+            jobs.add(new KRunner());
+            pool.execute(jobs.get(i));
+        }
+
+        Result best = jobs.get(0).r;
+        int dist = jobs.get(0).objFunc;
+
+        for(KRunner job : jobs) {
+            if(job.objFunc < dist) {
+                dist = job.objFunc;
+                best = job.r;
+            }
+        }
+
+        this.doTime = System.nanoTime() - time;
+
+        return best;
+    }
+
+    private class KRunner implements Runnable{
+        Result r;
+        int objFunc;
+
+        public KRunner(){
+            r = new Result(tspData);
+        }
+
+        @Override
+        public void run() {
+
+            for (int j = 0; j < tspData.getSize(); j++) {
+                int ra = rand.nextInt(tspData.getSize());
+                int tmp = r.way[ra];
+                r.way[ra] = r.way[j];
+                r.way[j] = tmp;
+            }
+            objFunc = r.calcObjectiveFunction();
+        }
+    }
+
 
     private Result calcSync() {
         Result result = null;

@@ -19,8 +19,16 @@ public class Drawer {
 
     public void showResult(Result result){
         Point[] points = ((EucTspData)result.problem).getPoints();
+        double max = 0.0;
         for(Point p: points){
             p.setState(Point.State.NORMAL);
+            if(p.getX() > max) max = p.getX();
+            if(p.getY() > max) max = p.getY();
+        }
+        double scaleX = surface.getWidth()/ max;
+        double scaleY = surface.getHeight()/ max;
+        for(Point p: points){
+            p.scale(scaleX, scaleY);
         }
         int last = result.way[0];
         int next = 0;
