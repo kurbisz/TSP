@@ -7,7 +7,7 @@ l = 0.25
 
 
 def draw():
-    file = open('compareTwoOptAndNn.csv')
+    file = open('compareBnnAndTwoOpt.csv')
     file.readline()
     names = ['' for n in range(10)]
     bnn = [0 for n in range(10)]

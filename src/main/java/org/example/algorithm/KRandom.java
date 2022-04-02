@@ -6,6 +6,7 @@ import org.example.data.TspData;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 public class KRandom extends Algorithm{
@@ -62,7 +63,7 @@ public class KRandom extends Algorithm{
                     for(int l = (k*index)/threads; l < (k*(index+1)/threads); l++) {
                         Result r = new Result(tspData);
                         for (int j = 0; j < tspData.getSize(); j++) {
-                            int ra = rand.nextInt(tspData.getSize());
+                            int ra = ThreadLocalRandom.current().nextInt(tspData.getSize());
                             int tmp = r.way[ra];
                             r.way[ra] = r.way[j];
                             r.way[j] = tmp;

@@ -7,7 +7,7 @@ l = 0.12
 
 
 def draw():
-    file = open('compareAll.csv')
+    file = open('compareAllTimes.csv')
     file.readline()
     names = ['' for n in range(10)]
     kr = [0 for n in range(10)]

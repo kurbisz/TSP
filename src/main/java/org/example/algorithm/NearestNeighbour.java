@@ -35,8 +35,11 @@ public class NearestNeighbour extends Algorithm{
     public ArrayList<Result> candidates;
 
     public NearestNeighbour(TspData tspData) {
-        super(tspData);
-        candidates = new ArrayList<>();
+        this(tspData, false, false);
+    }
+
+    public NearestNeighbour(TspData tspData, boolean upgraded) {
+        this(tspData, false, upgraded);
     }
 
     public NearestNeighbour(TspData tspData, boolean multiThreaded, boolean upgraded){
@@ -147,5 +150,4 @@ public class NearestNeighbour extends Algorithm{
         candidates.add(res);
     }
 
-    //TODO optimalizaton (optional)
 }

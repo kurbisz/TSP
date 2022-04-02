@@ -2,6 +2,8 @@ package org.example.data;
 
 import org.example.Point;
 
+import java.util.Random;
+
 public class Result {
 
     public TspData problem;
@@ -49,6 +51,18 @@ public class Result {
             stringBuilder.append(' ');
         }
         return stringBuilder.toString();
+    }
+
+    public static Result getRandom(TspData tspData) {
+        Random r = new Random();
+        Result result = new Result(tspData);
+        for(int i = 0; i < tspData.getSize(); i++) {
+            int rand = i + r.nextInt(tspData.getSize() - i);
+            int tmp = result.way[i];
+            result.way[i] = result.way[rand];
+            result.way[rand] = tmp;
+        }
+        return result;
     }
 
 }

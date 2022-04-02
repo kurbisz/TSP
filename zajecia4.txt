@@ -1,0 +1,5 @@
+SPRAWOZDANIE:
+1. zlozonosc obliczeniowa i pamieciowa kazdego z algorytmow
+2. opis eksperymentow: metodologia naszych eksperymentow tzn:
+    a) jak zostal zaimplementowany (ciekawsze, wazniejsze sprawy; jaki jezyk programowania; jak byl kompilowany)
+    b)

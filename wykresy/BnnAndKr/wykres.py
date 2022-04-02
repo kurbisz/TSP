@@ -7,7 +7,7 @@ l = 0.25
 
 
 def draw():
-    file = open('compareKrAndNn.csv')
+    file = open('compareBnnAndKr.csv')
     file.readline()
     names = ['' for n in range(10)]
     kr = [0 for n in range(10)]
