@@ -15,8 +15,10 @@ def draw():
         index += 1
 
     plt.axis([0, 8000, 50000, 120000])
-    plt.title('Wyniki dla algorytmu 2-OPT w zaleznosci od czasu w ms')
+    plt.title('Wyniki dla algorytmu 2-OPT w zaleznosci od czasu')
     plt.plot(x_line, k_random, color='red')
+    plt.xlabel('Czas wykonania algorytmu w milisekundach')
+    plt.ylabel('Najlepsze rozwiązanie')
     plt.savefig('twoOptTimeComparison.png')
     plt.show()
     plt.clf()

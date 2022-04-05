@@ -1,7 +1,6 @@
 package org.example;
 
-import org.example.algorithm.NearestNeighbour;
-import org.example.analyses.MultiThreadedNNComparisoon;
+import org.example.analyses.MultiThreadedComparison;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
@@ -30,7 +29,7 @@ public class RunClass {
 //        System.out.println(krandom.getTime()/1000000000.0);
 //        TwoOpt tOpt = new TwoOpt(loader.getTspData());
 //        draw(tOpt.calculate());
-        MultiThreadedNNComparisoon.calc("mulithreadNNComp_d1291.csv", loader.getTspData());
+        MultiThreadedComparison.calcNN("mulithreadNNComp_d1291.csv", loader.getTspData());
     }
 
     private static void draw(Result res) {

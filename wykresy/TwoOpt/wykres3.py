@@ -21,13 +21,16 @@ def draw():
         bto2[i] = int(line[3])
 
     r1 = np.arange(10)
-    plt.title('Porownanie czasu w ms algorytmu 2-OPT w zaleznosci od rozwiazania poczatkowego')
+    plt.title('Porownanie czasu algorytmu 2-OPT w zaleznosci od rozwiazania poczatkowego')
     plt.bar(r1 - l, to, color='green', width=l, label='Zwykly 2-OPT')
     plt.bar(r1, bto, color='red', width=l, label='2-OPT dla najblizszego sasiada od 1')
     plt.bar(r1 + l, to, color='blue', width=l, label='2-OPT dla ulepszonego najblizszego sasiada')
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
-    plt.savefig('twoOptStartingTime.png')
+    plt.xlabel('Rodzaj i wielkość problemu')
+    plt.ylabel('Czas wykonania algorytmu w milisekundach')
+    plt.yscale('log')
+    plt.savefig('twoOptStartingTime.png', bbox_inches='tight')
     plt.clf()
 
 

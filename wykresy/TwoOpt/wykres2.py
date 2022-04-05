@@ -27,6 +27,8 @@ def draw():
     plt.bar(r1 + l, to, color='blue', width=l, label='2-OPT dla ulepszonego najblizszego sasiada')
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
+    plt.xlabel('Rodzaj i wielkość problemu')
+    plt.ylabel('Najlepsze rozwiązanie')
     plt.savefig('twoOptStarting.png')
     plt.clf()
 

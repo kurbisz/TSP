@@ -24,11 +24,13 @@ def draw():
         k_random_avg[index] = int(line[1])
         index += 1
 
-    plt.axis([0, 100000, 359000, 405000])
+    plt.subplots_adjust(left=0.15)
     plt.title('Wyniki dla algorytmu KRandom w zaleznosci od k')
-    plt.plot(x_line, k_random, color='green', label='dla k przedzialami co 100')
+    plt.plot(x_line, k_random, color='green', label='wynik dla k przedzialami co 100')
     plt.plot(x_line_avg, k_random_avg, color='red', label='usredniony wynik 100 wywolan dla poszczegolnych k')
     plt.legend()
+    plt.xlabel('Wartość parametru k')
+    plt.ylabel('Najlepsze rozwiązanie')
     plt.savefig('krandom.png')
     plt.show()
     plt.clf()

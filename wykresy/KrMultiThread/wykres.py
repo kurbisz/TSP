@@ -6,7 +6,7 @@ def draw():
     x_line = [0 for n in range(max)]
     nnMulti = [0 for n in range(max)]
 
-    file1 = open('mulithreadNN_d198.csv')
+    file1 = open('mulithreadKR_d198.csv')
     index = 0
     file1.readline()
     for n in range(max):
@@ -15,12 +15,11 @@ def draw():
         nnMulti[index] = float(line[0])
         index += 1
 
-    #plt.axis([0, 16, 300, 2200])
-    plt.title('Wyniki dla algorytmu Nearest Neighbour w zaleznosci od ilosci watkow')
+    plt.title('Wyniki dla algorytmu K-Random (k=100000) w zaleznosci od ilosci watkow')
     plt.plot(x_line, nnMulti, color='red')
     plt.xlabel('Dostępna liczba wątków')
     plt.ylabel('Czas wykonania algorytmu w milisekundach')
-    plt.savefig('nnMultiThread_d198.png')
+    plt.savefig('krMultiThread_d198.png')
     plt.show()
     plt.clf()
 
@@ -28,7 +27,7 @@ def draw():
     x_line = [0 for n in range(max)]
     nnMulti = [0 for n in range(max)]
 
-    file1 = open('mulithreadNN_d1291.csv')
+    file1 = open('mulithreadKR_d1291.csv')
     index = 0
     file1.readline()
     for n in range(max):
@@ -37,12 +36,11 @@ def draw():
         nnMulti[index] = float(line[0])
         index += 1
 
-    #plt.axis([0, 16, 0, 16000])
-    plt.title('Wyniki dla algorytmu Nearest Neighbour w zaleznosci od ilosci watkow')
+    plt.title('Wyniki dla algorytmu K-Random (k=100000) w zaleznosci od ilosci watkow')
     plt.plot(x_line, nnMulti, color='red')
     plt.xlabel('Dostępna liczba wątków')
     plt.ylabel('Czas wykonania algorytmu w milisekundach')
-    plt.savefig('nnMultiThread_d1291.png')
+    plt.savefig('krMultiThread_d1291.png')
     plt.show()
     plt.clf()
 

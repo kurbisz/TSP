@@ -24,6 +24,8 @@ def draw():
     plt.bar(r1+l, bnn, color='red', width=l, label='Better Nearest Neighbour')
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
+    plt.xlabel('Rodzaj i wielkość problemu')
+    plt.ylabel('Najlepsze rozwiązanie')
     plt.savefig('BnnAndNn.png')
     print(stats.wilcoxon(nn, bnn))
 

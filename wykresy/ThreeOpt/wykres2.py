@@ -16,15 +16,6 @@ def draw():
         index += 1
 
 
-
-    plt.axis([0, 5150, 50000, 151000])
-    plt.title('Wyniki dla algorytmu 3-OPT w zaleznosci od czasu w s')
-    plt.plot(x_line, threeOpt, color='red')
-    plt.savefig('threeOptTimeComparison.png')
-    plt.show()
-    plt.clf()
-
-
     max = 15
     x_line2 = [0 for n in range(max+1)]
     twoOpt = [0 for n in range(max+1)]
@@ -45,6 +36,12 @@ def draw():
     plt.plot(x_line, threeOpt, color='red', label='algorytm 3-OPT')
     plt.plot(x_line2, twoOpt, color='green', label='algorytm 2-OPT')
     plt.legend()
+    plt.subplots_adjust(left=0.15)
+    plt.xlabel('Czas wykonania algorytmów w sekundach')
+    plt.xscale('log')
+    plt.xlim(1, 6000)
+    plt.ylim(55000, 160000)
+    plt.ylabel('Najlepsze rozwiązanie')
     plt.savefig('twoAndThreeOptTimeComparison.png')
     plt.show()
     plt.clf()

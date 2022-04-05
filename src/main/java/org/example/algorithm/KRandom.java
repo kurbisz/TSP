@@ -45,7 +45,7 @@ public class KRandom extends Algorithm{
     @Override
     public Result calculate() {
         if(time >= 0) return calcTime();
-        if(async) return calcAsync2();
+        if(async) return calcAsync();
         return calcSync();
     }
 

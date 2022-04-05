@@ -24,7 +24,10 @@ def draw():
     plt.bar(r1 + l, to, color='red', width=l, label='2-OPT dla losowego poczatku')
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
-    plt.savefig('twoOptRandomStartingTime.png')
+    plt.xlabel('Rodzaj i wielkość problemu')
+    plt.ylabel('Czas wykonania algorytmu w milisekundach')
+    plt.yscale('log')
+    plt.savefig('twoOptRandomStartingTime.png', bbox_inches='tight')
     plt.clf()
 
 

@@ -24,7 +24,10 @@ def draw():
     plt.bar(r1+l, to, color='red', width=l, label='2-OPT')
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
-    plt.savefig('TwoOptAndNN.png')
+    plt.xlabel('Rodzaj i wielkość problemu')
+    plt.ylabel('Najlepsze rozwiązanie')
+    plt.yscale('log')
+    plt.savefig('TwoOptAndNN.png', bbox_inches='tight')
     print(stats.wilcoxon(to, nn))
 
 

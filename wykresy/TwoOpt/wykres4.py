@@ -24,6 +24,8 @@ def draw():
     plt.bar(r1 + l, to, color='red', width=l, label='2-OPT dla losowego poczatku')
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
+    plt.xlabel('Rodzaj i wielkość problemu')
+    plt.ylabel('Najlepsze rozwiązanie')
     plt.savefig('twoOptRandomStarting.png')
     plt.clf()
 
