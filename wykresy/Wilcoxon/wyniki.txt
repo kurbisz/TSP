@@ -1,0 +1,8 @@
+Wyniki dla poszczegolnych porownan:
+    K-Random dla k=100 i k=2*n                          statistic=18.0, pvalue=0.375
+    K-Random i Nearest Neighbour                        statistic=0.0, pvalue=0.001953125
+    K-Random i 2-OPT                                    statistic=0.0, pvalue=0.001953125
+    2-OPT i Nearest Neighbour                           statistic=0.0, pvalue=0.001953125
+    Nearest Neighbour i Better Nearest Neighbour        statistic=0.0, pvalue=0.001953125
+    Better Nearest Neighbour i K-Random                 statistic=0.0, pvalue=0.001953125
+    Better Nearest Neighbour i 2-OPT                    statistic=23.0, pvalue=0.6953125

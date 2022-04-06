@@ -7,7 +7,7 @@ l = 0.25
 
 
 def draw():
-    file = open('compareKrAndNn.csv')
+    file = open('compareBnnAndKr.csv')
     file.readline()
     names = ['' for n in range(10)]
     kr = [0 for n in range(10)]
@@ -24,6 +24,9 @@ def draw():
     plt.bar(r1+l, bnn, color='red', width=l, label='Better Nearest Neighbour')
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
+    plt.xlabel('Rodzaj i wielkość problemu')
+    plt.ylabel('Najlepsze rozwiązanie')
+    plt.yscale('log')
     plt.savefig('BnnAndKr.png')
     print(stats.wilcoxon(kr, bnn))
 

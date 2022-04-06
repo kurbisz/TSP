@@ -7,7 +7,7 @@ l = 0.25
 
 
 def draw():
-    file = open('compareTwoOptAndNn.csv')
+    file = open('compareBnnAndTwoOpt.csv')
     file.readline()
     names = ['' for n in range(10)]
     bnn = [0 for n in range(10)]
@@ -24,6 +24,8 @@ def draw():
     plt.bar(r1+l, to, color='red', width=l, label='2-OPT')
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
+    plt.xlabel('Rodzaj i wielkość problemu')
+    plt.ylabel('Najlepsze rozwiązanie')
     plt.savefig('BnnAndTwoOpt.png')
     print(stats.wilcoxon(to, bnn))
 

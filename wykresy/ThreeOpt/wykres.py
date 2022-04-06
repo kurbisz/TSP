@@ -16,8 +16,11 @@ def draw():
         index += 1
 
     plt.axis([0, 5150, 50000, 151000])
-    plt.title('Wyniki dla algorytmu 3-OPT w zaleznosci od czasu w s')
+    plt.title('Wyniki dla algorytmu 3-OPT w zaleznosci od czasu')
     plt.plot(x_line, threeOpt, color='red')
+    plt.subplots_adjust(left=0.15)
+    plt.xlabel('Czas wykonania algorytmu w sekundach')
+    plt.ylabel('Najlepsze rozwiązanie')
     plt.savefig('threeOptTimeComparison.png')
     plt.show()
     plt.clf()

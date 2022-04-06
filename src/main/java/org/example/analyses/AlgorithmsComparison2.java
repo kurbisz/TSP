@@ -29,8 +29,7 @@ public class AlgorithmsComparison2 {
 			betterTwoOpt.setStarting(result);
 			bto[i] = betterTwoOpt.calculate().calcObjectiveFunction();
 
-			// TODO change to better NN
-			NearestNeighbour nearestNeighbour2 = new NearestNeighbour(tspData);
+			NearestNeighbour nearestNeighbour2 = new NearestNeighbour(tspData, true);
 			Result result2 = nearestNeighbour2.calculate();
 			TwoOpt betterTwoOpt2 = new TwoOpt(tspData);
 			betterTwoOpt2.setStarting(result2);
@@ -74,8 +73,7 @@ public class AlgorithmsComparison2 {
 			bto[i] = betterTwoOpt.calculate().calcObjectiveFunction();
 			bto[i] = System.nanoTime() - time;
 
-			// TODO change to better NN
-			NearestNeighbour nearestNeighbour2 = new NearestNeighbour(tspData);
+			NearestNeighbour nearestNeighbour2 = new NearestNeighbour(tspData, true);
 			Result result2 = nearestNeighbour2.calculate();
 			time = System.nanoTime();
 			TwoOpt betterTwoOpt2 = new TwoOpt(tspData);
@@ -102,5 +100,77 @@ public class AlgorithmsComparison2 {
 			e.printStackTrace();
 		}
 	}
+
+	public static void compareTwoOptRandom(String fileName, List<TspData> data) {
+		int n = data.size();
+		int to[] = new int[n], bto[] = new int[n];
+		int i = 0;
+		for(TspData tspData : data) {
+			TwoOpt twoOpt = new TwoOpt(tspData);
+			to[i] = twoOpt.calculate().calcObjectiveFunction();
+
+			Result result = Result.getRandom(tspData);
+			TwoOpt betterTwoOpt = new TwoOpt(tspData);
+			betterTwoOpt.setStarting(result);
+			bto[i] = betterTwoOpt.calculate().calcObjectiveFunction();
+
+
+			i++;
+		}
+
+		try {
+			File file = new File(fileName);
+			file.delete();
+			file.createNewFile();
+			FileWriter fileWriter = new FileWriter(file, true);
+			fileWriter.write("file;2-OPT;RandomStart2-OPT\n");
+			for (int k = 0; k < n; k++) {
+				fileWriter.write(Main.names[k] + ";" + to[k] + ";" + bto[k] + "\n");
+			}
+
+			fileWriter.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void compareTwoOptRandomTime(String fileName, List<TspData> data) {
+		int n = data.size();
+		long to[] = new long[n], bto[] = new long[n];
+		int i = 0;
+		for(TspData tspData : data) {
+			long time = System.nanoTime();
+			TwoOpt twoOpt = new TwoOpt(tspData);
+			twoOpt.calculate().calcObjectiveFunction();
+			to[i] = System.nanoTime() - time;
+
+			Result result = Result.getRandom(tspData);
+			time = System.nanoTime();
+			TwoOpt betterTwoOpt = new TwoOpt(tspData);
+			betterTwoOpt.setStarting(result);
+			bto[i] = betterTwoOpt.calculate().calcObjectiveFunction();
+			bto[i] = System.nanoTime() - time;
+
+			i++;
+		}
+
+		try {
+			File file = new File(fileName);
+			file.delete();
+			file.createNewFile();
+			FileWriter fileWriter = new FileWriter(file, true);
+			fileWriter.write("file;2-OPT;RandomStart2-OPT\n");
+			for (int k = 0; k < n; k++) {
+				fileWriter.write(Main.names[k] + ";" + to[k] + ";" + bto[k] + "\n");
+			}
+
+			fileWriter.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 
 }

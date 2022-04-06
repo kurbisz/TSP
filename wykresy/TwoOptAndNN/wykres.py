@@ -19,12 +19,15 @@ def draw():
         nn[i] = int(line[2])
 
     r1 = np.arange(10)
-    plt.title('Porownanie algorytmu 2-OPT i Nearest Neighbour')
+    plt.title('Porownanie algorytmu 2-OPT i Nearest Neighbour (ograniczenie czasowe do czasu NN)')
     plt.bar(r1, nn, color='green', width=l, label='Nearest Neighbour')
     plt.bar(r1+l, to, color='red', width=l, label='2-OPT')
     plt.xticks([r + l for r in range(10)], names)
     plt.legend()
-    plt.savefig('TwoOptAndNN.png')
+    plt.xlabel('Rodzaj i wielkość problemu')
+    plt.ylabel('Najlepsze rozwiązanie')
+    plt.yscale('log')
+    plt.savefig('TwoOptAndNN.png', bbox_inches='tight')
     print(stats.wilcoxon(to, nn))
 
 

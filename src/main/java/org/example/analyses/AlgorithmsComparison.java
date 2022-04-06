@@ -135,8 +135,7 @@ public class AlgorithmsComparison {
 			NearestNeighbour nearestNeighbour = new NearestNeighbour(tspData);
 			nn[i] = nearestNeighbour.calculate().calcObjectiveFunction();
 
-			// TODO change to Better nearest neighbour
-			NearestNeighbour betterNearestNeighbour = new NearestNeighbour(tspData);
+			NearestNeighbour betterNearestNeighbour = new NearestNeighbour(tspData, true);
 			nn2[i] = betterNearestNeighbour.calculate().calcObjectiveFunction();
 
 			TwoOpt twoOpt = new TwoOpt(tspData);
@@ -148,10 +147,10 @@ public class AlgorithmsComparison {
 			file.delete();
 			file.createNewFile();
 			FileWriter fileWriter = new FileWriter(file, true);
-			fileWriter.write("file;K-Random-100;K-Random-2n;NearestNeighbour;NearestNeighbour2;2-OPT\n");
+			fileWriter.write("file;K-Random-100;K-Random-2n;NearestNeighbour;NearestNeighbour2;2-OPT;BestSolution\n");
 			for (int k = 0; k < n; k++) {
 				fileWriter.write(Main.names[k] + ";" + kr[k] + ";" + kr2[k] + ";" + nn[k] + ";" + nn2[k] + ";"
-						+ to[k] + "\n");
+						+ to[k] + ";" + Main.best[k] + "\n");
 			}
 
 			fileWriter.close();
@@ -182,9 +181,8 @@ public class AlgorithmsComparison {
 			nearestNeighbour.calculate().calcObjectiveFunction();
 			nn[i] = System.nanoTime() - time;
 
-			// TODO change to Better nearest neighbour
 			time = System.nanoTime();
-			NearestNeighbour betterNearestNeighbour = new NearestNeighbour(tspData);
+			NearestNeighbour betterNearestNeighbour = new NearestNeighbour(tspData, true);
 			betterNearestNeighbour.calculate().calcObjectiveFunction();
 			nn2[i] = System.nanoTime() - time;
 
@@ -199,10 +197,10 @@ public class AlgorithmsComparison {
 			file.delete();
 			file.createNewFile();
 			FileWriter fileWriter = new FileWriter(file, true);
-			fileWriter.write("file;K-Random-100;K-Random-2n;NearestNeighbour;NearestNeighbour2;2-OPT;BestSolution\n");
+			fileWriter.write("file;K-Random-100;K-Random-2n;NearestNeighbour;NearestNeighbour2;2-OPT\n");
 			for (int k = 0; k < n; k++) {
 				fileWriter.write(Main.names[k] + ";" + kr[k] + ";" + kr2[k] + ";" + nn[k] + ";" + nn2[k] + ";"
-						+ to[k] + ";" + Main.best[k] + "\n");
+						+ to[k] + "\n");
 			}
 
 			fileWriter.close();

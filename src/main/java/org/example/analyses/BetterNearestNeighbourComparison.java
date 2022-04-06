@@ -20,8 +20,7 @@ public class BetterNearestNeighbourComparison {
 		int i = 0;
 		for(TspData tspData : data) {
 			time[i] = System.nanoTime();
-			// TODO change to BetterNearestNeighbour
-			NearestNeighbour nearestNeighbour = new NearestNeighbour(tspData);
+			NearestNeighbour nearestNeighbour = new NearestNeighbour(tspData, true);
 			nn[i] = nearestNeighbour.calculate().calcObjectiveFunction();
 			time[i] = System.nanoTime() - time[i];
 			i++;
@@ -61,8 +60,7 @@ public class BetterNearestNeighbourComparison {
 		}
 		i=0;
 		for(TspData tspData : data) {
-			// TODO change to BetterNearestNeighbour
-			NearestNeighbour nearestNeighbour = new NearestNeighbour(tspData);
+			NearestNeighbour nearestNeighbour = new NearestNeighbour(tspData, true);
 			kr[i] = nearestNeighbour.calculate().calcObjectiveFunction();
 			i++;
 		}
@@ -94,8 +92,7 @@ public class BetterNearestNeighbourComparison {
 		}
 		i=0;
 		for(TspData tspData : data) {
-			// TODO change to BetterNearestNeighbour
-			NearestNeighbour nearestNeighbour = new NearestNeighbour(tspData);
+			NearestNeighbour nearestNeighbour = new NearestNeighbour(tspData, true);
 			bnn[i] = nearestNeighbour.calculate().calcObjectiveFunction();
 			i++;
 		}

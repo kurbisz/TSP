@@ -1,6 +1,8 @@
 package org.example;
 
+import org.example.algorithm.KRandom;
 import org.example.analyses.*;
+import org.example.data.Result;
 import org.example.data.TspData;
 
 import java.io.File;
@@ -33,20 +35,20 @@ public class Main {
         TspData tspData = fileLoader.getTspData();
         //System.out.println(tspData.toString());
 
-        fileLoader.setFileName(files[2]); // Troche wiekszy plik dla wiekszego czasu
-        fileLoader.load();
-        tspData = fileLoader.getTspData();
+//        fileLoader.setFileName(files[2]); // Troche wiekszy plik dla wiekszego czasu
+//        fileLoader.load();
+//        tspData = fileLoader.getTspData();
         //TwoOptComparison.calc("twoOptTimeComparison.csv", tspData);
         //ThreeOptComparison.calc("threeOptTimeComparison.csv", tspData);
 
-        List<TspData> list = new ArrayList<>();
-        for(int i = 0; i < files.length; i++) {
-            fileLoader.setFileName(files[i]);
-            fileLoader.load();
-            TspData data = fileLoader.getTspData();
-            data.setName(names[i]);
-            list.add(data);
-        }
+//        List<TspData> list = new ArrayList<>();
+//        for(int i = 0; i < files.length; i++) {
+//            fileLoader.setFileName(files[i]);
+//            fileLoader.load();
+//            TspData data = fileLoader.getTspData();
+//            data.setName(names[i]);
+//            list.add(data);
+//        }
         //AlgorithmsComparison.compareKRAndNN("compareKrAndNn.csv", list);
         //AlgorithmsComparison.compareTwoOptAndNN("compareTwoOptAndNn.csv", list);
         //AlgorithmsComparison.compareKrAndTwoOpt("compareKrAndTwoOpt.csv", list);
@@ -56,17 +58,19 @@ public class Main {
 //        BetterNearestNeighbourComparison.compareNN("compareBnnAndNn.csv", list);
 //        BetterNearestNeighbourComparison.compareTwoOpt("compareBnnAndTwoOpt.csv", list);
 //        AlgorithmsComparison2.compareTwoOpt("twoOptStarting.csv", list);
-//        AlgorithmsComparison2.compareTwoOptTime("twoOptStartingTime.csv", list);
+        //AlgorithmsComparison2.compareTwoOptTime("twoOptStartingTime.csv", list);
+        //AlgorithmsComparison2.compareTwoOptRandom("twoOptRandomStarting.csv", list);
+        //AlgorithmsComparison2.compareTwoOptRandomTime("twoOptRandomStartingTime.csv", list);
 
 
         //System.out.println("Liczba dostepnych procesorow: " + Runtime.getRuntime().availableProcessors());
 
-//        KRandom algorithm = new KRandom(tspData, 1000000, true);
+//        KRandom algorithm = new KRandom(tspData, 100000, true);
 //        algorithm.setThreads(8);
 //        Result r = algorithm.calculate();
 //        System.out.println("Wynik: " + r.calcObjectiveFunction());
 //        System.out.println("Rozwiazanie: " + r);
-//        System.out.println("Czas: " + algorithm.getTime());
+//        System.out.println("Czas: " + algorithm.getTime()/1000000);
 //        Drawer drawer = new Drawer();
 //        drawer.showResult(r);
 
@@ -74,6 +78,16 @@ public class Main {
         //DifferentKRandom.calcAverage("kRandomAverage.csv", tspData);
 
         //System.out.println(algorithm.objectiveFunction());
+
+        fileLoader.setFileName("dane/d1291.tsp");
+        fileLoader.load();
+        tspData = fileLoader.getTspData();
+        System.out.println("test");
+
+        //MultiThreadedComparison.calcNN("mulithreadNN_d198.csv", tspData);
+        //MultiThreadedComparison.calcNN("mulithreadNN_d1291.csv", tspData);
+        MultiThreadedComparison.calcKRandom("mulithreadKR_d198.csv", tspData);
+        MultiThreadedComparison.calcKRandom("mulithreadKR_d1291.csv", tspData);
     }
 
 }
