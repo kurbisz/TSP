@@ -1,13 +1,9 @@
 package org.example;
 
-<<<<<<< HEAD
 import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
 import org.example.algorithm.TwoOpt;
-import org.example.analyses.MultiThreadedNNComparisoon;
-=======
 import org.example.analyses.MultiThreadedComparison;
->>>>>>> ca8d4ccbf2eb5f34577f0341a9c63ea018381b80
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
