@@ -122,16 +122,18 @@ public class KRandom extends Algorithm{
     private class KRunner implements Runnable{
         Result r;
         int objFunc;
+        Random random;
 
         public KRunner(){
             r = new Result(tspData);
+            random = new Random();
         }
 
         @Override
         public void run() {
 
             for (int j = 0; j < tspData.getSize(); j++) {
-                int ra = rand.nextInt(tspData.getSize());
+                int ra = random.nextInt(tspData.getSize());
                 int tmp = r.way[ra];
                 r.way[ra] = r.way[j];
                 r.way[j] = tmp;
