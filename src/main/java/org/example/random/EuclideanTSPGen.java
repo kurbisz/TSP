@@ -8,6 +8,10 @@ import java.util.Random;
 public class EuclideanTSPGen extends TSPGenerator{
 
     private final double max_x, max_y;
+    Type type = Type.RANDOM;
+    File newFile;
+    int maxCitiesPerCluster = 30;
+    double metroSize = 100.0;
 
     public EuclideanTSPGen(double max_x, double max_y) {
         this.max_x = max_x;
@@ -30,11 +34,13 @@ public class EuclideanTSPGen extends TSPGenerator{
         }
     }
 
-    Type type = Type.RANDOM;
-    File newFile;
-
     public void setType(Type type){
         this.type = type;
+    }
+
+    public void setMetroParam(double metroSize, int maxCitiesPerCluster){
+        this.metroSize = metroSize;
+        this.maxCitiesPerCluster = maxCitiesPerCluster;
     }
 
     @Override
@@ -105,8 +111,8 @@ public class EuclideanTSPGen extends TSPGenerator{
         }
     }
     private void generateMetro(String filename, int count){
-        final int maxCitiesPerCluster = count/5;
-        final double metroSize = 100.0;
+//        final int maxCitiesPerCluster = count/5;
+//        final double metroSize = 100.0;
         generateHeader(filename, count, "in clusters");
         Random generator = new Random(System.currentTimeMillis());
         ArrayList<WritePoint> generated = new ArrayList<>();

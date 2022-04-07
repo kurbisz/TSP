@@ -11,9 +11,9 @@ public class Drawer {
     Window.DrawingSurface surface;
     ArrayList<Line> lines;
 
-    public Drawer(){
+    public Drawer(String winTitle){
         lines = new ArrayList<>();
-        mainWindow = new Window();
+        mainWindow = new Window(winTitle);
         surface = mainWindow.drawingPanel;
     }
 

@@ -11,8 +11,8 @@ public class Window extends JFrame {
     private int height = 1000;
     public DrawingSurface drawingPanel;
 
-    public Window(){
-        setTitle("Visualization");
+    public Window(String title) {
+        setTitle(title);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(1,1));
         setBackground(bgdCol);

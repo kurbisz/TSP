@@ -11,15 +11,19 @@ import org.example.drawer.Line;
 import org.example.drawer.Window;
 import org.example.random.EuclideanTSPGen;
 
+import java.util.Random;
+
 public class RunClass {
 
     public static FileLoader loader;
 
     public static void main(String[] args) {
-        loaderTest("testMetro.tsp");
+        String file = "metro4.tsp";
+        loaderTest(file);
+        mapTest(file);
 //        generatorTest();
 //        windowTest();
-//        mapTest();
+
 //        NearestNeighbour nearestNeighbour = new NearestNeighbour(loader.getTspData(), NearestNeighbour.Strategy.UPGRADED_MULTI);
 //        nearestNeighbour.setThreadCount(6);
 //        draw(nearestNeighbour.calculate());
@@ -31,19 +35,20 @@ public class RunClass {
 //        draw(krandom.calculate());
 //        krandom.calculate();
 //        System.out.println(krandom.getTime()/1000000000.0);
-        TwoOpt tOpt = new TwoOpt(loader.getTspData());
-        draw(tOpt.calculate());
+//        TwoOpt tOpt = new TwoOpt(loader.getTspData());
+//        draw(tOpt.calculate());
 //        MultiThreadedNNComparisoon.calc("mulithreadNNComp_d1544291.csv", loader.getTspData());
-
+//        generateRndMetro(10, 300, 50, 300/5, 300);
+//        generateRnd(10, 300, 50);
     }
 
     private static void draw(Result res) {
-        Drawer drawer = new Drawer();
+        Drawer drawer = new Drawer(res.problem.getName());
         drawer.showResult(res);
     }
 
-    private static void mapTest() {
-        Drawer drawer = new Drawer();
+    private static void mapTest(String winTitle) {
+        Drawer drawer = new Drawer(winTitle);
         TspData data = loader.getTspData();
         Result testResult = new Result(data);
 
@@ -51,8 +56,8 @@ public class RunClass {
 
     }
 
-    private static void windowTest() {
-        Window testWindow = new Window();
+    private static void windowTest(String winTitle) {
+        Window testWindow = new Window(winTitle);
         Point testPointA = new Point(30, 50, Point.State.NORMAL);
         Point testPointB = new Point(300, 100, Point.State.VISITED);
         Line testLine = new Line(testPointA, testPointB);
@@ -72,5 +77,24 @@ public class RunClass {
         EuclideanTSPGen gen = new EuclideanTSPGen(1000.0, 1000.0);
         gen.setType(EuclideanTSPGen.Type.METROPOLIS);
         gen.generate("test3Metro", 150);
+    }
+
+    public static void generateRnd(int number, int maxCities, int minCities){
+        EuclideanTSPGen gen = new EuclideanTSPGen(2000.0, 2000.0);
+        gen.setType(EuclideanTSPGen.Type.RANDOM);
+        Random r = new Random();
+        for(int i = 0; i < number; i++){
+            gen.generate("rnd" + i, r.nextInt(maxCities - minCities) + minCities);
+        }
+    }
+
+    public static void generateRndMetro(int number, int maxCities, int minCities, int maxCitiesPerCluster, double maxClusterSize){
+        EuclideanTSPGen gen = new EuclideanTSPGen(2000.0, 2000.0);
+        gen.setType(EuclideanTSPGen.Type.METROPOLIS);
+        gen.setMetroParam(maxClusterSize, maxCitiesPerCluster);
+        Random r = new Random();
+        for(int i = 0; i < number; i++){
+            gen.generate("metro" + i, r.nextInt(maxCities - minCities) + minCities);
+        }
     }
 }
