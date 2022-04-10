@@ -9,10 +9,19 @@ public class Result {
     public TspData problem;
     public int[] way;
     public int currInd=0;
+    public int objFuncResult;
+
     public Result(TspData tspData){
         this.problem = tspData;
         way = new int[problem.getSize()];
         for(int i = 0; i< problem.getSize(); i++) way[i]=i;
+    }
+
+    public Result(Result result) {
+        this.problem = result.problem;
+        this.currInd = result.currInd;
+        this.way = new int[problem.getSize()];
+        if (problem.getSize() >= 0) System.arraycopy(result.way, 0, this.way, 0, problem.getSize());
     }
 
     public int calcObjectiveFunction() {

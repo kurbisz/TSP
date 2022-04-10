@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
+import org.example.algorithm.Neighbourhoods.Invert;
+import org.example.algorithm.TabooSearch;
 import org.example.algorithm.TwoOpt;
 import org.example.analyses.MultiThreadedComparison;
 import org.example.data.Result;
@@ -18,9 +20,22 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
-        String file = "metro4.tsp";
+        String file = "dane/d657.tsp";
         loaderTest(file);
-        mapTest(file);
+
+        TwoOpt tOpt = new TwoOpt(loader.getTspData());
+        Result res2 = tOpt.calculate();
+//        draw(res2);
+        System.out.println(res2.calcObjectiveFunction());
+
+        TabooSearch ts = new TabooSearch(loader.getTspData());
+        Result res = new Result(loader.getTspData());
+
+        ts.setParameters(res2, new Invert(), false);
+        res = ts.calculate();
+        draw(res);
+        System.out.println(res.calcObjectiveFunction());
+//        mapTest(file);
 //        generatorTest();
 //        windowTest();
 
@@ -35,8 +50,8 @@ public class RunClass {
 //        draw(krandom.calculate());
 //        krandom.calculate();
 //        System.out.println(krandom.getTime()/1000000000.0);
-//        TwoOpt tOpt = new TwoOpt(loader.getTspData());
-//        draw(tOpt.calculate());
+
+
 //        MultiThreadedNNComparisoon.calc("mulithreadNNComp_d1544291.csv", loader.getTspData());
 //        generateRndMetro(10, 300, 50, 300/5, 300);
 //        generateRnd(10, 300, 50);
