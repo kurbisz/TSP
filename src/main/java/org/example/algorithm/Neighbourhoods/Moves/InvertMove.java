@@ -16,5 +16,12 @@ public class InvertMove implements Move {
         }
         return false;
     }
+
+    @Override
+    public int[] toIntArray() {
+        return new int[]{from, to};
+    }
+
+
 }
 

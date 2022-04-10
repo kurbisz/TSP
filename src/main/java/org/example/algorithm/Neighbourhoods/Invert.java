@@ -7,6 +7,7 @@ import org.example.data.TspData;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Invert implements Neighbourhood {
@@ -77,6 +78,13 @@ public class Invert implements Neighbourhood {
 
                 //utworzenie pary (nowy rezultat, ruch) i dodanie do listy sąsiadów
                 neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult, move));
+
+
+                Result newResult2 = new Result(result);
+                reverse(newResult2, j, i);
+                newResult.objFuncResult = newResult.calcObjectiveFunction();
+                InvertMove move2 = new InvertMove(j, i);
+                neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult2, move2));
             }
         }
 

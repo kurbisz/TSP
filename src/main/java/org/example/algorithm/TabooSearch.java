@@ -57,7 +57,7 @@ public class TabooSearch extends Algorithm {
         if(aspirationCriteria) candidate = neighbours.get(0).getKey();
         else {
             for (Entry<Result, Move> entry : neighbours) {
-                if ( !tabooList.contains(entry.getValue())) candidate = entry.getKey();
+                if ( !tabooList.containsMove(entry.getValue())) candidate = entry.getKey();
             }
         }
         //jeśli tutaj nadal candidate jest nullem, to ozn., że mamy aspiration = false i
@@ -68,7 +68,7 @@ public class TabooSearch extends Algorithm {
             Result res = neighbour.getKey();
             Move move = neighbour.getValue();
             if(res.objFuncResult < candidate.objFuncResult){
-                if(tabooList.contains(move)){
+                if(tabooList.containsMove(move)){
                     if( aspirationCriteria && res.objFuncResult < result.objFuncResult) {
                         candidate = res;
                     }
