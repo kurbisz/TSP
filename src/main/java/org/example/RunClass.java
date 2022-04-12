@@ -25,16 +25,16 @@ public class RunClass {
 
         TwoOpt tOpt = new TwoOpt(loader.getTspData());
         Result res2 = tOpt.calculate();
-//        draw(res2);
+        draw(res2);
         System.out.println(res2.calcObjectiveFunction());
 
-        TabooSearch ts = new TabooSearch(loader.getTspData());
-        Result res = new Result(loader.getTspData());
-
-        ts.setParameters(res2, new Invert(), false);
-        res = ts.calculate();
-        draw(res);
-        System.out.println(res.calcObjectiveFunction());
+//        TabooSearch ts = new TabooSearch(loader.getTspData());
+//        Result res = new Result(loader.getTspData());
+//
+//        ts.setParameters(res2, new Invert(), false);
+//        res = ts.calculate();
+//        draw(res);
+//        System.out.println(res.calcObjectiveFunction());
 //        mapTest(file);
 //        generatorTest();
 //        windowTest();

@@ -8,12 +8,10 @@ public class BasicTabooList extends ArrayList<Move> {
 
     int maxSize;
     boolean symmetricTSP;
-    boolean aspiration;
 
-    BasicTabooList(int maxSize, boolean symmetricTSP, boolean aspiration) {
+    BasicTabooList(int maxSize, boolean symmetricTSP) {
         this.maxSize = maxSize;
         this.symmetricTSP = symmetricTSP;
-        this.aspiration = aspiration;
     }
 
     @Override
@@ -22,5 +20,14 @@ public class BasicTabooList extends ArrayList<Move> {
             remove(this.size()-1);
         }
         return super.add(move);
+    }
+
+    public boolean containsMove(Move move) {
+        for(Move m : this) {
+            if(m.equals(move)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
