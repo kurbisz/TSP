@@ -43,7 +43,7 @@ public class Invert implements Neighbourhood {
                 newResult.objFuncResult = way;
 
                 //utworzenie obiektu reprezentującego dokonany ruch
-                InvertMove move = new InvertMove(i, j);
+                InvertMove move = new InvertMove(i, j, true);
 
                 //utworzenie pary (nowy rezultat, ruch) i dodanie do listy sąsiadów
                 neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult, move));
@@ -58,7 +58,7 @@ public class Invert implements Neighbourhood {
         ArrayList<Map.Entry<Result, Move>> neighbours = new ArrayList<>();
         int n = result.problem.getSize();
         for (int i = 0; i < result.problem.getSize(); i++) {
-            for (int j = i+1; j < result.problem.getSize(); j++) {
+            for (int j = 0; j < result.problem.getSize(); j++) {
                 /**
                  //TODO:
                  * Tutaj spójrz jak możesz, było i!=j i zarówno j i i szły od 0 ale w sumie invert 5,2 to to samo,
@@ -74,17 +74,17 @@ public class Invert implements Neighbourhood {
                 newResult.objFuncResult = newResult.calcObjectiveFunction();
 
                 //utworzenie obiektu reprezentującego dokonany ruch
-                InvertMove move = new InvertMove(i, j);
+                InvertMove move = new InvertMove(i, j, false);
 
                 //utworzenie pary (nowy rezultat, ruch) i dodanie do listy sąsiadów
                 neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult, move));
 
 
-                Result newResult2 = new Result(result);
-                reverse(newResult2, j, i);
-                newResult.objFuncResult = newResult.calcObjectiveFunction();
-                InvertMove move2 = new InvertMove(j, i);
-                neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult2, move2));
+//                Result newResult2 = new Result(result);
+//                reverse(newResult2, j, i);
+//                newResult.objFuncResult = newResult.calcObjectiveFunction();
+//                InvertMove move2 = new InvertMove(j, i, );
+//                neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult2, move2));
             }
         }
 
