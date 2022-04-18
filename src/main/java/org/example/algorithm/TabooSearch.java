@@ -2,34 +2,49 @@ package org.example.algorithm;
 
 import org.example.algorithm.Neighbourhoods.Moves.Move;
 import org.example.algorithm.Neighbourhoods.Neighbourhood;
+import org.example.algorithm.stopFunctions.StopFunction;
+import org.example.algorithm.stopFunctions.TimeStop;
+import org.example.algorithm.tabooList.InvertTabooList;
+import org.example.algorithm.tabooList.TabooList;
 import org.example.data.Result;
 import org.example.data.TspData;
 
 import java.util.ArrayList;
 import java.util.Map.Entry;
-import java.util.Queue;
 
 public class TabooSearch extends Algorithm {
 
     final int tabooListSize = 7;
-    final int maxIterations = 1000;
 
     Result result;
     Neighbourhood neighbourhood;
     boolean aspirationCriteria;
     TabooList tabooList;
-    int iterations = 0;
+    StopFunction stopFunction;
 
     public TabooSearch(TspData tspData) {
         super(tspData);
-        tabooList = new TabooList(tabooListSize);
     }
 
-    public void setParameters(Result startingResult, Neighbourhood neighbourhood, boolean aspirationCriteria) {
+    public void setParameters(Result startingResult,
+                              Neighbourhood neighbourhood,
+                              boolean aspirationCriteria,
+                              TabooList tabooList,
+                              StopFunction stopFunction) {
         this.result = startingResult;
         result.calcObjectiveFunction();
         this.neighbourhood = neighbourhood;
         this.aspirationCriteria = aspirationCriteria;
+        this.tabooList = tabooList;
+        this.stopFunction = stopFunction;
+    }
+
+    public void setParameters(Result startingResult,
+                              Neighbourhood neighbourhood,
+                              boolean aspirationCriteria) {
+        setParameters(startingResult, neighbourhood, aspirationCriteria,
+                new InvertTabooList(tabooListSize, tspData.getSize()),
+                new TimeStop(10000000000L));
     }
 
     @Override
@@ -44,9 +59,7 @@ public class TabooSearch extends Algorithm {
     }
 
     private boolean stopFunction() {
-        if(iterations >= maxIterations) return true;
-        iterations++;
-        return false;
+        return stopFunction.check();
     }
 
     private boolean chooseBestNeighbour(ArrayList<Entry<Result, Move>> neighbours) {
@@ -57,7 +70,7 @@ public class TabooSearch extends Algorithm {
         if(aspirationCriteria) candidate = neighbours.get(0).getKey();
         else {
             for (Entry<Result, Move> entry : neighbours) {
-                if ( !tabooList.containsMove(entry.getValue())) candidate = entry.getKey();
+                if ( !tabooList.contains(entry.getValue())) candidate = entry.getKey();
             }
         }
         //jeśli tutaj nadal candidate jest nullem, to ozn., że mamy aspiration = false i
@@ -68,7 +81,7 @@ public class TabooSearch extends Algorithm {
             Result res = neighbour.getKey();
             Move move = neighbour.getValue();
             if(res.objFuncResult < candidate.objFuncResult){
-                if(tabooList.containsMove(move)){
+                if(tabooList.contains(move)){
                     if( aspirationCriteria && res.objFuncResult < result.objFuncResult) {
                         candidate = res;
                     }
