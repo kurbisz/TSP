@@ -1,0 +1,8 @@
+Do zrobienia:
+- różne otoczenia: insert, invert, swap, ???; zoptymalizowanie symetrycznych jeżeli to możliwe
+- różne momenty startu: standardowy, losowy, 2-OPT, Nearest=Neighbour
+- lista długoterminowa
+- porównać długości listy tabu (stałe, zwiększające się z czasem, zależne od n)
+- porównać funkcje stopu (iteracje, czas)
+- sprawdzanie listy tabu w O(1) dla stałych długości list tabu
+-
