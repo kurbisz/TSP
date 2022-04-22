@@ -23,6 +23,8 @@ public class TabooSearch extends Algorithm {
     TabooList tabooList;
     StopFunction stopFunction;
 
+    int threads = 0;
+
     public TabooSearch(TspData tspData) {
         super(tspData);
     }
@@ -48,15 +50,62 @@ public class TabooSearch extends Algorithm {
                 new TimeStop(10000000000L));
     }
 
+    /**
+     * Set taboo search to sync/async mode (bigger than 1 means async)
+     * @param threads new amount of used threads
+     */
+    public void setAsync(int threads) {
+        this.threads = threads;
+    }
+
     @Override
     public Result calculate() {
+        if(threads <= 1) {
+            return calculateSingleResult(result);
+        }
+        else {
+            final Result bestResults[] = new Result[threads];
+            Thread thread[] = new Thread[threads];
+            for(int i = 0; i < threads; i++) {
+                final int k = i;
+                thread[i] = new Thread() {
+                    @Override
+                    public void run() {
+                        bestResults[k] = calculate();
+                    }
+                };
+                thread[i].start();
+            }
+
+            for(int i = 0; i < threads; i++) {
+                try {
+                    thread[i].join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            int min = bestResults[0].calcObjectiveFunction();
+            int minIndex = 0;
+            for(int i = 1; i < threads; i++) {
+                int func = bestResults[i].calcObjectiveFunction();
+                if(func < min) {
+                    min = func;
+                    minIndex = i;
+                }
+            }
+            return bestResults[minIndex];
+        }
+    }
+
+    private Result calculateSingleResult(Result res) {
         ArrayList<Entry<Result, Move>> neighbours;
         do {
-            if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(result);
-            else neighbours = neighbourhood.getNeighbourhoodAsymmetric(result);
-            if (!chooseBestNeighbour(neighbours)) return result;
+            if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(res);
+            else neighbours = neighbourhood.getNeighbourhoodAsymmetric(res);
+            if (!chooseBestNeighbour(neighbours)) return res;
         } while ( !stopFunction());
-        return result;
+        return res;
     }
 
     private boolean stopFunction() {
