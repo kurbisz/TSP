@@ -1,11 +1,12 @@
-package org.example.algorithm;
+package org.example.algorithm.taboo;
 
-import org.example.algorithm.Neighbourhoods.Moves.Move;
-import org.example.algorithm.Neighbourhoods.Neighbourhood;
-import org.example.algorithm.stopFunctions.StopFunction;
-import org.example.algorithm.stopFunctions.TimeStop;
-import org.example.algorithm.tabooList.InvertTabooList;
-import org.example.algorithm.tabooList.TabooList;
+import org.example.algorithm.Algorithm;
+import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
+import org.example.algorithm.taboo.Neighbourhoods.Neighbourhood;
+import org.example.algorithm.taboo.stopFunctions.StopFunction;
+import org.example.algorithm.taboo.stopFunctions.TimeStop;
+import org.example.algorithm.taboo.tabooList.InvertTabooList;
+import org.example.algorithm.taboo.tabooList.TabooList;
 import org.example.data.Result;
 import org.example.data.TspData;
 

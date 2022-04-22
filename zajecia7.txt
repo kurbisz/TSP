@@ -1,0 +1,12 @@
+Uwagi:
+ - dla kazdego z eksperymentu osobno cel, opis, rezultat
+ - wlaczenie wyswietlania punktow (musza byc widoczne na wykresie)
+ - wlaczenie linii pionowych i poziomych (szare) zeby widac bylo do ktorego punktu odnosi sie dany punkt (zeby bylo widac mniej wiecej wspolrzedne danego punktu)
+ - czestsze tabelki dla niektorych danych (np pogrubić najlepszy algorytm itp)
+ - tabele podpisywać u góry, wykresy na dole i powinny być numerowane
+ - test wilcoxona dla wiecej niz 1 instancji
+ - test wilcoxona dla sparowanych (wilcoxon signed paired test)
+
+Nowe uwagi:
+ - na liście tabu mają być numery miast a nie ich indeksy
+ - na liściu tabu ma być dany ruch oraz ruch odwrotny

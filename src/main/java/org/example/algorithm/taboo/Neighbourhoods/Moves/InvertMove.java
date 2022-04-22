@@ -1,4 +1,4 @@
-package org.example.algorithm.Neighbourhoods.Moves;
+package org.example.algorithm.taboo.Neighbourhoods.Moves;
 
 public class InvertMove implements Move {
     int from;
@@ -15,6 +15,7 @@ public class InvertMove implements Move {
     public boolean checkEqual(Move move) {
         if (move instanceof InvertMove) {
             InvertMove invertMove = (InvertMove) move;
+            // TODO check if this condition is ok
             if (symm) return (from == invertMove.from && to == invertMove.to);
             else return (invertMove.from == this.from && invertMove.to == this.to) || (invertMove.from == this.to && invertMove.to == this.from);
         }

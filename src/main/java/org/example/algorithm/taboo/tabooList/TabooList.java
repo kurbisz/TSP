@@ -1,6 +1,6 @@
-package org.example.algorithm.tabooList;
+package org.example.algorithm.taboo.tabooList;
 
-import org.example.algorithm.Neighbourhoods.Moves.Move;
+import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 
 public abstract class TabooList {
 

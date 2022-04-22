@@ -1,6 +1,6 @@
-package org.example.algorithm.Neighbourhoods;
+package org.example.algorithm.taboo.Neighbourhoods;
 
-import org.example.algorithm.Neighbourhoods.Moves.Move;
+import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 import org.example.data.Result;
 
 import java.util.ArrayList;
