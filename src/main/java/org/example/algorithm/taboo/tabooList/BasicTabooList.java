@@ -14,6 +14,7 @@ public class BasicTabooList extends TabooList {
 
     public BasicTabooList(int maxSize, boolean symmetricTSP, boolean aspiration) {
         //TODO
+        super(maxSize, 0);
         this.list = new ArrayList<>();
 //        this.maxSize = maxSize;
         this.symmetricTSP = symmetricTSP;
@@ -21,12 +22,12 @@ public class BasicTabooList extends TabooList {
     }
 
     @Override
-    public boolean add(Move move) {
+    public void add(Move move) {
         //TODO
         if(list.size()+1 > maxSize) {
             list.remove(list.size()-1);
         }
-        //return list.add(move);
+        list.add(move);
     }
 
 

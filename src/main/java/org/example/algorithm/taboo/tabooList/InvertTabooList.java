@@ -5,7 +5,7 @@ import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 
 public class InvertTabooList extends TabooList {
 
-	boolean moves[][];
+	boolean[][] moves;
 
 	public InvertTabooList(int maxSize, int n) {
 		super(maxSize, n);

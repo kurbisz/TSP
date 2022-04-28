@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.algorithm.NearestNeighbour;
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
 import org.example.algorithm.taboo.TabooSearch;
 import org.example.algorithm.TwoOpt;
@@ -19,14 +20,16 @@ public class RunClass {
     public static void main(String[] args) {
 //        String file = "dane/d657.tsp";
 //        String file = "dane/d198.tsp";
-        String file = "dane/d1291.tsp";
+//        String file = "dane/d1291.tsp";
 //        String file = "dane/pr299.tsp";
-//        String file = "metro6.tsp";
+        String file = "metro6.tsp";
 //        String file = "metro7.tsp";
 //        String file = "metro8.tsp";
 //        String file = "rnd3.tsp";
-//        loaderTest(file);
-//
+        loaderTest(file);
+        TspData data = loader.getTspData();
+//        Result result = new Result(data);
+//        draw(result);
 //        TwoOpt tOpt = new TwoOpt(loader.getTspData());
 //        Result res2 = tOpt.calculate();
 //        draw(res2);
@@ -48,7 +51,8 @@ public class RunClass {
 //        draw(nearestNeighbour.calculate());
 //        nearestNeighbour.setThreadCount(100);
 //        nearestNeighbour.calculate();
-//        System.out.println(nearestNeighbour.getTime()/1000000000.0);
+
+        //        System.out.println(nearestNeighbour.getTime()/1000000000.0);
 //        KRandom krandom = new KRandom(loader.getTspData(), 100000, true);
 //        krandom.setThreads(10);
 //        draw(krandom.calculate());
