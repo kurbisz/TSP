@@ -42,9 +42,7 @@ public class TabooSearch extends Algorithm {
         this.stopFunction = stopFunction;
     }
 
-    public void setParameters(Result startingResult,
-                              Neighbourhood neighbourhood,
-                              boolean aspirationCriteria) {
+    public void setParameters(Result startingResult, Neighbourhood neighbourhood, boolean aspirationCriteria) {
         setParameters(startingResult, neighbourhood, aspirationCriteria,
                 new InvertTabooList(tabooListSize, tspData.getSize()),
                 new TimeStop(10000000000L));
@@ -64,8 +62,8 @@ public class TabooSearch extends Algorithm {
             return calculateSingleResult(result);
         }
         else {
-            final Result bestResults[] = new Result[threads];
-            Thread thread[] = new Thread[threads];
+            final Result[] bestResults = new Result[threads];
+            Thread[] thread = new Thread[threads];
             for(int i = 0; i < threads; i++) {
                 final int k = i;
                 thread[i] = new Thread() {
@@ -101,8 +99,10 @@ public class TabooSearch extends Algorithm {
     private Result calculateSingleResult(Result res) {
         ArrayList<Entry<Result, Move>> neighbours;
         do {
+            //generowanie sąsiedztwa
             if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(res);
             else neighbours = neighbourhood.getNeighbourhoodAsymmetric(res);
+            //wybór najlepszego sąsiada (funkcja wewnątrz zmienia res na nowego kandydata)
             if (!chooseBestNeighbour(neighbours)) return res;
         } while ( !stopFunction());
         return res;
@@ -113,14 +113,14 @@ public class TabooSearch extends Algorithm {
     }
 
     private boolean chooseBestNeighbour(ArrayList<Entry<Result, Move>> neighbours) {
-        Result candidate = null;
+        Entry<Result, Move> candidate = null;
         //wiem, że dziwnie to wygląda, ale wydaje mi się, że musi to być mniej więcej w ten sposób
         //jak nie ma kryterium aspiracji, to mogłoby się zdarzyć, że pierwszy sąsiad akurat ma najlepszą funkcję
         //celu, ale jest niedozwolony, bo jest w tablicy tabu. I wtedy dalsza pętla nie obrałaby nic
-        if(aspirationCriteria) candidate = neighbours.get(0).getKey();
+        if(aspirationCriteria) candidate = neighbours.get(0);
         else {
             for (Entry<Result, Move> entry : neighbours) {
-                if ( !tabooList.contains(entry.getValue())) candidate = entry.getKey();
+                if ( !tabooList.contains(entry.getValue())) candidate = entry;
             }
         }
         //jeśli tutaj nadal candidate jest nullem, to ozn., że mamy aspiration = false i
@@ -130,18 +130,18 @@ public class TabooSearch extends Algorithm {
         for(Entry<Result, Move> neighbour : neighbours) {
             Result res = neighbour.getKey();
             Move move = neighbour.getValue();
-            if(res.objFuncResult < candidate.objFuncResult){
+            if(res.objFuncResult < candidate.getKey().objFuncResult){
                 if(tabooList.contains(move)){
                     if( aspirationCriteria && res.objFuncResult < result.objFuncResult) {
-                        candidate = res;
+                        candidate = neighbour;
                     }
                 } else {
-                    candidate = res;
+                    candidate = neighbour;
                 }
             }
         }
-        result = candidate;
-        tabooList.add(neighbours.get(0).getValue());
+        result = candidate.getKey();
+        tabooList.add(candidate.getValue());
         return true;
     }
 

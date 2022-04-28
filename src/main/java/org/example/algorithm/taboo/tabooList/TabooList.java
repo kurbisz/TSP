@@ -6,7 +6,7 @@ public abstract class TabooList {
 
     protected int maxSize;
     protected int n;
-    protected Move movesList[];
+    protected Move[] movesList;
     protected int down, up;
 
     public TabooList(int maxSize, int n) {

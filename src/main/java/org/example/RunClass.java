@@ -25,11 +25,11 @@ public class RunClass {
 //        String file = "metro7.tsp";
 //        String file = "metro8.tsp";
 //        String file = "rnd3.tsp";
-        loaderTest(file);
-
-        TwoOpt tOpt = new TwoOpt(loader.getTspData());
-        Result res2 = tOpt.calculate();
-        draw(res2);
+//        loaderTest(file);
+//
+//        TwoOpt tOpt = new TwoOpt(loader.getTspData());
+//        Result res2 = tOpt.calculate();
+//        draw(res2);
 //        System.out.println(res2.calcObjectiveFunction());
 
 //        TabooSearch ts = new TabooSearch(loader.getTspData());
