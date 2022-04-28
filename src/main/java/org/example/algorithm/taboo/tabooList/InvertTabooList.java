@@ -3,7 +3,7 @@ package org.example.algorithm.taboo.tabooList;
 import org.example.algorithm.taboo.Neighbourhoods.Moves.InvertMove;
 import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 
-public class InvertTabooList extends TabooList {
+public class InvertTabooList extends BaseForTabooList {
 
 	boolean[][] moves;
 

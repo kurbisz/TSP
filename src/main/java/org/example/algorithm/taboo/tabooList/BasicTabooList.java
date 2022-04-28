@@ -4,27 +4,23 @@ import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 
 import java.util.ArrayList;
 
-//TODO
-public class BasicTabooList extends TabooList {
+public class BasicTabooList implements TabooList {
 
     ArrayList<Move> list;
     int maxSize;
-    boolean symmetricTSP;
-    boolean aspiration;
+//    boolean symmetricTSP;
+//    boolean aspiration;
 
-    public BasicTabooList(int maxSize, boolean symmetricTSP, boolean aspiration) {
-        //TODO
-        super(maxSize, 0);
+    public BasicTabooList(int maxSize) {
         this.list = new ArrayList<>();
-//        this.maxSize = maxSize;
-        this.symmetricTSP = symmetricTSP;
-        this.aspiration = aspiration;
+        this.maxSize = maxSize;
+//        this.symmetricTSP = symmetricTSP;
+//        this.aspiration = aspiration;
     }
 
     @Override
     public void add(Move move) {
-        //TODO
-        if(list.size()+1 > maxSize) {
+        if(list.size()+1 > maxSize) {   //jeśli przekroczymy zadany maksymalny rozmiar, to usuwamy najstarszy element
             list.remove(list.size()-1);
         }
         list.add(move);
@@ -38,13 +34,10 @@ public class BasicTabooList extends TabooList {
 
     @Override
     public TabooList clone() {
-        BasicTabooList basicTabooList = new BasicTabooList(this.maxSize, this.symmetricTSP, this.aspiration);
-        //TODO
-        basicTabooList.down = this.down;
-        basicTabooList.up = this.up;
-        for(int i = 0; i < n; i++) {
-            basicTabooList.movesList[i] = this.movesList[i];
+        BasicTabooList copy = new BasicTabooList(this.maxSize);
+        for(Move move : list) {
+            copy.add(move);
         }
-        return basicTabooList;
+        return copy;
     }
 }

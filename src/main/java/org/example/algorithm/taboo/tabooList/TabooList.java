@@ -2,25 +2,18 @@ package org.example.algorithm.taboo.tabooList;
 
 import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 
-public abstract class TabooList {
+/**
+ * Interfejs ogólny dla wszystkich list tabu
+ * Zawiera metody, które są niezbędne do działania listy tabu
+ *
+ * Co myślisz o takim rozwiązaniu?
+ * Te parametry, które dodałeś, przeniosłem do abstrakcyjnej klasy dziedziczącej po tej tak, że
+ * w Twoim kodzie nie ma żadnych zmian
+ */
+public interface TabooList {
 
-    protected int maxSize;
-    protected int n;
-    protected Move[] movesList;
-    protected int down, up;
-
-    public TabooList(int maxSize, int n) {
-        this.maxSize = maxSize;
-        this.n = n;
-        movesList = new Move[maxSize];
-        this.down = 0;
-        this.up = 0;
-    }
-
-    public abstract void add(Move move);
-
-    public abstract boolean contains(Move move);
-
-    public abstract TabooList clone();
+    void add(Move move);
+    boolean contains(Move move);
+    TabooList clone();
 
 }
