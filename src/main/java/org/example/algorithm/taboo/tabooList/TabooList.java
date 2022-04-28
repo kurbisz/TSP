@@ -21,4 +21,6 @@ public abstract class TabooList {
 
     public abstract boolean contains(Move move);
 
+    public abstract TabooList clone();
+
 }

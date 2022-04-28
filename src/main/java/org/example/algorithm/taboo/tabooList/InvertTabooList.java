@@ -44,4 +44,19 @@ public class InvertTabooList extends TabooList {
 		moves[m.getFrom()][m.getTo()] = b;
 	}
 
+	@Override
+	public TabooList clone() {
+		InvertTabooList invertTabooList = new InvertTabooList(this.maxSize, this.n);
+		for(int i = 0; i < n; i++) {
+			for(int j = 0; j < n; j++) {
+				invertTabooList.moves[i][j] = moves[i][j];
+			}
+		}
+		invertTabooList.down = this.down;
+		invertTabooList.up = this.up;
+		for(int i = 0; i < n; i++) {
+			invertTabooList.movesList[i] = this.movesList[i];
+		}
+		return invertTabooList;
+	}
 }
