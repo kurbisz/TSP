@@ -16,12 +16,7 @@ public class Invert implements Neighbourhood {
         int n = result.problem.getSize();
         for (int i = 0; i < result.problem.getSize(); i++) {
             for (int j = i+1; j < result.problem.getSize(); j++) {
-                /**
-                 //TODO:
-                 * Tutaj spójrz jak możesz, było i!=j i zarówno j i i szły od 0 ale w sumie invert 5,2 to to samo,
-                 * co invert 2,5, więc uznałem, że sensowniej będzie tak
-                 * Ale może czegoś nie widzę
-                 */
+
                 //zrobiłem pewne zmiany w Result, teraz taki konstruktor kopiuje
                 Result newResult = new Result(result);
 
@@ -58,12 +53,7 @@ public class Invert implements Neighbourhood {
         int n = result.problem.getSize();
         for (int i = 0; i < result.problem.getSize(); i++) {
             for (int j = 0; j < result.problem.getSize(); j++) {
-                /**
-                 //TODO:
-                 * Tutaj spójrz jak możesz, było i!=j i zarówno j i i szły od 0 ale w sumie invert 5,2 to to samo,
-                 * co invert 2,5, więc uznałem, że sensowniej będzie tak
-                 * Ale może czegoś nie widzę
-                 */
+
                 //zrobiłem pewne zmiany w Result, teraz taki konstruktor kopiuje
                 Result newResult = new Result(result);
 
