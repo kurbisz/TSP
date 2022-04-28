@@ -1,13 +1,12 @@
-package org.example.algorithm.Neighbourhoods;
+package org.example.algorithm.taboo.Neighbourhoods;
 
-import org.example.algorithm.Neighbourhoods.Moves.InvertMove;
-import org.example.algorithm.Neighbourhoods.Moves.Move;
+import org.example.algorithm.taboo.Neighbourhoods.Moves.InvertMove;
+import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 import org.example.data.Result;
 import org.example.data.TspData;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public class Invert implements Neighbourhood {

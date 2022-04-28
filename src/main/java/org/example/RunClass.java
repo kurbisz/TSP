@@ -1,11 +1,8 @@
 package org.example;
 
-import org.example.algorithm.KRandom;
-import org.example.algorithm.NearestNeighbour;
-import org.example.algorithm.Neighbourhoods.Invert;
-import org.example.algorithm.TabooSearch;
+import org.example.algorithm.taboo.Neighbourhoods.Invert;
+import org.example.algorithm.taboo.TabooSearch;
 import org.example.algorithm.TwoOpt;
-import org.example.analyses.MultiThreadedComparison;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
