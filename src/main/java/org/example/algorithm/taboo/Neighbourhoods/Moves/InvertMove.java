@@ -16,7 +16,8 @@ public class InvertMove implements Move {
         if (move instanceof InvertMove) {
             InvertMove invertMove = (InvertMove) move;
             // TODO check if this condition is ok
-            if (symm) return (from == invertMove.from && to == invertMove.to);
+            //zmieniłem symm na !symm, bo to właśnie jak jest symetryczny, to nie ma znaczenia kierunek
+            if (!symm) return (from == invertMove.from && to == invertMove.to);
             else return (invertMove.from == this.from && invertMove.to == this.to) || (invertMove.from == this.to && invertMove.to == this.from);
         }
         return false;

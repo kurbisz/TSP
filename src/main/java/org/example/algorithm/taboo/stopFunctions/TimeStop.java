@@ -3,7 +3,7 @@ package org.example.algorithm.taboo.stopFunctions;
 public class TimeStop extends StopFunction {
 
 	public long maxTime;
-	private long startTime;
+	private final long startTime;
 
 	public TimeStop(long maxTime) {
 		this.maxTime = maxTime;

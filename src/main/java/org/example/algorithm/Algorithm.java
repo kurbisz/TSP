@@ -9,7 +9,7 @@ public abstract class Algorithm {
 
 	public Algorithm(TspData tspData) {
 		this.tspData = tspData;
-		int size = tspData.getSize();
+//		int size = tspData.getSize();
 	}
 
 	public abstract Result calculate();

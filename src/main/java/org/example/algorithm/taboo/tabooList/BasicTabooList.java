@@ -4,6 +4,12 @@ import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 
 import java.util.ArrayList;
 
+/**
+ * Najbardziej podstawowa implementacja listy tabu.
+ * przechowuje ostatnio wykonane ruchy
+ * maxSize - maksymalna liczba ruchow przechowywana na liście
+ * po jej przekroczeniu ostatni ruch zostaje usuniety
+ */
 public class BasicTabooList implements TabooList {
 
     ArrayList<Move> list;
