@@ -20,6 +20,7 @@ public class Result {
     public Result(Result result) {
         this.problem = result.problem;
         this.currInd = result.currInd;
+        this.objFuncResult = result.objFuncResult;
         this.way = new int[problem.getSize()];
         if (problem.getSize() >= 0) System.arraycopy(result.way, 0, this.way, 0, problem.getSize());
     }
@@ -49,6 +50,7 @@ public class Result {
             result.way[i] = way[i];
         }
         result.currInd = currInd;
+        result.objFuncResult = objFuncResult;
         return result;
     }
 
