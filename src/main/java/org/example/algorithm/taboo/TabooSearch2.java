@@ -172,6 +172,7 @@ public class TabooSearch2 extends Algorithm {
      * @param longTermList - list of long term solutions (will be shared across threads)
      */
     public TabooSearch2(TspData tspData,
+                 Result startingResult,
                  boolean aspirationCriteria,
                  TabooList tabooListTemplate,
                  Neighbourhood neighbourhoodTemplate,
@@ -179,6 +180,8 @@ public class TabooSearch2 extends Algorithm {
                  LongTermList longTermList,
                  int threadCount){
         super(tspData);
+        mainResult = startingResult;
+        mainResult.objFuncResult = mainResult.calcObjectiveFunction();
         this.aspirationCriteria = aspirationCriteria;
         this.tabooListTemplate = tabooListTemplate;
         this.neighbourhoodTemplate = neighbourhoodTemplate;
