@@ -62,14 +62,14 @@ public class TabooSearch2 extends Algorithm {
 
             do {
 //                generowanie sąsiedztwa
-                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
-                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
-//                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
+//                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
+//                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
+                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
 
-                for (Map.Entry<Result, Move> neighbour : neighbours) {
-                    neighbour.getKey().calcObjectiveFunction();
-                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
-                }
+//                for (Map.Entry<Result, Move> neighbour : neighbours) {
+//                    neighbour.getKey().calcObjectiveFunction();
+//                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
+//                }
 
                 if (!chooseBestNeighbour(neighbours)) return;
             } while ( !stopFunction.check());
@@ -82,6 +82,7 @@ public class TabooSearch2 extends Algorithm {
          * @return false if every neighbour is tabooed
          */
         private boolean chooseBestNeighbour(ArrayList<Map.Entry<Result, Move>> neighbours ){
+
             Map.Entry<Result, Move> candidate = null;    //kandydat na nowe rozwiązanie w obecnym sąsiedztwie
 
             //jak nie ma aspiracji, to wywalam wszystko to, co jest na taboo
