@@ -23,10 +23,10 @@ public class RunClass {
 
     public static void main(String[] args) {
 //        String file = "dane/d657.tsp";
-//        String file = "dane/d198.tsp";
+        String file = "dane/d198.tsp";
 //        String file = "dane/d1291.tsp";
 //        String file = "dane/pr299.tsp";
-        String file = "metro6.tsp";
+//        String file = "metro6.tsp";
 //        String file = "metro7.tsp";
 //        String file = "metro8.tsp";
 //        String file = "rnd3.tsp";
@@ -58,13 +58,14 @@ public class RunClass {
 
         //        System.out.println(nearestNeighbour.getTime()/1000000000.0);
         TspData data = loader.getTspData();
-        KRandom krandom = new KRandom(data, 100000, true);
-        krandom.setThreads(10);
-        Result startingRes = krandom.calculate();
+//        KRandom krandom = new KRandom(data, 100000, true);
+//        krandom.setThreads(10);
+        NearestNeighbour nearestNeighbour = new NearestNeighbour(data, NearestNeighbour.Strategy.UPGRADED_MULTI);
+        nearestNeighbour.setThreadCount(6);
+        Result startingRes = nearestNeighbour.calculate();
 //        draw(startingRes);
 
-        TabooSearch2 ts = new TabooSearch2(data, startingRes);
-//        ts.setAsync(6);
+        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new BasicTabooList(7), new Invert(), new IterationsStop(100), null, 1);
         Result endRes = ts.calculate();
         System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
         System.out.println("At the end: " + endRes.calcObjectiveFunction());

@@ -232,7 +232,7 @@ public class TabooSearch2 extends Algorithm {
                 ex.printStackTrace();
             }
 
-            for (int i = 1; i < threadCount; i++){
+            for (int i = 0; i < threadCount; i++){
                 if (passes[i].bestResult.objFuncResult < mainResult.objFuncResult){
                     mainResult = passes[i].bestResult;
                 }
