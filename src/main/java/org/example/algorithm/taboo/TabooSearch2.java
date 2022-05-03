@@ -62,14 +62,14 @@ public class TabooSearch2 extends Algorithm {
 
             do {
 //                generowanie sąsiedztwa
-//                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
-//                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
-                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
+                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
+                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
+//                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
 
-//                for (Map.Entry<Result, Move> neighbour : neighbours) {
-//                    neighbour.getKey().calcObjectiveFunction();
-//                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
-//                }
+                for (Map.Entry<Result, Move> neighbour : neighbours) {
+                    neighbour.getKey().calcObjectiveFunction();
+                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
+                }
 
                 if (!chooseBestNeighbour(neighbours)) return;
             } while ( !stopFunction.check());
@@ -155,7 +155,7 @@ public class TabooSearch2 extends Algorithm {
         aspirationCriteria = false;
         tabooListTemplate = new BasicTabooList(7);
         neighbourhoodTemplate = new Invert();
-        stopFunctionTemplate = new IterationsStop(1000);
+        stopFunctionTemplate = new IterationsStop(1);
         longTermList = null;
     }
 
