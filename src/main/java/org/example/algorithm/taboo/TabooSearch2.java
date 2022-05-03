@@ -90,7 +90,9 @@ public class TabooSearch2 extends Algorithm {
                 //explicit użyję iteratora, żeby móc bezpiecznie usuwać elementy z listy w trakcie pętli
                 for(Iterator<Map.Entry<Result, Move>> it = neighbours.iterator(); it.hasNext(); ) {
                     Map.Entry<Result, Move> entry = it.next();
-                    if ( resultTS.tabooList.contains(entry.getValue())) it.remove();
+                    if ( resultTS.tabooList.contains(entry.getValue())) {
+                        it.remove();
+                    }
                 }
             }
 
@@ -152,6 +154,7 @@ public class TabooSearch2 extends Algorithm {
     public TabooSearch2(TspData tspData, Result startingResult){
         super(tspData);
         mainResult = startingResult;
+        mainResult.objFuncResult = mainResult.calcObjectiveFunction();
 //        mainResult = new Result(startingResult.problem);
         aspirationCriteria = false;
         tabooListTemplate = new BasicTabooList(7);
@@ -170,6 +173,7 @@ public class TabooSearch2 extends Algorithm {
      * @param longTermList - list of long term solutions (will be shared across threads)
      */
     public TabooSearch2(TspData tspData,
+                 Result startingResult,
                  boolean aspirationCriteria,
                  TabooList tabooListTemplate,
                  Neighbourhood neighbourhoodTemplate,
@@ -177,6 +181,8 @@ public class TabooSearch2 extends Algorithm {
                  LongTermList longTermList,
                  int threadCount){
         super(tspData);
+        mainResult = startingResult;
+        mainResult.objFuncResult = mainResult.calcObjectiveFunction();
         this.aspirationCriteria = aspirationCriteria;
         this.tabooListTemplate = tabooListTemplate;
         this.neighbourhoodTemplate = neighbourhoodTemplate;
