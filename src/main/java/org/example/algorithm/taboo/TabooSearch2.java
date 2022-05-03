@@ -1,7 +1,6 @@
 package org.example.algorithm.taboo;
 
 import org.example.algorithm.Algorithm;
-import org.example.algorithm.KRandom;
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
 import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 import org.example.algorithm.taboo.Neighbourhoods.Neighbourhood;
@@ -16,6 +15,7 @@ import org.example.data.TspData;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -215,10 +215,26 @@ public class TabooSearch2 extends Algorithm {
         } else{
             ExecutorService pool = Executors.newFixedThreadPool(threadCount);
             SingleSimplePass[] passes = new SingleSimplePass[threadCount];
+            Random r = new Random();
+            int change_count = tspData.getSize()/8;
 
             for (int i = 0; i < threadCount; i++){
-                KRandom r = new KRandom(tspData);
-                passes[i] = new SingleSimplePass(r.calculate(),
+//                KRandom r = new KRandom(tspData);
+                Result startingResult = mainResult.clone();
+                for (int j = 0; j<change_count; j++){
+                    int ind_1 = r.nextInt(tspData.getSize());
+                    int ind_2;
+                    do{
+                        ind_2 = r.nextInt(tspData.getSize());
+                    } while(ind_1 == ind_2);
+                    //losowy swap na wyniku początkowym
+                    int temp = startingResult.way[ind_1];
+                    startingResult.way[ind_1] = startingResult.way[ind_2];
+                    startingResult.way[ind_2] = temp;
+                }
+                startingResult.objFuncResult = startingResult.calcObjectiveFunction();
+//                System.out.println("Starting result: " + startingResult.objFuncResult);
+                passes[i] = new SingleSimplePass(startingResult,
                         aspirationCriteria,
                         tabooListTemplate.cloneTabooList(),
                         neighbourhoodTemplate.copy(),
@@ -234,6 +250,7 @@ public class TabooSearch2 extends Algorithm {
             }
 
             for (int i = 1; i < threadCount; i++){
+//                System.out.println("Thread " + i + ": " + passes[i].bestResult.objFuncResult);
                 if (passes[i].bestResult.objFuncResult < mainResult.objFuncResult){
                     mainResult = passes[i].bestResult;
                 }

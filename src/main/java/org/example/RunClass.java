@@ -66,7 +66,7 @@ public class RunClass {
         Result startingRes = nearestNeighbour.calculate();
 //        draw(startingRes);
 
-        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new BasicTabooList(7), new Invert(), new IterationsStop(10000), null, 1);
+        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new BasicTabooList(7), new Invert(), new IterationsStop(100), null, 5);
         Result endRes = ts.calculate();
         System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
         System.out.println("At the end: " + endRes.calcObjectiveFunction());
