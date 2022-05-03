@@ -14,6 +14,6 @@ public interface TabooList {
 
     void add(Move move);
     boolean contains(Move move);
-    public TabooList cloneTabooList();
+    TabooList cloneTabooList();
 
 }

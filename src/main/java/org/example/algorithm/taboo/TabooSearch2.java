@@ -61,7 +61,7 @@ public class TabooSearch2 extends Algorithm {
 //            }
 
             do {
-                //generowanie sąsiedztwa
+//                generowanie sąsiedztwa
 //                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
 //                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
                 neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
@@ -116,7 +116,9 @@ public class TabooSearch2 extends Algorithm {
 
             resultTS.result = candidate.getKey();
 //            System.out.println("New best result: " + bestResult.objFuncResult);
-            if(candidate.getKey().objFuncResult< bestResult.objFuncResult) bestResult = candidate.getKey();
+            if(candidate.getKey().objFuncResult< bestResult.objFuncResult)
+                bestResult = candidate.getKey();
+
             resultTS.tabooList.add(candidate.getValue());
 
             //nie ruszałem nic, poza przeniesieniem na nowe oznaczenia
