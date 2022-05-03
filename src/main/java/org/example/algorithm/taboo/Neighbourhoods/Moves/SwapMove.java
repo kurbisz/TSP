@@ -14,11 +14,8 @@ public class SwapMove implements Move {
     @Override
     public boolean checkEqual(Move move) {
         if (move instanceof SwapMove) {
-            SwapMove invertMove = (SwapMove) move;
-            // TODO check if this condition is ok
-            //zmieniłem symm na !symm, bo to właśnie jak jest symetryczny, to nie ma znaczenia kierunek
-            if (!symm) return (from == invertMove.from && to == invertMove.to);
-            else return (invertMove.from == this.from && invertMove.to == this.to) || (invertMove.from == this.to && invertMove.to == this.from);
+            SwapMove swapMove = (SwapMove) move;
+            return (swapMove.from == this.from && swapMove.to == this.to) || (swapMove.from == this.to && swapMove.to == this.from);
         }
         return false;
     }

@@ -15,6 +15,7 @@ import org.example.data.TspData;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -66,11 +67,10 @@ public class TabooSearch2 extends Algorithm {
                 else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
 //                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
 
-                for (Map.Entry<Result, Move> neighbour : neighbours) {
-                    neighbour.getKey().calcObjectiveFunction();
-                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
-                }
-
+//                for (Map.Entry<Result, Move> neighbour : neighbours) {
+//                    neighbour.getKey().calcObjectiveFunction();
+//                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
+//                }
                 if (!chooseBestNeighbour(neighbours)) return;
             } while ( !stopFunction.check());
         }
@@ -158,7 +158,7 @@ public class TabooSearch2 extends Algorithm {
         aspirationCriteria = false;
         tabooListTemplate = new BasicTabooList(7);
         neighbourhoodTemplate = new Invert();
-        stopFunctionTemplate = new IterationsStop(1);
+        stopFunctionTemplate = new IterationsStop(1000);
         longTermList = null;
     }
 
@@ -213,10 +213,11 @@ public class TabooSearch2 extends Algorithm {
         } else{
             ExecutorService pool = Executors.newFixedThreadPool(threadCount);
             SingleSimplePass[] passes = new SingleSimplePass[threadCount];
-
             for (int i = 0; i < threadCount; i++){
                 KRandom r = new KRandom(tspData);
-                passes[i] = new SingleSimplePass(r.calculate(),
+                Result res = r.calculate();
+                res.objFuncResult = res.calcObjectiveFunction();
+                passes[i] = new SingleSimplePass(res,
                         aspirationCriteria,
                         tabooListTemplate.cloneTabooList(),
                         neighbourhoodTemplate.copy(),
@@ -231,7 +232,7 @@ public class TabooSearch2 extends Algorithm {
                 ex.printStackTrace();
             }
 
-            for (int i = 1; i < threadCount; i++){
+            for (int i = 0; i < threadCount; i++){
                 if (passes[i].bestResult.objFuncResult < mainResult.objFuncResult){
                     mainResult = passes[i].bestResult;
                 }

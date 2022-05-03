@@ -2,15 +2,15 @@ package org.example.algorithm.taboo.Neighbourhoods;
 
 import org.example.algorithm.taboo.Neighbourhoods.Moves.InvertMove;
 import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
+import org.example.algorithm.taboo.Neighbourhoods.Moves.SwapMove;
 import org.example.data.Result;
 import org.example.data.TspData;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
-import java.util.ArrayList;
 import java.util.Map;
 
-public class Invert implements Neighbourhood {
+public class Swap implements Neighbourhood {
     @Override
     public ArrayList<Map.Entry<Result, Move>> getNeighbourhoodSymmetric(Result result) {
         int n = result.problem.getSize();
@@ -22,7 +22,7 @@ public class Invert implements Neighbourhood {
                 Result newResult = new Result(result);
 
                 // wprowadzenie zmiany w newResult
-                reverse(newResult, i, j);
+                swap(newResult, i, j);
                 int p = i-1;
                 if(p < 0) p += n;
                 int q = j+1;
@@ -30,15 +30,22 @@ public class Invert implements Neighbourhood {
                 if(p == j) continue;
                 TspData tspData = newResult.problem;
                 int way = newResult.objFuncResult;
+                // 1 2 3 4 5 -> 1 5 3 4 2
+                // Stad trzeba usunac 1->2, 2->3, 4->5 5->1
+                // i trzeba dodac 1->5, 5->3, 4->2, 2->1
                 way -= tspData.getDistance(result.way[p], result.way[i]);
+                way -= tspData.getDistance(result.way[i], result.way[i+1]);
                 way -= tspData.getDistance(result.way[j], result.way[q]);
+                way -= tspData.getDistance(result.way[j-1], result.way[j]);
                 way += tspData.getDistance(result.way[p], result.way[j]);
+                way += tspData.getDistance(result.way[j], result.way[i+1]);
                 way += tspData.getDistance(result.way[i], result.way[q]);
+                way += tspData.getDistance(result.way[j-1], result.way[i]);
                 //ręcznie modyfikuję wynik funkcji celu
                 newResult.objFuncResult = way;
 
                 //utworzenie obiektu reprezentującego dokonany ruch
-                InvertMove move = new InvertMove(i, j, true);
+                SwapMove move = new SwapMove(i, j, true);
 
                 //utworzenie pary (nowy rezultat, ruch) i dodanie do listy sąsiadów
                 neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult, move));
@@ -54,27 +61,20 @@ public class Invert implements Neighbourhood {
         int n = result.problem.getSize();
         for (int i = 0; i < result.problem.getSize(); i++) {
             for (int j = 0; j < result.problem.getSize(); j++) {
-                if(i==j) continue;
+
                 //zrobiłem pewne zmiany w Result, teraz taki konstruktor kopiuje
                 Result newResult = new Result(result);
 
-                // wprowadzenie zmiany w newResult
-                reverse(newResult, i, j);
+                swap(result, i, j);
 
                 newResult.objFuncResult = newResult.calcObjectiveFunction();
 
                 //utworzenie obiektu reprezentującego dokonany ruch
-                InvertMove move = new InvertMove(i, j, false);
+                SwapMove move = new SwapMove(i, j, false);
 
                 //utworzenie pary (nowy rezultat, ruch) i dodanie do listy sąsiadów
                 neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult, move));
 
-
-//                Result newResult2 = new Result(result);
-//                reverse(newResult2, j, i);
-//                newResult.objFuncResult = newResult.calcObjectiveFunction();
-//                InvertMove move2 = new InvertMove(j, i, false);
-//                neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult2, move2));
             }
         }
 
@@ -83,24 +83,13 @@ public class Invert implements Neighbourhood {
 
     @Override
     public Neighbourhood copy() {
-        return new Invert();
+        return new Swap();
     }
 
-    private void reverse(Result result, int i, int j) {
-        int n = result.problem.getSize();
-        int k = 0;
-        int am = j-i;
-        if(am < 0) am+=n;
-        while(k < am/2+1) {
-            int from = k+i;
-            if(from >= n) from -= n;
-            int to = j-k;
-            if(to < 0) to += n;
-            int tmp = result.way[from];
-            result.way[from] = result.way[to];
-            result.way[to] = tmp;
-            k++;
-        }
+    private void swap(Result result, int i, int j) {
+        int tmp = result.way[i];
+        result.way[i] = result.way[j];
+        result.way[j] = tmp;
     }
 
 }

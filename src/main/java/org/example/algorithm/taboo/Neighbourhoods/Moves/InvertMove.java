@@ -15,7 +15,7 @@ public class InvertMove implements Move {
     public boolean checkEqual(Move move) {
         if (move instanceof InvertMove) {
             InvertMove invertMove = (InvertMove) move;
-            // TODO check if this condition is ok
+            // (1,5) (5,1)
             //zmieniłem symm na !symm, bo to właśnie jak jest symetryczny, to nie ma znaczenia kierunek
             if (!symm) return (from == invertMove.from && to == invertMove.to);
             else return (invertMove.from == this.from && invertMove.to == this.to) || (invertMove.from == this.to && invertMove.to == this.from);

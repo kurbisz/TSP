@@ -35,7 +35,10 @@ public class BasicTabooList implements TabooList {
 
     @Override
     public boolean contains(Move move) {
-        return list.contains(move);
+        for(Move m : list) {
+            if(m.checkEqual(move)) return true;
+        }
+        return false;
     }
 
     @Override

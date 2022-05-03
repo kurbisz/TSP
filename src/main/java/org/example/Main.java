@@ -1,6 +1,11 @@
 package org.example;
 
 import org.example.algorithm.KRandom;
+import org.example.algorithm.taboo.Neighbourhoods.Invert;
+import org.example.algorithm.taboo.TabooSearch2;
+import org.example.algorithm.taboo.stopFunctions.IterationsStop;
+import org.example.algorithm.taboo.tabooList.BasicTabooList;
+import org.example.algorithm.taboo.tabooList.InvertTabooList;
 import org.example.analyses.*;
 import org.example.data.Result;
 import org.example.data.TspData;
@@ -12,6 +17,7 @@ import java.util.List;
 
 public class Main {
 
+    public static FileLoader loader;
     private static String folder = "dane" + File.separator;
     private static String[] files = {folder + "d198.tsp", folder + "d657.tsp", folder + "d1291.tsp",
                                     folder + "ft53.atsp", folder + "ftv35.atsp", folder + "kroB100.tsp",
@@ -29,65 +35,28 @@ public class Main {
             System.out.println("Argument 1 must be filename!");
             return;
         }
-        FileLoader fileLoader = new FileLoader(args[0]);
-        fileLoader.load();
+        String file = files[2];
 
-        TspData tspData = fileLoader.getTspData();
-        //System.out.println(tspData.toString());
+        loaderTest(file);
 
-//        fileLoader.setFileName(files[2]); // Troche wiekszy plik dla wiekszego czasu
-//        fileLoader.load();
-//        tspData = fileLoader.getTspData();
-        //TwoOptComparison.calc("twoOptTimeComparison.csv", tspData);
-        //ThreeOptComparison.calc("threeOptTimeComparison.csv", tspData);
+        TspData data = loader.getTspData();
+        KRandom krandom = new KRandom(data, 100000, true);
+        krandom.setThreads(10);
+        Result startingRes = krandom.calculate();
+//        draw(startingRes);
 
-//        List<TspData> list = new ArrayList<>();
-//        for(int i = 0; i < files.length; i++) {
-//            fileLoader.setFileName(files[i]);
-//            fileLoader.load();
-//            TspData data = fileLoader.getTspData();
-//            data.setName(names[i]);
-//            list.add(data);
-//        }
-        //AlgorithmsComparison.compareKRAndNN("compareKrAndNn.csv", list);
-        //AlgorithmsComparison.compareTwoOptAndNN("compareTwoOptAndNn.csv", list);
-        //AlgorithmsComparison.compareKrAndTwoOpt("compareKrAndTwoOpt.csv", list);
-        //AlgorithmsComparison.compareAll("compareAll.csv", list);
-        //AlgorithmsComparison.compareAllTimes("compareAllTimes.csv", list);
-//        BetterNearestNeighbourComparison.compareKR("compareBnnAndKr.csv", list);
-//        BetterNearestNeighbourComparison.compareNN("compareBnnAndNn.csv", list);
-//        BetterNearestNeighbourComparison.compareTwoOpt("compareBnnAndTwoOpt.csv", list);
-//        AlgorithmsComparison2.compareTwoOpt("twoOptStarting.csv", list);
-        //AlgorithmsComparison2.compareTwoOptTime("twoOptStartingTime.csv", list);
-        //AlgorithmsComparison2.compareTwoOptRandom("twoOptRandomStarting.csv", list);
-        //AlgorithmsComparison2.compareTwoOptRandomTime("twoOptRandomStartingTime.csv", list);
+        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new InvertTabooList(7, data.getSize()), new Invert(), new IterationsStop(10), null, 3);
+//        ts.setAsync(6);
+        Result endRes = ts.calculate();
+        System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
+        System.out.println("At the end: " + endRes.calcObjectiveFunction());
 
+    }
 
-        //System.out.println("Liczba dostepnych procesorow: " + Runtime.getRuntime().availableProcessors());
-
-//        KRandom algorithm = new KRandom(tspData, 100000, true);
-//        algorithm.setThreads(8);
-//        Result r = algorithm.calculate();
-//        System.out.println("Wynik: " + r.calcObjectiveFunction());
-//        System.out.println("Rozwiazanie: " + r);
-//        System.out.println("Czas: " + algorithm.getTime()/1000000);
-//        Drawer drawer = new Drawer();
-//        drawer.showResult(r);
-
-//        DifferentKRandom.calc("kRandom.csv", tspData);
-        //DifferentKRandom.calcAverage("kRandomAverage.csv", tspData);
-
-        //System.out.println(algorithm.objectiveFunction());
-
-        fileLoader.setFileName("dane/d1291.tsp");
-        fileLoader.load();
-        tspData = fileLoader.getTspData();
-        System.out.println("test");
-
-        //MultiThreadedComparison.calcNN("mulithreadNN_d198.csv", tspData);
-        //MultiThreadedComparison.calcNN("mulithreadNN_d1291.csv", tspData);
-        MultiThreadedComparison.calcKRandom("mulithreadKR_d198.csv", tspData);
-        MultiThreadedComparison.calcKRandom("mulithreadKR_d1291.csv", tspData);
+    public static void loaderTest(String filename){
+        loader = new FileLoader(filename);
+        loader.load();
+        System.out.println(loader.getTspData().toString());
     }
 
 }

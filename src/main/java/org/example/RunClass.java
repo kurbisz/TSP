@@ -8,6 +8,7 @@ import org.example.algorithm.TwoOpt;
 import org.example.algorithm.taboo.TabooSearch2;
 import org.example.algorithm.taboo.stopFunctions.IterationsStop;
 import org.example.algorithm.taboo.tabooList.BasicTabooList;
+import org.example.algorithm.taboo.tabooList.InvertTabooList;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
@@ -63,7 +64,7 @@ public class RunClass {
         Result startingRes = krandom.calculate();
 //        draw(startingRes);
 
-        TabooSearch2 ts = new TabooSearch2(data, startingRes);
+        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new BasicTabooList(7), new Invert(), new IterationsStop(100), null, 6);
 //        ts.setAsync(6);
         Result endRes = ts.calculate();
         System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());

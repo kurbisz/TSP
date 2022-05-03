@@ -4,6 +4,7 @@ import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 import org.example.data.Result;
 
 import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Map;
 
 public interface Neighbourhood {

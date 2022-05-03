@@ -42,6 +42,7 @@ public class InvertTabooList extends BaseForTabooList {
 
 	private void setMove(InvertMove m, boolean b) {
 		moves[m.getFrom()][m.getTo()] = b;
+		moves[m.getTo()][m.getFrom()] = b;
 	}
 
 	@Override
@@ -54,7 +55,7 @@ public class InvertTabooList extends BaseForTabooList {
 		}
 		invertTabooList.down = this.down;
 		invertTabooList.up = this.up;
-		for(int i = 0; i < n; i++) {
+		for(int i = 0; i < maxSize; i++) {
 			invertTabooList.movesList[i] = this.movesList[i];
 		}
 		return invertTabooList;
