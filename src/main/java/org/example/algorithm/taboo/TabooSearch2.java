@@ -62,9 +62,9 @@ public class TabooSearch2 extends Algorithm {
 
             do {
 //                generowanie sąsiedztwa
-//                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
-//                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
-                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
+                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
+                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
+//                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
 
 //                for (Map.Entry<Result, Move> neighbour : neighbours) {
 //                    neighbour.getKey().calcObjectiveFunction();
