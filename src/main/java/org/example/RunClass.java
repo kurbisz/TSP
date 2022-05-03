@@ -1,9 +1,13 @@
 package org.example;
 
+import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
 import org.example.algorithm.taboo.TabooSearch;
 import org.example.algorithm.TwoOpt;
+import org.example.algorithm.taboo.TabooSearch2;
+import org.example.algorithm.taboo.stopFunctions.IterationsStop;
+import org.example.algorithm.taboo.tabooList.BasicTabooList;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
@@ -27,7 +31,7 @@ public class RunClass {
 //        String file = "metro8.tsp";
 //        String file = "rnd3.tsp";
         loaderTest(file);
-        TspData data = loader.getTspData();
+//        TspData data = loader.getTspData();
 //        Result result = new Result(data);
 //        draw(result);
 //        TwoOpt tOpt = new TwoOpt(loader.getTspData());
@@ -53,9 +57,17 @@ public class RunClass {
 //        nearestNeighbour.calculate();
 
         //        System.out.println(nearestNeighbour.getTime()/1000000000.0);
-//        KRandom krandom = new KRandom(loader.getTspData(), 100000, true);
-//        krandom.setThreads(10);
-//        draw(krandom.calculate());
+        TspData data = loader.getTspData();
+        KRandom krandom = new KRandom(data, 100000, true);
+        krandom.setThreads(10);
+        Result startingRes = krandom.calculate();
+//        draw(startingRes);
+
+        TabooSearch2 ts = new TabooSearch2(data, startingRes);
+//        ts.setAsync(6);
+        Result endRes = ts.calculate();
+        System.out.println(endRes.calcObjectiveFunction());
+        draw(endRes);
 //        krandom.calculate();
 //        System.out.println(krandom.getTime()/1000000000.0);
 

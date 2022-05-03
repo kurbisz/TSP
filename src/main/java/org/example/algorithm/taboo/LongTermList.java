@@ -44,14 +44,14 @@ public class LongTermList {
 		if(newPoint) {
 			this.result = result.clone();
 			this.best = result.calcObjectiveFunction();
-			this.list = tabooList.clone();
+			this.list = tabooList.cloneTabooList();
 		}
 		counter = 0;
 		resetted = newPoint;
 	}
 
 	public LongTermList clone() {
-		LongTermList longTermList = new LongTermList(result.clone(), list.clone(), newElements, checkRatio);
+		LongTermList longTermList = new LongTermList(result.clone(), list.cloneTabooList(), newElements, checkRatio);
 		longTermList.counter = counter;
 		longTermList.best = best;
 		return longTermList;

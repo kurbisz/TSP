@@ -10,4 +10,5 @@ public interface Neighbourhood {
 
     ArrayList<Map.Entry<Result, Move>> getNeighbourhoodSymmetric(Result result);
     ArrayList<Map.Entry<Result, Move>> getNeighbourhoodAsymmetric(Result result);
+    Neighbourhood copy();
 }

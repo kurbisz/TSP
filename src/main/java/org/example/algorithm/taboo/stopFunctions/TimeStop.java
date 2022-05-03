@@ -15,4 +15,9 @@ public class TimeStop extends StopFunction {
 		return (System.nanoTime() - startTime) > maxTime;
 	}
 
+	@Override
+	public StopFunction copy() {
+		return new TimeStop(maxTime);
+	}
+
 }

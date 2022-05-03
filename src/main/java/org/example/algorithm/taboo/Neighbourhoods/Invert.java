@@ -80,6 +80,11 @@ public class Invert implements Neighbourhood {
         return neighbours;
     }
 
+    @Override
+    public Neighbourhood copy() {
+        return new Invert();
+    }
+
     private void reverse(Result result, int i, int j) {
         int n = result.problem.getSize();
         int k = 0;

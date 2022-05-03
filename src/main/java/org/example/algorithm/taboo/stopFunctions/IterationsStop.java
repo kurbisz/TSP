@@ -16,4 +16,9 @@ public class IterationsStop extends StopFunction {
 		return actualIterations >= maxIterations;
 	}
 
+	@Override
+	public StopFunction copy() {
+		return new IterationsStop(maxIterations);
+	}
+
 }

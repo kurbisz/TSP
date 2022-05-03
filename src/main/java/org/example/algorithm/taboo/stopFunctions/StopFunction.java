@@ -7,5 +7,6 @@ public abstract class StopFunction {
 	 * @return true when its time to finish
 	 */
 	public abstract boolean check();
+	public abstract StopFunction copy();
 
 }

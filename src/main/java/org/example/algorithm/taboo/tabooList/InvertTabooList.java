@@ -45,7 +45,7 @@ public class InvertTabooList extends BaseForTabooList {
 	}
 
 	@Override
-	public TabooList clone() {
+	public TabooList cloneTabooList() {
 		InvertTabooList invertTabooList = new InvertTabooList(this.maxSize, this.n);
 		for(int i = 0; i < n; i++) {
 			for(int j = 0; j < n; j++) {

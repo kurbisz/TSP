@@ -13,10 +13,10 @@ import org.example.data.TabooSearchResult;
 import org.example.data.TspData;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -47,7 +47,7 @@ public class TabooSearch extends Algorithm {
      * @param aspirationCriteria - czy używać kryterium aspiracji
      * @param tabooList - używana lista tabu
      * @param stopFunction - używana stop function
-     * @param longTermList - używana lista długoterminowa (może być null)
+     * @param longTermList - używana lista długoterminowa (może być null, wtedy algorytm nie będzie używał listy długoterminowej)
      */
     public void setParameters(Result startingResult,
                               Neighbourhood neighbourhood,
@@ -132,23 +132,38 @@ public class TabooSearch extends Algorithm {
      */
     class SimpleSinglePass implements Runnable{
 
+        //dotychczas najlepsze znalezione rozwiązanie
         Result res;
+        TabooSearchResult tabooSearchResult;
+        Neighbourhood threadNeighbourhood;
+        boolean threadAspirationCriteria = false;
+        TabooList threadTabooList = null;
+        StopFunction threadStopFunction = null;
+        LongTermList threadLongTermList = null;
 
         SimpleSinglePass(Result startingResult) {
             this.res = startingResult;
+            if(longTermList != null) {
+                tabooSearchResult = new TabooSearchResult(tabooList.cloneTabooList(), res.clone(), longTermList.clone());
+            } else{
+                tabooSearchResult = new TabooSearchResult(tabooList.cloneTabooList(), res.clone(), null);
+            }
+            threadNeighbourhood = neighbourhood;
         }
 
         @Override
         public void run() {
             ArrayList<Entry<Result, Move>> neighbours;
-            TabooSearchResult tabooSearchResult = new TabooSearchResult(tabooList.clone(), res.clone(), longTermList.clone());
+            //zmieniłem zgodnie z wcześniejszym założeniem, że lista długoterminowa może być nullem
             do {
                 //generowanie sąsiedztwa
-                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(res);
-                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(res);
-                if (!chooseBestNeighbour(tabooSearchResult, neighbours)) return;
+                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(tabooSearchResult.result);
+                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(tabooSearchResult.result);
+                if (!chooseBestNeighbour(res, tabooSearchResult, neighbours)) return;
+                if (tabooSearchResult.result.calcObjectiveFunction() < res.calcObjectiveFunction()) {
+                    res = tabooSearchResult.result;
+                }
             } while ( !stopFunction());
-            res = tabooSearchResult.result;
         }
     }
 
@@ -167,14 +182,20 @@ public class TabooSearch extends Algorithm {
             return pass.res;
         } else {    //przy wielu wątkach liczone są oddzielne taboosearch dla rozwiązań startowych z KRandom
             SimpleSinglePass[] passes = new SimpleSinglePass[threads];
-            ExecutorService executor = Executors.newFixedThreadPool(threads);
+            Thread[] thread = new Thread[threads];
+//            ExecutorService executor = Executors.newFixedThreadPool(threads);
             for(int i = 0; i < threads; i++) {
                 KRandom r = new KRandom(tspData);
                 passes[i] = new SimpleSinglePass(r.calculate());
-                executor.execute(passes[i]);
+//                executor.execute(passes[i]);
+                thread[i] = new Thread(passes[i]);
+                thread[i].start();
             }
             try{
-                executor.awaitTermination(Long.MAX_VALUE, TimeUnit.SECONDS);
+                for(Thread t : thread) {
+                    t.join();
+                }
+                System.out.println("Waiting for threads to finish");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -192,44 +213,56 @@ public class TabooSearch extends Algorithm {
         return stopFunction.check();
     }
 
-    private boolean chooseBestNeighbour(TabooSearchResult tsr, ArrayList<Entry<Result, Move>> neighbours) {
+    private boolean chooseBestNeighbour(Result currentBest, TabooSearchResult tsr, ArrayList<Entry<Result, Move>> neighbours) {
         Result candidate = null;
         //wiem, że dziwnie to wygląda, ale wydaje mi się, że musi to być mniej więcej w ten sposób
         //jak nie ma kryterium aspiracji, to mogłoby się zdarzyć, że pierwszy sąsiad akurat ma najlepszą funkcję
         //celu, ale jest niedozwolony, bo jest w tablicy tabu. I wtedy dalsza pętla nie obrałaby nic
 
-        if(aspirationCriteria) candidate = neighbours.get(0).getKey();
-        else {
-            for (Entry<Result, Move> entry : neighbours) {
-                if ( !tsr.tabooList.contains(entry.getValue())) candidate = entry.getKey();
+        //obieramy po prostu pierwszego ale też niezabronionego sąsiada
+//        if(aspirationCriteria) candidate = neighbours.get(0).getKey();
+//        else {
+//            for (Entry<Result, Move> entry : neighbours) {
+//                if ( !tsr.tabooList.contains(entry.getValue())) candidate = entry.getKey();
+//            }
+//        }
+
+        if (!aspirationCriteria) {
+            //explicit użyję iteratora, żeby móc bezpiecznie usuwać elementy z listy w trakcie pętli
+            for(Iterator<Entry<Result, Move>> it = neighbours.iterator(); it.hasNext(); ) {
+                Entry<Result, Move> entry = it.next();
+                if ( tsr.tabooList.contains(entry.getValue())) it.remove();
             }
         }
-        //jeśli tutaj nadal candidate jest nullem, to ozn., że mamy aspiration = false i
-        //wszystkie ruchy są na taboo - przerywam algorytm
-        if(candidate == null) return false;
 
-        /**
-         * W sumie jeszcze jakimś wyjściem byłoby obranie
-         * candidate = tsr.result;
-         * może i to nie jest takie głupie
-         */
+        if(neighbours.size() == 0) return false;
+        else candidate = neighbours.get(0).getKey();
 
+        //jeśli nie ma aspiracji, to na tym etapie mamy tylko dozwolone rozwiązania
         for(Entry<Result, Move> neighbour : neighbours) {
             Result res = neighbour.getKey();
             Move move = neighbour.getValue();
+
+            //tutaj nie jestem do końca pewien, jak to ma wyglądać
+            //w sensie "jeśli jest kryterium aspiracji, to jeśli rozwiązanie jest lepsze, a zakazane, to i tak je bierzemy"
+            //ale lepsze od najlepszego dotychczas znalezionego przez TS, czy w tym sąsiedztwie?
             if(res.objFuncResult < candidate.objFuncResult){
-                if(tsr.tabooList.contains(move)){
-                    if(aspirationCriteria && res.objFuncResult < tsr.result.objFuncResult) {
+                if(!aspirationCriteria) {
+                    candidate = res;
+                } else {
+                    if (!tsr.tabooList.contains(move)) {
+                        candidate = res;
+                    } else if (res.objFuncResult < currentBest.objFuncResult) {
                         candidate = res;
                     }
-                } else {
-                    candidate = neighbour.getKey();
                 }
             }
         }
         tsr.result = candidate;
         Move m = neighbours.get(0).getValue();
         tsr.tabooList.add(m);
+
+        //tego nie ruszałem
         if (tsr.longTermList != null && tsr.longTermList.addCount(m)) {
             boolean b = tsr.longTermList.isBetter(candidate.calcObjectiveFunction());
             tsr.longTermList.reset(candidate, tsr.tabooList, b);

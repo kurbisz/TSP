@@ -39,7 +39,7 @@ public class BasicTabooList implements TabooList {
     }
 
     @Override
-    public TabooList clone() {
+    public TabooList cloneTabooList() {
         BasicTabooList copy = new BasicTabooList(this.maxSize);
         for(Move move : list) {
             copy.add(move);
