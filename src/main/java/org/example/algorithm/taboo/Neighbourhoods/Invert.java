@@ -1,6 +1,7 @@
 package org.example.algorithm.taboo.Neighbourhoods;
 
 import org.example.algorithm.taboo.Neighbourhoods.Moves.InvertMove;
+import org.example.algorithm.taboo.Neighbourhoods.Moves.InvertMoveWithoutSymm;
 import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 import org.example.data.Result;
 import org.example.data.TspData;
@@ -37,13 +38,12 @@ public class Invert implements Neighbourhood {
                 newResult.objFuncResult = way;
 
                 //utworzenie obiektu reprezentującego dokonany ruch
-                InvertMove move = new InvertMove(i, j, true);
+                InvertMoveWithoutSymm move = new InvertMoveWithoutSymm(i, j);
 
                 //utworzenie pary (nowy rezultat, ruch) i dodanie do listy sąsiadów
                 neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult, move));
             }
         }
-
         return neighbours;
     }
 
@@ -63,7 +63,7 @@ public class Invert implements Neighbourhood {
                 newResult.objFuncResult = newResult.calcObjectiveFunction();
 
                 //utworzenie obiektu reprezentującego dokonany ruch
-                InvertMove move = new InvertMove(i, j, false);
+                InvertMoveWithoutSymm move = new InvertMoveWithoutSymm(i, j);
 
                 //utworzenie pary (nowy rezultat, ruch) i dodanie do listy sąsiadów
                 neighbours.add(new AbstractMap.SimpleEntry<Result, Move>(newResult, move));
