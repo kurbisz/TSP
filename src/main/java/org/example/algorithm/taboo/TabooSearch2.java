@@ -48,16 +48,29 @@ public class TabooSearch2 extends Algorithm {
             this.aspirationCriteria = aspirationCriteria;
             this.neighbourhood = neighbourhood;
             this.stopFunction = stopFunction;
+//            printHashCodes();
         }
 
         @Override
         public void run() {
+
             ArrayList<Map.Entry<Result, Move>> neighbours;
+
+//            for(int i = 0; i< resultTS.result.problem.getSize(); i++){
+//                System.out.println(resultTS.result.way[i]);
+//            }
 
             do {
                 //generowanie sąsiedztwa
-                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
-                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
+//                if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
+//                else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
+                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
+
+//                for (Map.Entry<Result, Move> neighbour : neighbours) {
+//                    neighbour.getKey().calcObjectiveFunction();
+//                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
+//                }
+
                 if (!chooseBestNeighbour(neighbours)) return;
             } while ( !stopFunction.check());
         }
@@ -66,7 +79,7 @@ public class TabooSearch2 extends Algorithm {
          * Picks the best neighbour from the list of neighbours,
          * updates the taboo list, long term list and the best result (if necessary).
          * @param neighbours
-         * @return
+         * @return false if every neighbour is tabooed
          */
         private boolean chooseBestNeighbour(ArrayList<Map.Entry<Result, Move>> neighbours ){
             Map.Entry<Result, Move> candidate = null;    //kandydat na nowe rozwiązanie w obecnym sąsiedztwie
@@ -102,7 +115,7 @@ public class TabooSearch2 extends Algorithm {
             }
 
             resultTS.result = candidate.getKey();
-            System.out.println("New best result: " + bestResult.objFuncResult);
+//            System.out.println("New best result: " + bestResult.objFuncResult);
             if(candidate.getKey().objFuncResult< bestResult.objFuncResult) bestResult = candidate.getKey();
             resultTS.tabooList.add(candidate.getValue());
 
@@ -118,6 +131,15 @@ public class TabooSearch2 extends Algorithm {
             }
             return true;
         }
+
+        void printHashCodes(){
+            System.out.println("Hash codes:");
+            System.out.println("Staring result: " + bestResult.hashCode());
+            System.out.println("Taboo list: " + resultTS.tabooList.hashCode());
+            System.out.println("Neigbourhood: " + neighbourhood.hashCode());
+            if (longTermList != null) System.out.println("Long term list: " + resultTS.longTermList.hashCode());
+            System.out.println("Stop function: " + stopFunction.hashCode());
+        }
     }
 
     /**
@@ -127,6 +149,7 @@ public class TabooSearch2 extends Algorithm {
     public TabooSearch2(TspData tspData, Result startingResult){
         super(tspData);
         mainResult = startingResult;
+//        mainResult = new Result(startingResult.problem);
         aspirationCriteria = false;
         tabooListTemplate = new BasicTabooList(7);
         neighbourhoodTemplate = new Invert();
@@ -161,8 +184,10 @@ public class TabooSearch2 extends Algorithm {
 
     @Override
     public Result calculate() {
+//        printHashCodes();
         if (threadCount <= 1){
-            SingleSimplePass pass = new SingleSimplePass(mainResult,
+
+            SingleSimplePass pass = new SingleSimplePass(mainResult.clone(),
                     aspirationCriteria,
                     tabooListTemplate.cloneTabooList(),
                     neighbourhoodTemplate.copy(),
@@ -206,4 +231,14 @@ public class TabooSearch2 extends Algorithm {
             return mainResult;
         }
     }
+
+    void printHashCodes() {
+        System.out.println("Main function hash codes:");
+        System.out.println("Staring result: " + mainResult.hashCode());
+        System.out.println("Taboo list: " + tabooListTemplate.hashCode());
+        System.out.println("Neigbourhood: " + neighbourhoodTemplate.hashCode());
+        if (longTermList != null) System.out.println("Long term list: " + longTermList.hashCode());
+        System.out.println("Stop function: " + stopFunctionTemplate.hashCode());
+    }
+
 }

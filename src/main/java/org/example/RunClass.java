@@ -66,7 +66,8 @@ public class RunClass {
         TabooSearch2 ts = new TabooSearch2(data, startingRes);
 //        ts.setAsync(6);
         Result endRes = ts.calculate();
-        System.out.println(endRes.calcObjectiveFunction());
+        System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
+        System.out.println("At the end: " + endRes.calcObjectiveFunction());
         draw(endRes);
 //        krandom.calculate();
 //        System.out.println(krandom.getTime()/1000000000.0);
