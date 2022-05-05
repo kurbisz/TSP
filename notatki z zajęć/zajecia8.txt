@@ -1,29 +1,29 @@
 Wymagania na poszczególne oceny:
 
 1. 3.0
-- działający Taboo Search (jakikolwiek)
-- badania co najmniej
++ działający Taboo Search (jakikolwiek)
++ badania co najmniej
 	- 2 wariantów na co najmniej 5 instancjach
 
 2. 4.0
-- kryterium aspiracji
-- uczciwa metoda porównania wariantów
++ kryterium aspiracji
++ uczciwa metoda porównania wariantów
 	- "mam tutaj na myśli sensowne kryterium stopu, które przerywa, kiedy trzeba, pozwalając na miarodajne i uczciwe porównanie algorytmów"
-- co najmniej 2 różne otoczenia
++ co najmniej 2 różne otoczenia
 	- nie muszą być niewiadomo jak wyrafinowane, np. Invert i Swap
-- akceleracja:
++ akceleracja:
 	- co najmniej 1 otoczenie zakcelerowane
 
 3. 5.0
-- testy statystyczne (wilcocxon paired)
++ testy statystyczne (wilcocxon paired)
 	- testy statystyczne porównujące parami rozwiązania
-- co najmniej 5 wariantów przetestowanych
++ co najmniej 5 wariantów przetestowanych
 	- wariant, czyli kombinacja wszystkich parametrów algorytmu:
 		- kryterium aspiracji, otoczenie swap
 		- kryterium aspiracji, otoczenie inwert
 		- brak kryterium aspiracji, otoczenie swap
 		- itd.
-- rozważyć różny budżet obliczeniowy (nawet ważniejsze niż lista dlugoterminowa)
++ rozważyć różny budżet obliczeniowy (nawet ważniejsze niż lista dlugoterminowa)
 - jakaś metoda eksploracji
 	- np. kick przy określeniu stagnacji
 		- można coś kombinować, że po prostu liczymy liczbę iteracji bez poprawy i jeśli osiągniemy pewną liczbę (być może zwiększającej się z czasem) robimy kicka
@@ -42,7 +42,7 @@ Wymagania na poszczególne oceny:
 	- może być róznie zrealizowana (kilka totalnie oddzielnych taboosearchów, kilka oddzielnych taboosearchów tworzących wspólną listę długoterminową)
 	- uwaga: w wielu tych standardowych bibliotekach nie jest najlepszym pomysłem zagnieżdżanie wątków w wątkach
 	- można poczytać o parralel for (for, gdzie jeśli kolejność wykonywania operacji nie ma znaczneia, to jest on zrównoleglony)
-- dużo więcej wariantów
++ dużo więcej wariantów
 	- oczywiście np. zmienianie długości listy taboo to trochę mało
 - skorzystanie z algorytmu, który będzie automatycznie robił parameter tuning
 	- z tego, co rozumiem, to można korzystać z jakiś zewnętrznych programów

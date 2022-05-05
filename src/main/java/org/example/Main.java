@@ -1,7 +1,11 @@
 package org.example;
 
 import org.example.algorithm.KRandom;
+<<<<<<< HEAD
 import org.example.algorithm.NearestNeighbour;
+=======
+import org.example.algorithm.taboo.ExploreFunctions.Blank;
+>>>>>>> Maciek_branch
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
 import org.example.algorithm.taboo.Neighbourhoods.Swap;
 import org.example.algorithm.taboo.TabooSearch2;
@@ -48,7 +52,7 @@ public class Main {
         Result startingRes = nearestNeighbour.calculate();
 //        draw(startingRes);
 
-        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new SwapTabooList(7, data.getSize()), new Swap(), new IterationsStop(100), null, 1);
+        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new InvertTabooList(7, data.getSize()), new Invert(), new IterationsStop(10), null, new Blank(), 3);
 //        ts.setAsync(6);
         Result endRes = ts.calculate();
         System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
