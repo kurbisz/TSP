@@ -1,11 +1,14 @@
 package org.example;
 
 import org.example.algorithm.KRandom;
+import org.example.algorithm.NearestNeighbour;
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
+import org.example.algorithm.taboo.Neighbourhoods.Swap;
 import org.example.algorithm.taboo.TabooSearch2;
 import org.example.algorithm.taboo.stopFunctions.IterationsStop;
 import org.example.algorithm.taboo.tabooList.BasicTabooList;
 import org.example.algorithm.taboo.tabooList.InvertTabooList;
+import org.example.algorithm.taboo.tabooList.SwapTabooList;
 import org.example.analyses.*;
 import org.example.data.Result;
 import org.example.data.TspData;
@@ -35,17 +38,17 @@ public class Main {
             System.out.println("Argument 1 must be filename!");
             return;
         }
-        String file = files[2];
+        String file = files[6];
 
         loaderTest(file);
 
         TspData data = loader.getTspData();
-        KRandom krandom = new KRandom(data, 100000, true);
-        krandom.setThreads(10);
-        Result startingRes = krandom.calculate();
+        NearestNeighbour nearestNeighbour = new NearestNeighbour(data, NearestNeighbour.Strategy.UPGRADED_MULTI);
+        nearestNeighbour.setThreadCount(6);
+        Result startingRes = nearestNeighbour.calculate();
 //        draw(startingRes);
 
-        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new InvertTabooList(7, data.getSize()), new Invert(), new IterationsStop(10), null, 3);
+        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new SwapTabooList(7, data.getSize()), new Swap(), new IterationsStop(100), null, 1);
 //        ts.setAsync(6);
         Result endRes = ts.calculate();
         System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
