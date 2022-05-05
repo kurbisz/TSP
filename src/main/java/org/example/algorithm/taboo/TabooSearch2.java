@@ -66,10 +66,10 @@ public class TabooSearch2 extends Algorithm {
                 else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
 //                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
 
-                for (Map.Entry<Result, Move> neighbour : neighbours) {
-                    neighbour.getKey().calcObjectiveFunction();
-                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
-                }
+//                for (Map.Entry<Result, Move> neighbour : neighbours) {
+//                    neighbour.getKey().calcObjectiveFunction();
+//                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
+//                }
 
                 if (!chooseBestNeighbour(neighbours)) return;
             } while ( !stopFunction.check());
