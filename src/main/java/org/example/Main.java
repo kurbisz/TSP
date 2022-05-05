@@ -1,11 +1,8 @@
 package org.example;
 
 import org.example.algorithm.KRandom;
-<<<<<<< HEAD
 import org.example.algorithm.NearestNeighbour;
-=======
 import org.example.algorithm.taboo.ExploreFunctions.Blank;
->>>>>>> Maciek_branch
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
 import org.example.algorithm.taboo.Neighbourhoods.Swap;
 import org.example.algorithm.taboo.TabooSearch2;
