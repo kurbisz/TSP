@@ -1,0 +1,81 @@
+A. ALGORYTM GENETYCZNY - TEORIA
+
+START -> Populacja początkowa -> Ewaluacja i selekcja -> Krzyżowanie -> Mutacja -> if (warunek stopu niespełniony) then GOTO(Ewaluacja i selekcja) -> STOP
+
+
+1. Wprowadzenie
+ 
+Jest to jeden z algorytmów populacyjnych (opierających się na jakimś zbiorze osobników zwanych populacją).
+
+Mówimy, że każdy z osobników ma swój genotyp, czyli zestaw jego cech charakterystycznych jednoznacznie definiujących osobnika (w naszym przypadku problemu TSP jest to jakaś dana ścieżka).
+
+2. Krzyżowanie
+
+Przez krzyżowanie rozumiemy połączenie dwóch rozwiązań tak, żeby otrzymać rozwiązanie mające cechy każdego z nich.
+
+Mamy wiele operatorów krzyżowania, tj. sposobów na wygenerowanie potomka dwóch rozwiązań.
+
+2a. Wybór osobników do krzyżowania
+Nie musimy krzyżować między sobą całej populacji, możemy np. w jakiś sposób wybierać osobniki, które się ze sobą skrzyżują, np.
+	- losowo wybrać ileś osobników
+	- podzielić na jakieś grupy i wybierać najlepszego z grupy
+	- wybór osobników z jakimś prawdopodobieństwem - tym wyższym, im lepsza funkcja celu
+
+3. Mutacja
+
+Bez tego etapu nasza populacja by się stopniowo zawężała i kolejne populacje byłyby coraz mniej różnorodne.
+Wprowadzając element mutacji dbamy o to, żeby nasz algorytm eksplorował przestrzeń rozwiązań.
+
+Oczywiście tak jak z krzyżowaniem, można mutować rozwiązania na wiele różnych sposobów.
+Musimy także uważać na to, w jaki sposób mutujemy rozwiązania, żeby dalej były one dozwolone.
+
+Mutacją może być też na przykład celowa poprawa naszej populacji, np. przez uruchomienie iluś iteracji algorytmu 2-opt.
+Jednakże nie poprawiamy zazwyczaj całej populacji, ponieważ znowu, powoduje to zawężanie rozbieżności rozwiązań.
+
+4. Wyspy rozwiązań
+
+Nie do końca ogarnąłem jak takie wyspy się tworzą, chyba po prostu kilka osobnych algorytmów genetycznych sobie wesoło leci i raz na jakiś czas krzyżujemy osobniki między nimi.
+
+5. Co może składać się na "genotyp osobnika"
+
+Oczywiście np. samo rozwiązanie (droga w TSP).
+Ale ponadto możemy przechowywać np.
+	- płeć, jeśli w naszym algorytmie one występują
+	- wiek - im starszy osobnik, tym większa szansa na usunięcie go
+	- wszystko inne, co tam sobie wymyślimy
+
+
+B. PRZYKŁADOWE OPERATORY KRZYŻOWANIA
+
+a) jakiś tam magiczny operator z pracy, którą Pan Doktor znalazł
+   (prawie identyczny do tego, który pokazał prof. Bożejko)
+
+P1 = (3 4 8 2 7 1 6 5)
+P2 = (4 2 5 1 6 8 3 7)
+
+1. Dzielimy osobniki na jakieś części
+P1 = (3 4 8 | 2 7 1 | 6 5)
+P2 = (4 2 5 | 1 6 8 | 3 7)
+
+2. Środki przepisujemy bez zmian
+O1 = (      | 1 6 8 |       )
+O2 = (      | 2 7 1 |       )
+
+3. Początek przepisujemy na krzyż tam, gdzie się da (gdzie się nie powtarzają)
+O1 = ( 3 4 x | 1 6 8 | x 5 )
+O2 = ( 4 x 5 | 2 7 1 | 3 x )
+
+4. Uzupełniamy potomków przez dopisanie (no właśnie nie usłyszałem jak)
+O1 = ( 3 4 2 | 1 6 8 | 7 5 )
+O2 = ( 4 8 5 | 2 7 1 | 3 6 )
+
+
+C. NA PIERWSZY ETAP ZAJĘĆ
+
+1. Podstawowy algorytm genetyczny
+	- możemy zignorować mutację
+	- albo np. można dodać 2 typy mutacji
+		- poprawiająca eksplorację, typu kick, czy coś takiego
+		- poprawiające eksploatację, typu np. uruchomienie taboosearch, czy 2-opt dla niektórych rozwiązań
+	- powinno być jakieś krzyżowanie
+		
