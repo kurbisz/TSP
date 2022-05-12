@@ -1,0 +1,18 @@
+Test Wilcoxona
+- parami
+    -> 1xN - podejście polegające na porównywaniu bazowego algorytmu TabooSearch (bez niczego dodatkowego) z naszymi wariantami
+    -> NxN - podejście polegające na porównywaniu naszych wariantów algorytmu TS między sobą
+
+    p = Prob(RejHo | Ho true)
+    W teście Wilcoxona liczymy mniej więcej takie prawdopodobieństwo p oznaczające możliwość, że odrzucamy
+    hipotezę RejHo, gdy hipoteza Ho jest prawdziwa.
+
+Okazuje się, że te testy NxN nie mają zawsze takiej samej siły.
+
+    p = Prob(RejHo | Ho true) = 1 - Prob(AccHo | Ho true) = 1 - Prob(AccH(i,p) i = 1..N | Ho true) =
+    = 1 - PI(i = 1..N)(1 - Prob(RejH(i,p) | Ho true)) = 1 - PI(i = 1..N)(1 - pi)
+
+Nie do końca rozumiem na czym polega ten problem dokładnie. Coś, że w przypadku testów NxN nie wykryjemy wszystkiego.
+
+Alternatywa - test Friedmana:
+- sprawdzić, czy jest we naszym języku programowania (no w pytongu jest na pewno)
