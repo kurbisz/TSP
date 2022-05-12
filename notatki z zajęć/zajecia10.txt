@@ -1,3 +1,4 @@
+UWAGI DOTYCZĄCE TESTÓW STATYSTYCZNYCH
 Test Wilcoxona
 - parami
     -> 1xN - podejście polegające na porównywaniu bazowego algorytmu TabooSearch (bez niczego dodatkowego) z naszymi wariantami
@@ -16,3 +17,37 @@ Nie do końca rozumiem na czym polega ten problem dokładnie. Coś, że w przypa
 
 Alternatywa - test Friedmana:
 - sprawdzić, czy jest we naszym języku programowania (no w pytongu jest na pewno)
+
+OMÓWIENIE KILKU OPERATORÓW KRZYŻÓWEK GENETYCZNYCH
+
+1. Operator jakiś tam
+
+1:  1   2   3   4   5   6
+2:  6   4   3   5   1   2
+
+2   4   3   5   1   6
+
+Losujemy ileś elementów w pierwszym rodzicu i wycinamy je z drugiego rodzica.
+    tutaj 2, 5, 6
+
+Przepisujemy z drugiego rodzica wszystko, poza tymi wyciętymi
+
+_    4   3  _   1   _
+
+Uzupełniamy wyciętymi w kolejności występowania w pierwszym rodzicu
+
+2   4   3   5   1   6
+
+2. Drugi operator
+
+To samo, tylko jeszcze wpisujemy nie tylko w kolejności takiej, jak w pierwszym rodzicu, ale też na pozycjach,
+na których występują w pierwszym rodzicu.
+
+Wycinamy 2,5,6 i przepisujemy drugiego rodzica bez wyciętych
+
+_    4   3  _   1   _
+
+Uzupełniamy wyciętymi w kolejności i na pozycjach pierwszego rodzica
+Pozostałe przesuwamy
+
+4   2   3   1   5   6
