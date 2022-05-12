@@ -1,11 +1,5 @@
 package org.example;
 
-import org.example.algorithm.KRandom;
-import org.example.algorithm.taboo.Neighbourhoods.Invert;
-import org.example.algorithm.taboo.TabooSearch2;
-import org.example.algorithm.taboo.stopFunctions.IterationsStop;
-import org.example.algorithm.taboo.tabooList.BasicTabooList;
-import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.tabooSearchAnalyses.AlgorithmsComparisonTS;
 
@@ -67,7 +61,22 @@ public class Main {
 //        AlgorithmsComparisonTS.compareAsynchronous("asynchronous.csv", list);
 //        AlgorithmsComparisonTS.compareStart("start.csv", list);
 //        AlgorithmsComparisonTS.compareLongTermList("longTermList.csv", list, false);
-        AlgorithmsComparisonTS.compareLongTermList("longTermListKick.csv", list, true);
+//        AlgorithmsComparisonTS.compareLongTermList("longTermListKick.csv", list, true);
+//        AlgorithmsComparisonTS.compareTime("progress100.csv", list, 100);
+//        AlgorithmsComparisonTS.compareProgress("progress500.csv", list, 500);
+//        AlgorithmsComparisonTS.compareTime("progress1000.csv", list, 1000);
+//        fileLoader.setFileName(files[0]);
+//        fileLoader.load();
+//        TspData data = fileLoader.getTspData();
+//        AlgorithmsComparisonTS.compareTabooListTime("tabooListTime198.csv", data);
+//        fileLoader.setFileName(files[8]);
+//        fileLoader.load();
+//        data = fileLoader.getTspData();
+//        AlgorithmsComparisonTS.compareTabooListTime("tabooListTime91.csv", data);
+        fileLoader.setFileName(files[9]);
+        fileLoader.load();
+        TspData data = fileLoader.getTspData();
+        AlgorithmsComparisonTS.compareTabooListTime("tabooListTime48.csv", data);
 
 
 //        FileLoader fileLoader = new FileLoader("metro8.tsp");

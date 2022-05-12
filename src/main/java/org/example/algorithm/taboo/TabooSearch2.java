@@ -1,6 +1,7 @@
 package org.example.algorithm.taboo;
 
 import org.example.algorithm.Algorithm;
+import org.example.algorithm.KRandom;
 import org.example.algorithm.taboo.ExploreFunctions.Blank;
 import org.example.algorithm.taboo.ExploreFunctions.ExploreFunction;
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
