@@ -1,0 +1,32 @@
+Otoczenia:
+- Invert
+- Insert
+- Swap
+- CloseSwap
+
+Taboolisty:
+- Basic
+- ta w czasie stałym
+
+Lista długoterminowa:
+- Basic
+
+Zadania:
+
+K dokończyć otoczenia CloseSwap i Swap
+M dopracowanie wielowątkowości, żeby nawet przy wielu wątkach korzystał z rozwiązania początkowego
+M poszukać akceleracji dla innych otoczeń
+- lista długoterminowa, aka metoda eksploracji
+	M kick (ileś bez poprawy, wtedy randomowy kick)
+	K ileś iteracji bez poprawy -> wróć do ostatniego najlepszego (dodaj ruch, który wyjdzie jako najlepszy do taboo)
+	M wspólna lista długoterminowa dla kilku wątków
+- badania tuningu parametrów
+- wykresy
+
+Parametry:
+- użyta lista tabu
+- użyte otoczenie
+- aspiracja
+- sąsiedztwo
+- liczba wątków
+- lista długoterminowa (lub jej brak)

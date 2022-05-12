@@ -1,7 +1,8 @@
 package org.example.algorithm.taboo;
 
 import org.example.algorithm.Algorithm;
-import org.example.algorithm.KRandom;
+import org.example.algorithm.taboo.ExploreFunctions.Blank;
+import org.example.algorithm.taboo.ExploreFunctions.ExploreFunction;
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
 import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 import org.example.algorithm.taboo.Neighbourhoods.Neighbourhood;
@@ -16,6 +17,7 @@ import org.example.data.TspData;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +29,7 @@ public class TabooSearch2 extends Algorithm {
     TabooList tabooListTemplate; //szablon listy tabu
     Neighbourhood neighbourhoodTemplate; //szablon sasiedztwa
     StopFunction stopFunctionTemplate; //szablon funkcji stopu
+    ExploreFunction exploreFunctionTemplate = null; //szablon funkcji eksploracji
     LongTermList longTermList = null; //lista dlugoterminowa
     int threadCount = 1;
 
@@ -36,18 +39,21 @@ public class TabooSearch2 extends Algorithm {
         boolean aspirationCriteria;
         Neighbourhood neighbourhood;
         StopFunction stopFunction;
+        ExploreFunction exploreFunction;
 
         SingleSimplePass(Result startingResult,
                          boolean aspirationCriteria,
                          TabooList tabooList,
                          Neighbourhood neighbourhood,
                          StopFunction stopFunction,
-                         LongTermList longTermList){
+                         LongTermList longTermList,
+                         ExploreFunction exploreFunction){
             this.resultTS = new TabooSearchResult(tabooList, startingResult, longTermList);
             this.bestResult = startingResult;
             this.aspirationCriteria = aspirationCriteria;
             this.neighbourhood = neighbourhood;
             this.stopFunction = stopFunction;
+            this.exploreFunction = exploreFunction;
 //            printHashCodes();
         }
 
@@ -72,6 +78,8 @@ public class TabooSearch2 extends Algorithm {
 //                }
 
                 if (!chooseBestNeighbour(neighbours)) return;
+                if (exploreFunction != null && exploreFunction.shouldExplore(resultTS.result))
+                    exploreFunction.explore(resultTS.result);
             } while ( !stopFunction.check());
         }
 
@@ -109,8 +117,10 @@ public class TabooSearch2 extends Algorithm {
                     } else {
                         if(!resultTS.tabooList.contains(neighbour.getValue())){
                             candidate = neighbour;
-                        } else if(neighbour.getKey().objFuncResult < bestResult.objFuncResult){
-                            candidate = neighbour;
+                        } else {
+                            if(neighbour.getKey().objFuncResult < bestResult.objFuncResult){
+                                candidate = neighbour;
+                            }
                         }
                     }
                 }
@@ -164,6 +174,7 @@ public class TabooSearch2 extends Algorithm {
         tabooListTemplate = new BasicTabooList(7);
         neighbourhoodTemplate = new Invert();
         stopFunctionTemplate = new IterationsStop(10);
+        exploreFunctionTemplate = new Blank();
         longTermList = null;
     }
 
@@ -183,6 +194,7 @@ public class TabooSearch2 extends Algorithm {
                  Neighbourhood neighbourhoodTemplate,
                  StopFunction stopFunctionTemplate,
                  LongTermList longTermList,
+                 ExploreFunction exploreFunctionTemplate,
                  int threadCount){
         super(tspData);
         mainResult = startingResult;
@@ -192,6 +204,8 @@ public class TabooSearch2 extends Algorithm {
         this.neighbourhoodTemplate = neighbourhoodTemplate;
         this.stopFunctionTemplate = stopFunctionTemplate;
         this.longTermList = longTermList;
+        if(exploreFunctionTemplate == null) this.exploreFunctionTemplate = new Blank();
+        else this.exploreFunctionTemplate = exploreFunctionTemplate;
         this.threadCount = threadCount;
     }
 
@@ -205,7 +219,8 @@ public class TabooSearch2 extends Algorithm {
                     tabooListTemplate.cloneTabooList(),
                     neighbourhoodTemplate.copy(),
                     stopFunctionTemplate.copy(),
-                    longTermList);
+                    longTermList,
+                    exploreFunctionTemplate.copy());
 
             Thread t = new Thread(pass);
             t.start();
@@ -218,15 +233,32 @@ public class TabooSearch2 extends Algorithm {
         } else{
             ExecutorService pool = Executors.newFixedThreadPool(threadCount);
             SingleSimplePass[] passes = new SingleSimplePass[threadCount];
+            Random r = new Random();
+            int change_count = tspData.getSize()/8;
 
             for (int i = 0; i < threadCount; i++){
-                KRandom r = new KRandom(tspData);
-                passes[i] = new SingleSimplePass(r.calculate(),
+//                KRandom r = new KRandom(tspData);
+                Result startingResult = mainResult.clone();
+                for (int j = 0; j<change_count; j++){
+                    int ind_1 = r.nextInt(tspData.getSize());
+                    int ind_2;
+                    do{
+                        ind_2 = r.nextInt(tspData.getSize());
+                    } while(ind_1 == ind_2);
+                    //losowy swap na wyniku początkowym
+                    int temp = startingResult.way[ind_1];
+                    startingResult.way[ind_1] = startingResult.way[ind_2];
+                    startingResult.way[ind_2] = temp;
+                }
+                startingResult.objFuncResult = startingResult.calcObjectiveFunction();
+//                System.out.println("Starting result: " + startingResult.objFuncResult);
+                passes[i] = new SingleSimplePass(startingResult,
                         aspirationCriteria,
                         tabooListTemplate.cloneTabooList(),
                         neighbourhoodTemplate.copy(),
                         stopFunctionTemplate.copy(),
-                        longTermList);
+                        longTermList,
+                        exploreFunctionTemplate.copy());
                 pool.execute(passes[i]);
             }
             pool.shutdown();
@@ -237,6 +269,7 @@ public class TabooSearch2 extends Algorithm {
             }
 
             for (int i = 1; i < threadCount; i++){
+//                System.out.println("Thread " + i + ": " + passes[i].bestResult.objFuncResult);
                 if (passes[i].bestResult.objFuncResult < mainResult.objFuncResult){
                     mainResult = passes[i].bestResult;
                 }

@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
+import org.example.algorithm.taboo.ExploreFunctions.Kick;
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
 import org.example.algorithm.taboo.TabooSearch;
 import org.example.algorithm.TwoOpt;
@@ -22,10 +23,11 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
-//        String file = "dane/d657.tsp";
-        String file = "dane/d198.tsp";
+        String file = "dane/d657.tsp";
+//        String file = "dane/d198.tsp";
 //        String file = "dane/d1291.tsp";
 //        String file = "dane/pr299.tsp";
+//          String file = "kroB100.tsp";
 //        String file = "metro6.tsp";
 //        String file = "metro7.tsp";
 //        String file = "metro8.tsp";
@@ -65,7 +67,7 @@ public class RunClass {
         Result startingRes = nearestNeighbour.calculate();
 //        draw(startingRes);
 
-        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new BasicTabooList(7), new Invert(), new IterationsStop(100), null, 1);
+        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new BasicTabooList(7), new Invert(), new IterationsStop(10000), null, new Kick(100, 5), 6);
         Result endRes = ts.calculate();
         System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
         System.out.println("At the end: " + endRes.calcObjectiveFunction());

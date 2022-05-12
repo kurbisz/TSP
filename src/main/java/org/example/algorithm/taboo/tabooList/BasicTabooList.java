@@ -36,6 +36,7 @@ public class BasicTabooList implements TabooList {
     @Override
     public boolean contains(Move move) {
         for(Move m : list) {
+//            System.out.println("jest na taboo");
             if(m.checkEqual(move)) return true;
         }
         return false;

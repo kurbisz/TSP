@@ -12,6 +12,7 @@ public class IterationsStop extends StopFunction {
 
 	@Override
 	public boolean check() {
+//		System.out.println("IterationsStop: " + actualIterations + " / " + maxIterations);
 		actualIterations++;
 		return actualIterations >= maxIterations;
 	}
