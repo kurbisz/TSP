@@ -30,7 +30,7 @@ public class Kick implements ExploreFunction {
 
     @Override
     public void explore(Result start) {
-        System.out.println("Kicking");
+//        System.out.println("Kicking");
         TspData tspData = start.problem;
         Random r = new Random();
         for (int j = 0; j<kick_changes; j++){
@@ -44,6 +44,7 @@ public class Kick implements ExploreFunction {
             start.way[ind_1] = start.way[ind_2];
             start.way[ind_2] = temp;
         }
+        start.calcObjectiveFunction();
         it_without_improvement = 0;
     }
 

@@ -18,7 +18,7 @@ def draw():
             operations[j][i] = int(line[j+1])
 
     r1 = np.arange(10)*2
-    plt.title('Porównanie taboo search dla liczby iteracji n')
+    plt.title('Porównanie tabu search dla liczby iteracji n')
     color = ['black', 'red', 'darkorange', 'greenyellow', 'green', 'blue']
     plt.bar(r1 - 1.5 * l, operations[0], color=color[0], width=l, label='n = 50')
     plt.bar(r1 - 0.5 * l, operations[1], color=color[1], width=l, label='n = 100')
