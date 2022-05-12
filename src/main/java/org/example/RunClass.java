@@ -23,13 +23,13 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
-        String file = "dane/d657.tsp";
+//        String file = "dane/d657.tsp";
 //        String file = "dane/d198.tsp";
 //        String file = "dane/d1291.tsp";
 //        String file = "dane/pr299.tsp";
 //          String file = "kroB100.tsp";
 //        String file = "metro6.tsp";
-//        String file = "metro7.tsp";
+        String file = "metro7.tsp";
 //        String file = "metro8.tsp";
 //        String file = "rnd3.tsp";
         loaderTest(file);

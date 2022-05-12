@@ -44,6 +44,8 @@ public class Kick implements ExploreFunction {
             start.way[ind_1] = start.way[ind_2];
             start.way[ind_2] = temp;
         }
+        start.calcObjectiveFunction();
+        last_improve = start.objFuncResult;
         it_without_improvement = 0;
     }
 
