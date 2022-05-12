@@ -12,7 +12,7 @@ import java.util.Map;
 public class Insert implements Neighbourhood {
     @Override
     public ArrayList<Map.Entry<Result, Move>> getNeighbourhoodSymmetric(Result result) {
-        return getNeighbourhoodSymmetric(result);
+        return getNeighbourhoodAsymmetric(result);
     }
 
     @Override
