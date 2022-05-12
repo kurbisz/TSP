@@ -65,7 +65,7 @@ public class Swap implements Neighbourhood {
                 //zrobiłem pewne zmiany w Result, teraz taki konstruktor kopiuje
                 Result newResult = new Result(result);
 
-                swap(result, i, j);
+                swap(newResult, i, j);
 
                 newResult.objFuncResult = newResult.calcObjectiveFunction();
 

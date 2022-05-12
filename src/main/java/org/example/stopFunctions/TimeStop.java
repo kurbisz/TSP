@@ -1,4 +1,4 @@
-package org.example.algorithm.taboo.stopFunctions;
+package org.example.stopFunctions;
 
 public class TimeStop extends StopFunction {
 

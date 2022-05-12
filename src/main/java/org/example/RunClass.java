@@ -1,13 +1,10 @@
 package org.example;
 
-import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
 import org.example.algorithm.taboo.ExploreFunctions.Kick;
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
-import org.example.algorithm.taboo.TabooSearch;
-import org.example.algorithm.TwoOpt;
 import org.example.algorithm.taboo.TabooSearch2;
-import org.example.algorithm.taboo.stopFunctions.IterationsStop;
+import org.example.stopFunctions.IterationsStop;
 import org.example.algorithm.taboo.tabooList.BasicTabooList;
 import org.example.data.Result;
 import org.example.data.TspData;

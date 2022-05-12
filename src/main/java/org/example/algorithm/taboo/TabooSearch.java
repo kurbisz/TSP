@@ -4,8 +4,8 @@ import org.example.algorithm.Algorithm;
 import org.example.algorithm.KRandom;
 import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
 import org.example.algorithm.taboo.Neighbourhoods.Neighbourhood;
-import org.example.algorithm.taboo.stopFunctions.StopFunction;
-import org.example.algorithm.taboo.stopFunctions.TimeStop;
+import org.example.stopFunctions.StopFunction;
+import org.example.stopFunctions.TimeStop;
 import org.example.algorithm.taboo.tabooList.InvertTabooList;
 import org.example.algorithm.taboo.tabooList.TabooList;
 import org.example.data.Result;
@@ -14,11 +14,7 @@ import org.example.data.TspData;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ArrayList;
 import java.util.Map.Entry;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Klasa implementująca algorytm Tabu Search.

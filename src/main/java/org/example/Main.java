@@ -68,13 +68,14 @@ public class Main {
 //        AlgorithmsComparisonTS.compareOperations("operations.csv", list);
 //        AlgorithmsComparisonTS.compareTabooListSize("tabooListSize.csv", list);
 //        AlgorithmsComparisonTS.compareAspiration("aspiration.csv", list);
-//        AlgorithmsComparisonTS.compareNeighbourhood("neighbourhood.csv", list);
+        AlgorithmsComparisonTS.compareNeighbourhood("neighbourhood.csv", list);
 //        AlgorithmsComparisonTS.compareAsynchronous("asynchronous.csv", list);
 //        AlgorithmsComparisonTS.compareStart("start.csv", list);
 //        AlgorithmsComparisonTS.compareLongTermList("longTermList.csv", list, false);
 //        AlgorithmsComparisonTS.compareLongTermList("longTermListKick.csv", list, true);
         System.out.println(list.size());
-        AlgorithmsComparisonTS.compareExploreFunctions("exploreFunctions.csv", list);
+//        AlgorithmsComparisonTS.compareExploreFunctions("exploreFunctions.csv", list, 5);
+//        AlgorithmsComparisonTS.compareExploreFunctions("exploreFunctions15.csv", list, 15);
 //        AlgorithmsComparisonTS.compareTime("progress100.csv", list, 100);
 //        AlgorithmsComparisonTS.compareProgress("progress500.csv", list, 500);
 //        AlgorithmsComparisonTS.compareTime("progress1000.csv", list, 1000);

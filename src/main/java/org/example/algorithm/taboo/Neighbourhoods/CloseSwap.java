@@ -24,7 +24,7 @@ public class CloseSwap implements Neighbourhood {
             //zrobiłem pewne zmiany w Result, teraz taki konstruktor kopiuje
             Result newResult = new Result(result);
 
-            swap(result, i, (i+1)%n);
+            swap(newResult, i, (i+1)%n);
 
             newResult.objFuncResult = newResult.calcObjectiveFunction();
 
