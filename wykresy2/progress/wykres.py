@@ -17,7 +17,7 @@ def draw():
         for j in range(11):
             operations[i][j] = int(line[j+1])
 
-    plt.title('Proces zmiany wyniku w zalezności od czasu')
+    plt.title('Proces zmiany wyniku w zależności od czasu')
     color = ['black', 'dimgray', 'silver', 'red', 'darkorange', 'greenyellow', 'green', 'aqua', 'blue', 'blueviolet', 'hotpink']
     x_axis = [r for r in range(0, 110, 10)]
     for i in range(10):
@@ -42,7 +42,7 @@ def draw():
         for j in range(11):
             operations[i][j] = int(line[j+1])
 
-    plt.title('Proces zmiany wyniku w zalezności od czasu')
+    plt.title('Proces zmiany wyniku w zależności od czasu')
     color = ['black', 'dimgray', 'silver', 'red', 'darkorange', 'greenyellow', 'green', 'aqua', 'blue', 'blueviolet', 'hotpink']
     x_axis = [r for r in range(0, 110, 10)]
     for i in range(10):
@@ -67,7 +67,7 @@ def draw():
         for j in range(11):
             operations[i][j] = int(line[j+1])
 
-    plt.title('Proces zmiany wyniku w zalezności od czasu')
+    plt.title('Proces zmiany wyniku w zależności od czasu')
     color = ['black', 'dimgray', 'silver', 'red', 'darkorange', 'greenyellow', 'green', 'aqua', 'blue', 'blueviolet', 'hotpink']
     x_axis = [r for r in range(0, 110, 10)]
     for i in range(10):

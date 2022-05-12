@@ -1,6 +1,10 @@
 package org.example;
 
+import org.example.algorithm.TwoOpt;
+import org.example.data.EucTspData;
+import org.example.data.Result;
 import org.example.data.TspData;
+import org.example.drawer.Drawer;
 import org.example.tabooSearchAnalyses.AlgorithmsComparisonTS;
 
 import java.io.File;
@@ -44,7 +48,7 @@ public class Main {
 //        System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
 //        System.out.println("At the end: " + endRes.calcObjectiveFunction());
 
-        FileLoader fileLoader = new FileLoader(files[0]);
+        FileLoader fileLoader = new FileLoader(files[2]);
         fileLoader.load();
         List<TspData> list = new ArrayList<>();
         for(int i = 0; i < files.length; i++) {
@@ -54,6 +58,13 @@ public class Main {
             data.setName(names[i]);
             list.add(data);
         }
+//        fileLoader.setFileName(files[8]);
+//        fileLoader.load();
+//        TspData d = fileLoader.getTspData();
+//        if(d instanceof EucTspData) {
+//            Result res = (new TwoOpt(d)).calculate();
+//            draw(res);
+//        }
 //        AlgorithmsComparisonTS.compareOperations("operations.csv", list);
 //        AlgorithmsComparisonTS.compareTabooListSize("tabooListSize.csv", list);
 //        AlgorithmsComparisonTS.compareAspiration("aspiration.csv", list);
@@ -62,6 +73,8 @@ public class Main {
 //        AlgorithmsComparisonTS.compareStart("start.csv", list);
 //        AlgorithmsComparisonTS.compareLongTermList("longTermList.csv", list, false);
 //        AlgorithmsComparisonTS.compareLongTermList("longTermListKick.csv", list, true);
+        System.out.println(list.size());
+        AlgorithmsComparisonTS.compareExploreFunctions("exploreFunctions.csv", list);
 //        AlgorithmsComparisonTS.compareTime("progress100.csv", list, 100);
 //        AlgorithmsComparisonTS.compareProgress("progress500.csv", list, 500);
 //        AlgorithmsComparisonTS.compareTime("progress1000.csv", list, 1000);
@@ -73,10 +86,10 @@ public class Main {
 //        fileLoader.load();
 //        data = fileLoader.getTspData();
 //        AlgorithmsComparisonTS.compareTabooListTime("tabooListTime91.csv", data);
-        fileLoader.setFileName(files[9]);
-        fileLoader.load();
-        TspData data = fileLoader.getTspData();
-        AlgorithmsComparisonTS.compareTabooListTime("tabooListTime48.csv", data);
+//        fileLoader.setFileName(files[9]);
+//        fileLoader.load();
+//        TspData data = fileLoader.getTspData();
+//        AlgorithmsComparisonTS.compareTabooListTime("tabooListTime48.csv", data);
 
 
 //        FileLoader fileLoader = new FileLoader("metro8.tsp");
@@ -88,6 +101,11 @@ public class Main {
 //        Drawer drawer = new Drawer(res.problem.getName());
 //        drawer.showResult(res);
 
+    }
+
+    private static void draw(Result res) {
+        Drawer drawer = new Drawer(res.problem.getName());
+        drawer.showResult(res);
     }
 
     public static void loaderTest(String filename){

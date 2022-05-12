@@ -14,10 +14,10 @@ def draw():
         line = file.readline().split(';')
         for j in range(10):
             operations[i][j] = int(line[j+1])/1000000
-    plt.title('Czas Taboo Search dla roznych list tabu dla wielkosci problemu = 198')
+    plt.title('Czas tabu search dla różnych list tabu dla wielkości problemu = 198')
     x_axis = [r for r in range(100, 1100, 100)]
-    plt.plot(x_axis, operations[0], color='red', marker='.', label='Standardowa lista tabu (zlozonosc O(n))')
-    plt.plot(x_axis, operations[1], color='blue', marker='.', label='Ulepszona lista tabu (zlozonosc O(1))')
+    plt.plot(x_axis, operations[0], color='red', marker='.', label='Standardowa lista tabu (złożoność O(n))')
+    plt.plot(x_axis, operations[1], color='blue', marker='.', label='Ulepszona lista tabu (złożoność O(1))')
     plt.legend()
     plt.xticks(x_axis)
     plt.xlabel('Liczba iteracji algorytmu')
@@ -36,10 +36,10 @@ def draw():
         for j in range(10):
             operations[i][j] = int(line[j+1])/1000000
 
-    plt.title('Czas Taboo Search dla roznych list tabu dla wielkosci problemu = 91')
+    plt.title('Czas tabu search dla różnych list tabu dla wielkości problemu = 91')
     x_axis = [r for r in range(100, 1100, 100)]
-    plt.plot(x_axis, operations[0], color='red', marker='.', label='Standardowa lista tabu (zlozonosc O(n))')
-    plt.plot(x_axis, operations[1], color='blue', marker='.', label='Ulepszona lista tabu (zlozonosc O(1))')
+    plt.plot(x_axis, operations[0], color='red', marker='.', label='Standardowa lista tabu (złożoność O(n))')
+    plt.plot(x_axis, operations[1], color='blue', marker='.', label='Ulepszona lista tabu (złożoność O(1))')
     plt.legend()
     plt.xticks(x_axis)
     plt.xlabel('Liczba iteracji algorytmu')
@@ -58,10 +58,10 @@ def draw():
         for j in range(10):
             operations[i][j] = int(line[j+1])/1000000
 
-    plt.title('Czas Taboo Search dla roznych list tabu dla wielkosci problemu = 48')
+    plt.title('Czas tabu search dla różnych list tabu dla wielkości problemu = 48')
     x_axis = [r for r in range(100, 1100, 100)]
-    plt.plot(x_axis, operations[0], color='red', marker='.', label='Standardowa lista tabu (zlozonosc O(n))')
-    plt.plot(x_axis, operations[1], color='blue', marker='.', label='Ulepszona lista tabu (zlozonosc O(1))')
+    plt.plot(x_axis, operations[0], color='red', marker='.', label='Standardowa lista tabu (złożoność O(n))')
+    plt.plot(x_axis, operations[1], color='blue', marker='.', label='Ulepszona lista tabu (złożoność O(1))')
     plt.legend()
     plt.xticks(x_axis)
     plt.xlabel('Liczba iteracji algorytmu')

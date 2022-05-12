@@ -19,7 +19,7 @@ def draw():
         aspTrue[i] = int(line[2])
 
     r1 = np.arange(10)
-    plt.title('Porównanie taboo search dla kryterium aspiracji')
+    plt.title('Porównanie tabu search dla kryterium aspiracji')
     plt.bar(r1 + 0.5 * l, aspFalse, color='red', width=l, label='Nie używając kryterium aspiracji')
     plt.bar(r1 + 1.5 * l, aspTrue, color='darkorange', width=l, label='Używając kryterium aspiracji')
     plt.xticks([r + l for r in range(10)], names)

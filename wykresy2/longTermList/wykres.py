@@ -18,7 +18,7 @@ def draw():
             longTermList[j][i] = int(line[j+1])
 
     r1 = np.arange(10)*2
-    plt.title('Porównanie taboo search dla listy długoterminowej sprawdzającej co n kroków')
+    plt.title('Porównanie tabu search dla listy długoterminowej sprawdzającej co n kroków')
     color = ['black', 'red', 'darkorange', 'greenyellow', 'green', 'blue']
     plt.bar(r1 - 1.5 * l, longTermList[0], color=color[0], width=l, label='Bez listy długoterminowej')
     plt.bar(r1 - 0.5 * l, longTermList[1], color=color[1], width=l, label='n = 50')
@@ -49,7 +49,7 @@ def draw():
             longTermList[j][i] = int(line[j+1])
 
     r1 = np.arange(10)*2
-    plt.title('Porównanie taboo search dla listy długoterminowej wykonującej losowy Kick co n kroków')
+    plt.title('Porównanie tabu search dla listy długoterminowej wykonującej losowy Kick co n kroków')
     color = ['black', 'red', 'darkorange', 'greenyellow', 'green', 'blue']
     plt.bar(r1 - 1.5 * l, longTermList[0], color=color[0], width=l, label='Bez listy długoterminowej')
     plt.bar(r1 - 0.5 * l, longTermList[1], color=color[1], width=l, label='n = 50')

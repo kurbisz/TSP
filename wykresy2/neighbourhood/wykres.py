@@ -18,7 +18,7 @@ def draw():
             longTermList[j][i] = int(line[j+1])
 
     r1 = np.arange(10)
-    plt.title('Porównanie taboo search dla roznych otoczen')
+    plt.title('Porównanie tabu search dla różnych otoczeń')
     color = ['blue', 'red', 'darkorange', 'green']
     plt.bar(r1 - 0.5 * l, longTermList[0], color=color[0], width=l, label='Invert')
     plt.bar(r1 + 0.5 * l, longTermList[1], color=color[1], width=l, label='Insert')

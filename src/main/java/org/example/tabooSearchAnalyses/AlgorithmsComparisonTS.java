@@ -4,6 +4,8 @@ import org.example.Main;
 import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
 import org.example.algorithm.TwoOpt;
+import org.example.algorithm.taboo.ExploreFunctions.ExploreFunction;
+import org.example.algorithm.taboo.ExploreFunctions.Kick;
 import org.example.algorithm.taboo.LongTermList;
 import org.example.algorithm.taboo.Neighbourhoods.CloseSwap;
 import org.example.algorithm.taboo.Neighbourhoods.Insert;
@@ -304,6 +306,53 @@ public class AlgorithmsComparisonTS {
 			TabooSearch2 taboo = new TabooSearch2(tspData, res, false,
 					new BasicTabooList(10), new Invert(),
 					new IterationsStop(2000), longTermList, null, 1);
+			ts[i][tests.length] = taboo.calculate().calcObjectiveFunction();
+			i++;
+		}
+		try {
+			File file = new File(fileName);
+			file.delete();
+			file.createNewFile();
+			FileWriter fileWriter = new FileWriter(file, true);
+			fileWriter.write("ProblemName;off;50;100;200;300;n/4\n");
+			for (int k = 0; k < n; k++) {
+				String str = Main.names[k];
+				for(int j = 0; j < tests.length+1; j++) {
+					str += ";" + ts[k][j];
+				}
+				str += "\n";
+				fileWriter.write(str);
+			}
+
+			fileWriter.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Porownanie listy dlugoterminowej
+	public static void compareExploreFunctions(String fileName, List<TspData> data) {
+		int n = data.size();
+		int tests[] = {0, 50, 100, 200, 300};
+		int ts[][] = new int[n][tests.length + 1];
+		int i = 0;
+		for (TspData tspData : data) {
+			Result res = new KRandom(tspData).calculate();
+			System.out.println(i + ": " + tspData.getSize());
+			for(int j = 0; j < tests.length; j++) {
+				ExploreFunction exploreFunction = new Kick(tests[j], 5);
+				if(tests[j] == 0) exploreFunction = null;
+				TabooSearch2 taboo = new TabooSearch2(tspData, res, false,
+						new BasicTabooList(10), new Invert(),
+						new IterationsStop(2000), null, exploreFunction, 1);
+				ts[i][j] = taboo.calculate().calcObjectiveFunction();
+			}
+			System.out.println(i + ": " + tspData.getSize());
+			ExploreFunction exploreFunction = new Kick(n/4, 5);
+			TabooSearch2 taboo = new TabooSearch2(tspData, res, false,
+					new BasicTabooList(10), new Invert(),
+					new IterationsStop(2000), null, exploreFunction, 1);
 			ts[i][tests.length] = taboo.calculate().calcObjectiveFunction();
 			i++;
 		}
