@@ -31,6 +31,7 @@ public class Result {
             sum += problem.getDistance(way[i], way[i+1]);
         }
         sum+= problem.getDistance(way[problem.getSize()-1], way[0]);
+        objFuncResult = sum;
         return sum;
     }
 

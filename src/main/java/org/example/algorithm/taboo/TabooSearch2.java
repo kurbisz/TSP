@@ -34,6 +34,10 @@ public class TabooSearch2 extends Algorithm {
     LongTermList longTermList = null; //lista dlugoterminowa
     int threadCount = 1;
 
+    /**
+     * Klasa wewnętrzna odpowiadająca za wykonanie jednego przejścia taboo search na osobnym wątku
+     * operuje na osobnych obiektach tak, żeby uniknąć problemów wynikających z wielowątkowością
+     */
     class SingleSimplePass implements Runnable{
         TabooSearchResult resultTS;
         Result bestResult;
@@ -58,29 +62,24 @@ public class TabooSearch2 extends Algorithm {
 //            printHashCodes();
         }
 
+        /**
+         * Metoda wykonująca przejście taboo search
+         */
         @Override
         public void run() {
 
             ArrayList<Map.Entry<Result, Move>> neighbours;
 
-//            for(int i = 0; i< resultTS.result.problem.getSize(); i++){
-//                System.out.println(resultTS.result.way[i]);
-//            }
-
             do {
-//                generowanie sąsiedztwa
+                //generowanie sąsiedztwa
                 if (tspData.isSymmetric()) neighbours = neighbourhood.getNeighbourhoodSymmetric(resultTS.result);
                 else neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
-//                neighbours = neighbourhood.getNeighbourhoodAsymmetric(resultTS.result);
-
-//                for (Map.Entry<Result, Move> neighbour : neighbours) {
-//                    neighbour.getKey().calcObjectiveFunction();
-//                    System.out.println("Neighbour: " + neighbour.getKey().objFuncResult);
-//                }
-
+                //wybór sąsiada (wewnątrz tej funkcji zaszyta jest lista tabu)
                 if (!chooseBestNeighbour(neighbours)) return;
+                //sprawdzenie funkcji eksploracji (o ile została zdefiniowana)
                 if (exploreFunction != null && exploreFunction.shouldExplore(resultTS.result))
                     exploreFunction.explore(resultTS.result);
+                //sprawdzenie funkcji stopu
             } while ( !stopFunction.check());
         }
 
@@ -251,7 +250,7 @@ public class TabooSearch2 extends Algorithm {
                     startingResult.way[ind_1] = startingResult.way[ind_2];
                     startingResult.way[ind_2] = temp;
                 }
-                startingResult.objFuncResult = startingResult.calcObjectiveFunction();
+                startingResult.calcObjectiveFunction();
 //                System.out.println("Starting result: " + startingResult.objFuncResult);
                 passes[i] = new SingleSimplePass(startingResult,
                         aspirationCriteria,
