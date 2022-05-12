@@ -1,6 +1,7 @@
 package org.example.algorithm.taboo;
 
 import org.example.algorithm.Algorithm;
+import org.example.algorithm.KRandom;
 import org.example.algorithm.taboo.ExploreFunctions.Blank;
 import org.example.algorithm.taboo.ExploreFunctions.ExploreFunction;
 import org.example.algorithm.taboo.Neighbourhoods.Invert;
@@ -139,8 +140,13 @@ public class TabooSearch2 extends Algorithm {
                 resultTS.longTermList.reset(candidate.getKey(), resultTS.tabooList, b);
                 // Jesli rozwiazanie po n krokach nie jest lepsze to wroc do ekstremum
                 if(!b) {
-                    resultTS.result = resultTS.longTermList.result;
-                    resultTS.tabooList = resultTS.longTermList.list;
+                    if(resultTS.longTermList.kick) {
+                        resultTS.result = new KRandom(tspData).calculate();
+                    }
+                    else {
+                        resultTS.result = resultTS.longTermList.result;
+                        resultTS.tabooList = resultTS.longTermList.list;
+                    }
                 }
             }
             return true;

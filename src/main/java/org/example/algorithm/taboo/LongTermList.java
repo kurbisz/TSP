@@ -9,7 +9,7 @@ public class LongTermList {
 
 
 	int counter = 0;
-	boolean resetted = true;
+	boolean resetted = true, kick;
 	int newElements, checkRatio;
 
 	Result result;
@@ -17,15 +17,16 @@ public class LongTermList {
 	TabooList list;
 
 	public LongTermList(Result result, TabooList list) {
-		this(result, list, 5, 100);
+		this(result, list, 5, 100, false);
 	}
 
-	public LongTermList(Result result, TabooList list, int newElements, int checkRatio) {
+	public LongTermList(Result result, TabooList list, int newElements, int checkRatio, boolean kick) {
 		this.result = result;
 		this.best = result.calcObjectiveFunction();
 		this.list = list;
 		this.newElements = newElements;
 		this.checkRatio = checkRatio;
+		this.kick = kick;
 	}
 
 	public boolean addCount(Move move) {
@@ -51,7 +52,7 @@ public class LongTermList {
 	}
 
 	public LongTermList clone() {
-		LongTermList longTermList = new LongTermList(result.clone(), list.cloneTabooList(), newElements, checkRatio);
+		LongTermList longTermList = new LongTermList(result.clone(), list.cloneTabooList(), newElements, checkRatio, kick);
 		longTermList.counter = counter;
 		longTermList.best = best;
 		return longTermList;
