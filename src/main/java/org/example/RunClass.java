@@ -1,10 +1,15 @@
 package org.example;
 
+import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
 import org.example.algorithm.taboo.ExploreFunctions.Kick;
-import org.example.algorithm.taboo.Neighbourhoods.Invert;
+import org.example.algorithm.taboo.Neighbourhoods.*;
+import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
+import org.example.algorithm.taboo.Neighbourhoods.Moves.SwapMove;
+import org.example.algorithm.taboo.TabooSearch;
+import org.example.algorithm.TwoOpt;
 import org.example.algorithm.taboo.TabooSearch2;
-import org.example.stopFunctions.IterationsStop;
+import org.example.algorithm.taboo.stopFunctions.IterationsStop;
 import org.example.algorithm.taboo.tabooList.BasicTabooList;
 import org.example.data.Result;
 import org.example.data.TspData;
@@ -13,6 +18,8 @@ import org.example.drawer.Line;
 import org.example.drawer.Window;
 import org.example.random.EuclideanTSPGen;
 
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 public class RunClass {
@@ -20,16 +27,20 @@ public class RunClass {
     public static FileLoader loader;
 
     public static void main(String[] args) {
+
 //        String file = "dane/d657.tsp";
 //        String file = "dane/d198.tsp";
 //        String file = "dane/d1291.tsp";
 //        String file = "dane/pr299.tsp";
 //          String file = "kroB100.tsp";
 //        String file = "metro6.tsp";
-        String file = "metro7.tsp";
+//        String file = "metro7.tsp";
 //        String file = "metro8.tsp";
 //        String file = "rnd3.tsp";
-        loaderTest(file);
+        String file = "test.tsp";
+//        loaderTest(file);
+//        neighbourhoodTest(file);
+        movesTest();
 //        TspData data = loader.getTspData();
 //        Result result = new Result(data);
 //        draw(result);
@@ -56,19 +67,19 @@ public class RunClass {
 //        nearestNeighbour.calculate();
 
         //        System.out.println(nearestNeighbour.getTime()/1000000000.0);
-        TspData data = loader.getTspData();
+//        TspData data = loader.getTspData();
 //        KRandom krandom = new KRandom(data, 100000, true);
 //        krandom.setThreads(10);
-        NearestNeighbour nearestNeighbour = new NearestNeighbour(data, NearestNeighbour.Strategy.UPGRADED_MULTI);
-        nearestNeighbour.setThreadCount(6);
-        Result startingRes = nearestNeighbour.calculate();
+//        NearestNeighbour nearestNeighbour = new NearestNeighbour(data, NearestNeighbour.Strategy.UPGRADED_MULTI);
+//        nearestNeighbour.setThreadCount(6);
+//        Result startingRes = nearestNeighbour.calculate();
 //        draw(startingRes);
 
-        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new BasicTabooList(7), new Invert(), new IterationsStop(10000), null, new Kick(100, 5), 6);
-        Result endRes = ts.calculate();
-        System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
-        System.out.println("At the end: " + endRes.calcObjectiveFunction());
-        draw(endRes);
+//        TabooSearch2 ts = new TabooSearch2(data, startingRes, true, new BasicTabooList(7), new Invert(), new IterationsStop(10000), null, new Kick(100, 5), 6);
+//        Result endRes = ts.calculate();
+//        System.out.println("At the beginning: " + startingRes.calcObjectiveFunction());
+//        System.out.println("At the end: " + endRes.calcObjectiveFunction());
+//        draw(endRes);
 //        krandom.calculate();
 //        System.out.println(krandom.getTime()/1000000000.0);
 
@@ -76,6 +87,7 @@ public class RunClass {
 //        MultiThreadedNNComparisoon.calc("mulithreadNNComp_d1544291.csv", loader.getTspData());
 //        generateRndMetro(10, 300, 50, 300/5, 300);
 //        generateRnd(10, 300, 50);
+
     }
 
     private static void draw(Result res) {
@@ -132,5 +144,76 @@ public class RunClass {
         for(int i = 0; i < number; i++){
             gen.generate("metro" + i, r.nextInt(maxCities - minCities) + minCities);
         }
+    }
+
+    public static void neighbourhoodTest(String filename){
+        loader = new FileLoader(filename);
+        ArrayList<Map.Entry<Result, Move>> neighbours;
+
+        loader.load();
+        TspData data = loader.getTspData();
+        Result res = new Result(data);
+        Result orig = new Result(res);
+        res.calcObjectiveFunction();
+//        Neighbourhood n = new CloseSwap();
+//        Neighbourhood n = new Insert();
+        Neighbourhood n = new Swap();
+//        Neighbourhood n = new Invert();
+
+        System.out.println("Original result: ");
+        for(int p : res.way){
+            System.out.print(p + " ");
+        }
+        System.out.println();
+        System.out.println("Obj. function: "+res.objFuncResult);
+        System.out.println();
+
+        if(data.isSymmetric()){
+            neighbours = n.getNeighbourhoodSymmetric(res);
+        } else {
+            neighbours = n.getNeighbourhoodAsymmetric(res);
+        }
+        boolean containsOriginal = false;
+        for(Map.Entry<Result, Move> entry : neighbours){
+            boolean isIdenticalAsOriginal = true;
+            int i = 0;
+            for(int p : entry.getKey().way){
+                System.out.print(p + " ");
+                if(p != orig.way[i]){
+                    isIdenticalAsOriginal = false;
+                }
+                i++;
+            }
+            if(isIdenticalAsOriginal){
+                containsOriginal = true;
+            }
+            System.out.println();
+            System.out.println("Obj. function: "+entry.getKey().objFuncResult);
+            System.out.println();
+        }
+
+        if(containsOriginal){
+            System.out.println("Original result is contained in neighbourhood");
+        }
+
+    }
+
+    public static void movesTest( ){
+        //swap move test
+        //symmetric
+        SwapMove m1 = new SwapMove(0, 1, true);
+        SwapMove m2 = new SwapMove(0, 1, true);
+        SwapMove m3 = new SwapMove(1, 0, true);
+        System.out.println(m1.checkEqual(m2));
+        System.out.println(m1.checkEqual(m3));
+
+        //asymmetric
+        m1 = new SwapMove(0, 1, false);
+        m2 = new SwapMove(0, 1, false);
+        m3 = new SwapMove(1, 0, false);
+        System.out.println(m1.checkEqual(m2));
+        System.out.println(m1.checkEqual(m3));
+
+
     }
 }
