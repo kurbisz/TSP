@@ -1,0 +1,18 @@
+- prawdopodobnie za krótka lista tabu, stąd algorytm się blokował
+    - dłuższa lista tabu
+    - funkcja eksploracji
+- więcej wykresów ze skalą logarytmiczną, albo np. porównanie do najlepszego rozwiązania!!!
+- W OGÓLE NA PRZYSZŁOŚĆ POMYŚLEĆ, JAKIE TE WYKRESY DOKŁADNIE ZROBIĆ, A NIE NA PAŁĘ WARTOŚĆ BEZWZGLĘDNĄ
+- szerszy zakres badań
+    - czy algorytm wpada w cykl?
+        - jeśli tak to dlaczego?
+- nie do końca dobrze zrobione badanie wielu wątków
+    - zamiast pokazać wpływ wielu wątków pokazaliśmy bardziej wpływ rozwiązania początkowego
+    - zła skala na wykresie
+    - de facto testujemy jak będzie działać uruchomienie kilku tabu searchów równolegle i każdy dostanie ileś przebiegów
+        - można by się pokusić o porównanie różnych podejść - odpalenie na wielu wątkach, albo okresowe przerywanie i uruchamianie jeszcze raz
+        - "czy jednowątkowy algorytm z tym samym budżetem obliczeniowym jest lepszy od wielowątkowego"
+
+
+Pomysł na pracę inżynierską:
+- dokładiejsza analiza tych algorytmów (to to nawet na magisterską)

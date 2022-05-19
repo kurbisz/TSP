@@ -16,7 +16,7 @@ public class GeneticAlgorithm extends Algorithm {
 		//parametry:
 		/**
 		 * schemat tworzenia populacji startowej
-		 * schemat ewaluacji i dobierania
+		 * schemat selekcji
 		 * schemat krzyżowania
 		 * schemat mutacji
 		 * liczba wątków
