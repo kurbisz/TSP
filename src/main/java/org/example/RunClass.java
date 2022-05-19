@@ -9,7 +9,6 @@ import org.example.algorithm.taboo.Neighbourhoods.Moves.SwapMove;
 import org.example.algorithm.taboo.TabooSearch;
 import org.example.algorithm.TwoOpt;
 import org.example.algorithm.taboo.TabooSearch2;
-import org.example.algorithm.taboo.stopFunctions.IterationsStop;
 import org.example.algorithm.taboo.tabooList.BasicTabooList;
 import org.example.data.Result;
 import org.example.data.TspData;
@@ -40,7 +39,8 @@ public class RunClass {
         String file = "test.tsp";
 //        loaderTest(file);
 //        neighbourhoodTest(file);
-        movesTest();
+//        movesTest();
+        kikTest(file);
 //        TspData data = loader.getTspData();
 //        Result result = new Result(data);
 //        draw(result);
@@ -88,6 +88,33 @@ public class RunClass {
 //        generateRndMetro(10, 300, 50, 300/5, 300);
 //        generateRnd(10, 300, 50);
 
+    }
+
+    private static void kikTest(String filename) {
+        loader = new FileLoader(filename);
+        loader.load();
+        TspData data = loader.getTspData();
+        Result result = new Result(data);
+        Kick kick = new Kick(3, 5);
+        System.out.println("Original result: ");
+        for(int p : result.way){
+            System.out.print(p + " ");
+        }
+        System.out.println();
+        System.out.println("Obj. function: "+result.objFuncResult);
+        System.out.println();
+
+        for(int i = 0; i < 10; i++) {
+            if(kick.shouldExplore(result)) {
+                kick.explore(result);
+                for(int p : result.way){
+                    System.out.print(p + " ");
+                }
+                System.out.println();
+                System.out.println("Obj. function: "+result.objFuncResult);
+                System.out.println();
+            }
+        }
     }
 
     private static void draw(Result res) {

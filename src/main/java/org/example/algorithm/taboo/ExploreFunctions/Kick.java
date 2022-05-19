@@ -30,7 +30,7 @@ public class Kick implements ExploreFunction {
 
     @Override
     public void explore(Result start) {
-        System.out.println("Kicking");
+//        System.out.println("Kicking");
         TspData tspData = start.problem;
         Random r = new Random();
         for (int j = 0; j<kick_changes; j++){
