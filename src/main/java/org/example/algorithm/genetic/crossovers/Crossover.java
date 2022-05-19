@@ -1,7 +1,6 @@
 package org.example.algorithm.genetic.crossovers;
 
 import org.example.algorithm.genetic.GeneticResult;
-import org.example.data.Result;
 
 import java.util.List;
 
