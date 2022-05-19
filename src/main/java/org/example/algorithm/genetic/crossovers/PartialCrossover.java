@@ -1,6 +1,7 @@
 package org.example.algorithm.genetic.crossovers;
 
 import org.example.algorithm.genetic.GeneticResult;
+import org.example.data.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,19 +23,25 @@ public class PartialCrossover implements Crossover {
 		this.to = to;
 	}
 
+//	@Override
+//	public List<GeneticResult> getNewPopulation(List<Pair> parentsList) {
+//		List<GeneticResult> list = new ArrayList<>();
+//		for(GeneticResult result : parentsList) {
+//			for(GeneticResult result2 : parentsList) {
+//				if(!result.equals(result2)
+//						&& result.getChanceToCross() < ThreadLocalRandom.current().nextDouble()
+//						&& result2.getChanceToCross() < ThreadLocalRandom.current().nextDouble()) {
+//					list.add(getNewGeneticResult(result, result2));
+//				}
+//			}
+//		}
+//		return list;
+//	}
+
+
 	@Override
-	public List<GeneticResult> getNewPopulation(List<GeneticResult> oldPopulation) {
-		List<GeneticResult> list = new ArrayList<>();
-		for(GeneticResult result : oldPopulation) {
-			for(GeneticResult result2 : oldPopulation) {
-				if(!result.equals(result2)
-						&& result.getChanceToCross() < ThreadLocalRandom.current().nextDouble()
-						&& result2.getChanceToCross() < ThreadLocalRandom.current().nextDouble()) {
-					list.add(getNewGeneticResult(result, result2));
-				}
-			}
-		}
-		return list;
+	public List<GeneticResult> getNewPopulation(List<Pair> parentsList) {
+		return null;
 	}
 
 	private GeneticResult getNewGeneticResult(GeneticResult result1, GeneticResult result2) {

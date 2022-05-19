@@ -1,6 +1,7 @@
 package org.example.algorithm.genetic.crossovers;
 
 import org.example.algorithm.genetic.GeneticResult;
+import org.example.data.Pair;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class OrderCrossover implements Crossover {
 	}
 
 	@Override
-	public List<GeneticResult> getNewPopulation(List<GeneticResult> oldPopulation) {
+	public List<GeneticResult> getNewPopulation(List<Pair> parentsList) {
 		return null;
 	}
 }
