@@ -26,7 +26,7 @@ def draw():
     for i in range(5, 8):
         plt.bar(r1 + (-2.5 + i) * l, asyn[i], color=color[i], width=l, label=str(i+1) + ' wątków')
     plt.xticks([2*r + l for r in range(10)], names)
-    plt.legend(loc='upper left')
+    plt.legend(loc='lower left')
     plt.xlabel('Rodzaj i wielkość problemu')
     plt.ylabel('Otrzymane rozwiązanie')
     plt.subplots_adjust(left=0.15, bottom=0.1, right=0.85, top=0.9)

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PartialCrossover implements Crossover {
+public class BetterPartialCrossover implements Crossover {
 
 	int from, to;
 
@@ -17,7 +17,7 @@ public class PartialCrossover implements Crossover {
 	 * @param from point from genetic result will be transformed
 	 * @param to point to genetic result will be transformed
 	 */
-	public PartialCrossover(int from, int to) {
+	public BetterPartialCrossover(int from, int to) {
 		this.from = from;
 		this.to = to;
 	}
@@ -38,7 +38,7 @@ public class PartialCrossover implements Crossover {
 	}
 
 	private GeneticResult getNewGeneticResult(GeneticResult result1, GeneticResult result2) {
-		// TODO CHECK
+		// TODO EDIT
 		GeneticResult newRes = result1.clone();
 		int am[] = new int[newRes.getProblemSize()];
 		for(int i = from; i <= to; i++) {

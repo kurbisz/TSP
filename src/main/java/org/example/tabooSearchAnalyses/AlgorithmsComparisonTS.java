@@ -344,13 +344,13 @@ public class AlgorithmsComparisonTS {
 				if(tests[j] == 0) exploreFunction = null;
 				TabooSearch2 taboo = new TabooSearch2(tspData, res, false,
 						new BasicTabooList(10), new Invert(),
-						new IterationsStop(2000), null, exploreFunction, 1);
+						new IterationsStop(1000), null, exploreFunction, 1);
 				ts[i][j] = taboo.calculate().calcObjectiveFunction();
 			}
 			ExploreFunction exploreFunction = new Kick(n/4, kick_changes);
 			TabooSearch2 taboo = new TabooSearch2(tspData, res, false,
 					new BasicTabooList(10), new Invert(),
-					new IterationsStop(2000), null, exploreFunction, 1);
+					new IterationsStop(1000), null, exploreFunction, 1);
 			ts[i][tests.length] = taboo.calculate().calcObjectiveFunction();
 			i++;
 		}

@@ -19,9 +19,20 @@ public class GeneticResult extends Result {
 		return chanceToCross;
 	}
 
+	public int getProblemSize() {
+		return problem.getSize();
+	}
+
 	@Override
 	public GeneticResult clone() {
-		return null;
+		GeneticResult newResult = new GeneticResult(problem);
+		for(int i = 0; i < problem.getSize(); i++) {
+			newResult.way[i] = way[i];
+		}
+		newResult.currInd = currInd;
+		newResult.objFuncResult = objFuncResult;
+		newResult.setChanceToCross(chanceToCross);
+		return newResult;
 	}
 
 	public static GeneticResult getFromResult(Result result) {

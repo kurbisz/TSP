@@ -9,7 +9,6 @@ import org.example.algorithm.taboo.Neighbourhoods.Moves.SwapMove;
 import org.example.algorithm.taboo.TabooSearch;
 import org.example.algorithm.TwoOpt;
 import org.example.algorithm.taboo.TabooSearch2;
-import org.example.algorithm.taboo.stopFunctions.IterationsStop;
 import org.example.algorithm.taboo.tabooList.BasicTabooList;
 import org.example.data.Result;
 import org.example.data.TspData;
