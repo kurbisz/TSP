@@ -1,12 +1,13 @@
 package org.example.algorithm.genetic.mutations;
 
-import org.example.data.Result;
+import org.example.algorithm.genetic.GeneticResult;
 
 import java.util.List;
 
 public class NoMutation implements Mutation {
+
 	@Override
-	public List<Result> getMutatedPopulation(List<Result> list) {
-		return list;
+	public List<GeneticResult> getMutatedPopulation(List<GeneticResult> list) {
+		return null;
 	}
 }
