@@ -12,7 +12,25 @@ public class GeneticAlgorithm extends Algorithm {
 
 	@Override
 	public Result calculate() {
+		//TODO utworzenie i wywołanie wątku (wątków) realizującego algorytm genetyczny
+		//parametry:
+		/**
+		 * schemat tworzenia populacji startowej
+		 * schemat ewaluacji i dobierania
+		 * schemat krzyżowania
+		 * schemat mutacji
+		 * liczba wątków
+		 */
 		return null;
 	}
 
 }
+
+/**
+ * Schemat tworzenia populacji startowej:
+ *  - klasa, która zwraca tablicę/listę zawierającą początkową populację
+ *  - może wykorzystajmy już istniejące sąsiedztwa + ewentualnie coś nowego
+ *
+ * Schemat ewaluacji:
+ *  -
+ */

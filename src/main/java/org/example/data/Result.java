@@ -35,15 +35,10 @@ public class Result {
         return sum;
     }
 
-    public void addWaypoint(int p){
-        way[currInd] = p;
-        currInd++;
+    public int getProblemSize() {
+        return problem.getSize();
     }
 
-    public void removeLastWaypoint(){
-        currInd--;
-        way[currInd]=0;
-    }
 
     public Result clone() {
         Result result = new Result(problem);

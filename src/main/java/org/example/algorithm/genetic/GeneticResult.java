@@ -19,9 +19,6 @@ public class GeneticResult extends Result {
 		return chanceToCross;
 	}
 
-	public int getProblemSize() {
-		return problem.getSize();
-	}
 
 	@Override
 	public GeneticResult clone() {

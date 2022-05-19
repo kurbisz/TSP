@@ -1,0 +1,8 @@
+OMÓWIENIE SPRAWOZDAŃ
+
+1. Problemy
+    - za mało różnorodnych instancji
+    - za długie sprawozdania
+    - zbyt małyo zakres badań
+        - mała liczba instancji
+        - mały budżet obliczeniowy
