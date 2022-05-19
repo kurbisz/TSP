@@ -7,7 +7,7 @@ l = 0.13
 
 
 def draw():
-    file = open('exploreFunctions.csv')
+    file = open('exploreFunctions2.csv')
     file.readline()
     names = ['' for n in range(10)]
     longTermList = [[0 for n in range(10)] for j in range(8)]
