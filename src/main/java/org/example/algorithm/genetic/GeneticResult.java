@@ -22,12 +22,7 @@ public class GeneticResult extends Result {
 
 	@Override
 	public GeneticResult clone() {
-		GeneticResult newResult = new GeneticResult(problem);
-		for(int i = 0; i < problem.getSize(); i++) {
-			newResult.way[i] = way[i];
-		}
-		newResult.currInd = currInd;
-		newResult.objFuncResult = objFuncResult;
+		GeneticResult newResult = GeneticResult.getFromResult(super.clone());
 		newResult.setChanceToCross(chanceToCross);
 		return newResult;
 	}

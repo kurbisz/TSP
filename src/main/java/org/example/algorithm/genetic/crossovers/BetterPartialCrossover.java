@@ -13,7 +13,7 @@ public class BetterPartialCrossover implements Crossover {
 	/**
 	 * For example from = 1, to = 4 will cross part '2 1 4 3'
 	 * from result '0 2 1 4 3 5 6 7' with another result and repair
-	 * indexes which are duplicated in ascending order
+	 * indexes which are duplicated in THE SAME order as second result
 	 * @param from point from genetic result will be transformed
 	 * @param to point to genetic result will be transformed
 	 */
@@ -48,7 +48,9 @@ public class BetterPartialCrossover implements Crossover {
 			am[newRes.way[i]]++;
 		}
 		int over = 0;
+		int j = 0;
 		for(int i = 0; i < newRes.getProblemSize(); i++) {
+			while(am[result2.way[j]] != 0) j++;
 			if(am[newRes.way[i]] != 2) continue;
 			while(am[newRes.way[over]] != 0) over++;
 			newRes.way[over] = result1.way[i];
