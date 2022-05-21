@@ -96,6 +96,9 @@ public class FileLoader {
 	}
 
 	public TspData getTspData() {
+		if(tspData == null) {
+			System.out.println("TSP data is not loaded!");
+		}
 		return this.tspData;
 	}
 

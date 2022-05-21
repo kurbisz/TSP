@@ -11,6 +11,11 @@ public class GeneticResult extends Result {
 		super(tspData);
 	}
 
+	public GeneticResult(Result res){
+		super(res);
+		chanceToCross = 0.0;
+	}
+
 	public void setChanceToCross(double chanceToCross) {
 		this.chanceToCross = chanceToCross;
 	}
