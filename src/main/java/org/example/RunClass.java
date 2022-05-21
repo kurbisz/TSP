@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.algorithm.KRandom;
 import org.example.algorithm.NearestNeighbour;
+import org.example.algorithm.genetic.GeneticResult;
 import org.example.algorithm.taboo.ExploreFunctions.Kick;
 import org.example.algorithm.taboo.Neighbourhoods.*;
 import org.example.algorithm.taboo.Neighbourhoods.Moves.Move;
@@ -17,7 +18,9 @@ import org.example.drawer.Line;
 import org.example.drawer.Window;
 import org.example.random.EuclideanTSPGen;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Random;
 
@@ -32,15 +35,15 @@ public class RunClass {
 //        String file = "dane/d1291.tsp";
 //        String file = "dane/pr299.tsp";
 //          String file = "kroB100.tsp";
-//        String file = "metro6.tsp";
+        String file = "metro6.tsp";
 //        String file = "metro7.tsp";
 //        String file = "metro8.tsp";
 //        String file = "rnd3.tsp";
-        String file = "test.tsp";
+//        String file = "test.tsp";
 //        loaderTest(file);
 //        neighbourhoodTest(file);
 //        movesTest();
-        kikTest(file);
+//        kikTest(file);
 //        TspData data = loader.getTspData();
 //        Result result = new Result(data);
 //        draw(result);
@@ -87,7 +90,6 @@ public class RunClass {
 //        MultiThreadedNNComparisoon.calc("mulithreadNNComp_d1544291.csv", loader.getTspData());
 //        generateRndMetro(10, 300, 50, 300/5, 300);
 //        generateRnd(10, 300, 50);
-
     }
 
     private static void kikTest(String filename) {
