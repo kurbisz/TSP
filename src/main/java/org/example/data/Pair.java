@@ -11,5 +11,11 @@ public class Pair {
         this.parent2 = parent2;
     }
 
+    public GeneticResult getParent1() {
+        return parent1;
+    }
 
+    public GeneticResult getParent2() {
+        return parent2;
+    }
 }

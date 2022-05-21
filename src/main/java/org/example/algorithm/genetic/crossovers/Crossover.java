@@ -14,4 +14,5 @@ public interface Crossover {
 	 */
 	List<GeneticResult> getNewPopulation(List<Pair> parentsList);
 
+    Crossover copy();
 }

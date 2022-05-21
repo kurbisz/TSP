@@ -8,18 +8,29 @@ import org.example.data.TspData;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasa, która generuje populację startową
+ * z losowymi osobnikami uzyskanymi za pomocą KRandom
+ */
 public class RandomPopulation implements PopulationGenerator {
 
     int populationSize;
 
+    /**
+     * Domyślny konstruktor
+     * ustawia rozmiar populacji na 100
+     */
     public RandomPopulation() {
         populationSize = 100;
     }
 
+    /**
+     * Konstruktor pozwalający na ustawienie rozmiaru populacji
+     * @param populationSize - żądany rozmiar zwracanej populacji
+     */
     public RandomPopulation(int populationSize) {
         this.populationSize = populationSize;
     }
-
 
     @Override
     public List<GeneticResult> getNewPopulation(TspData tspData) {
@@ -34,5 +45,10 @@ public class RandomPopulation implements PopulationGenerator {
         }
 
         return population;
+    }
+
+    @Override
+    public PopulationGenerator copy() {
+        return new RandomPopulation(populationSize);
     }
 }

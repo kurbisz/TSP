@@ -44,6 +44,7 @@ public class BetterPartialCrossover implements Crossover {
 		return null;
 	}
 
+
 	private GeneticResult getNewGeneticResult(GeneticResult result1, GeneticResult result2) {
 		// TODO EDIT
 		GeneticResult newRes = result1.clone();
@@ -63,6 +64,11 @@ public class BetterPartialCrossover implements Crossover {
 			newRes.way[over] = result1.way[i];
 		}
 		return newRes;
+	}
+
+	@Override
+	public Crossover copy() {
+		return new BetterPartialCrossover(from, to);
 	}
 
 }

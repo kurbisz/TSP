@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface Mutation {
 
-	List<GeneticResult> getMutatedPopulation(List<GeneticResult> list);
+	List<GeneticResult> getMutatedPopulation(List<GeneticResult> population);
 
+    Mutation copy();
 }

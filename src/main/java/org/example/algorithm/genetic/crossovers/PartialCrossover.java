@@ -63,4 +63,8 @@ public class PartialCrossover implements Crossover {
 		return newRes;
 	}
 
+	@Override
+	public Crossover copy() {
+		return new PartialCrossover(from, to);
+	}
 }
