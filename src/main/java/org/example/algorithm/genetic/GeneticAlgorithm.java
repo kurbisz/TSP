@@ -39,7 +39,7 @@ public class GeneticAlgorithm extends Algorithm {
 		int n = tspData.getSize();
 		populationGeneratorTemplate = new RandomPopulation(1000);
 		selectionTemplate = new SimpleBestSelection();
-		crossoverTemplate = new PartialCrossover(n/3, 2*n/3);
+		crossoverTemplate = new PartialCrossover(n/3, 2*n/3, true);
 		fillerTemplate = new RandomFiller();
 		stopFunctionTemplate = new TimeStop(60000000000L); // 60s na wykonanie
 	}
@@ -91,7 +91,7 @@ public class GeneticAlgorithm extends Algorithm {
 		}
 		GeneticResult best = null;
 		for(SingleGeneticThread pass : passes){
-			GeneticResult thisBest = pass.returnBest();
+			GeneticResult thisBest = pass.bestResult;
 			if(best == null || best.objFuncResult > thisBest.objFuncResult){
 				best = thisBest;
 			}
@@ -100,6 +100,8 @@ public class GeneticAlgorithm extends Algorithm {
 	}
 
 	class SingleGeneticThread implements Runnable {
+
+		GeneticResult bestResult;
 
 		PopulationGenerator populationGenerator;
 		Selection selection;
@@ -135,14 +137,16 @@ public class GeneticAlgorithm extends Algorithm {
 				List<Pair> parents = selection.getParents(currentPopulation);
 //				for(Pair p : parents) System.out.println(p.getParent1() + "      " + p.getParent2());
 				currentPopulation = crossover.getNewPopulation(parents);
+				bestResult = returnBest();
+//				System.out.println("Size: " + currentPopulation.size());
+				System.out.println("Best: " + bestResult + " (score: " + bestResult.objFuncResult + ")");
 				filler.fillPopulation(currentPopulation, oldPopulation);
 				if(mutation != null)
 					currentPopulation = mutation.getMutatedPopulation(currentPopulation);
 				oldPopulation = currentPopulation;
-				System.out.println("Size: " + currentPopulation.size());
-				GeneticResult best = returnBest();
-				System.out.println("Best: " + best + " (score: " + best.objFuncResult + ")");
 			} while(!stopFunction.check());
+			bestResult = returnBest();
+//			for(GeneticResult re : currentPopulation) System.out.println(re.toString());
 		}
 
 		GeneticResult returnBest(){

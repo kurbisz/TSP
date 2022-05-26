@@ -9,18 +9,23 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class PartialCrossover implements Crossover {
 
+	boolean bothChildren;
 	int from, to;
 
 	/**
-	 * For example from = 1, to = 4 will cross part '2 1 4 3'
-	 * from result '0 2 1 4 3 5 6 7' with another result and repair
-	 * indexes which are duplicated in ascending order
+	 * Example:
+	 * 				from: 4    to: 5
+	 * par1:		3 4 9 1 2 6 8 0 5 7
+	 * par2:		5 6 2 8 0 1 9 3 7 4
+	 * result:		3 4 9 2 0 1 8 6 5 7
 	 * @param from point from genetic result will be transformed
 	 * @param to point to genetic result will be transformed
+	 * @param bothChildren true if there should be added both children
 	 */
-	public PartialCrossover(int from, int to) {
+	public PartialCrossover(int from, int to, boolean bothChildren) {
 		this.from = from;
 		this.to = to;
+		this.bothChildren  = bothChildren;
 	}
 
 	@Override
@@ -28,18 +33,16 @@ public class PartialCrossover implements Crossover {
 		List<GeneticResult> list = new ArrayList<>();
 		for(Pair pair : parentsList) {
 			GeneticResult res1 = getNewGeneticResult(pair.getParent1(), pair.getParent2());
-			GeneticResult res2 = getNewGeneticResult(pair.getParent2(), pair.getParent1());
 			list.add(res1);
-			if(!res1.equals(res2)) list.add(res2);
+			if(bothChildren) {
+				GeneticResult res2 = getNewGeneticResult(pair.getParent2(), pair.getParent1());
+				if (!res1.equals(res2)) list.add(res2);
+			}
 		}
 		return list;
 	}
 
-//		Przyklad:
-//			from: 4    to: 5
-//			3 4 9 1 2 6 8 0 5 7
-//			5 6 2 8 0 1 9 3 7 4
-//			3 4 9 2 0 1 8 6 5 7
+
 	private GeneticResult getNewGeneticResult(GeneticResult result1, GeneticResult result2) {
 //		System.out.println("from: " + from + "    to: " + to);
 //		System.out.println(result1.toString());
@@ -70,6 +73,6 @@ public class PartialCrossover implements Crossover {
 
 	@Override
 	public Crossover copy() {
-		return new PartialCrossover(from, to);
+		return new PartialCrossover(from, to, bothChildren);
 	}
 }

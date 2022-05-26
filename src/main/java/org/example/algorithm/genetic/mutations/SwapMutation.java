@@ -9,20 +9,26 @@ import java.util.concurrent.ThreadLocalRandom;
 public class SwapMutation implements Mutation {
 
 	private double chance;
+	private int swapAm;
 	private ThreadLocalRandom r = ThreadLocalRandom.current();
 
 	public SwapMutation() {
-		this(0.5);
+		this(0.5, 1);
 	}
 
-	public SwapMutation(double chance) {
+	public SwapMutation(double chance, int swapAm) {
 		this.chance = chance;
+		this.swapAm = swapAm;
 	}
 
 	@Override
 	public List<GeneticResult> getMutatedPopulation(List<GeneticResult> population) {
 		for(GeneticResult result : population) {
-			if(r.nextDouble() < chance) swap(result);
+			if(r.nextDouble() < chance) {
+				for(int i = 0; i < swapAm; i++) {
+					swap(result);
+				}
+			}
 		}
 		return population;
 	}
@@ -43,6 +49,6 @@ public class SwapMutation implements Mutation {
 
 	@Override
 	public Mutation copy() {
-		return new SwapMutation(chance);
+		return new SwapMutation(chance, swapAm);
 	}
 }

@@ -4,8 +4,10 @@ import org.example.algorithm.KRandom;
 import org.example.algorithm.TwoOpt;
 import org.example.algorithm.genetic.GeneticAlgorithm;
 import org.example.algorithm.genetic.GeneticResult;
+import org.example.algorithm.genetic.crossovers.PartlyOrderCrossover;
 import org.example.algorithm.genetic.mutations.SwapMutation;
 import org.example.algorithm.genetic.selections.BestWithBestSelection;
+import org.example.algorithm.genetic.startPopulations.HammingRandomPopulation;
 import org.example.data.EucTspData;
 import org.example.data.Result;
 import org.example.data.TspData;
@@ -36,15 +38,19 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
 
-        FileLoader fileLoader = new FileLoader(files[3]);
+        String f = "test10.tsp";
+//        String f = files[1];
+        FileLoader fileLoader = new FileLoader(f);
         fileLoader.load();
         TspData data = fileLoader.getTspData();
-        data.setName(files[3]);
+        data.setName(f);
 
         System.out.println(new TwoOpt(data).calculate().calcObjectiveFunction());
         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(data);
-        geneticAlgorithm.setStopFunctionTemplate(new IterationsStop(1000));
-        geneticAlgorithm.setMutationTemplate(new SwapMutation(0.8));
+        geneticAlgorithm.setStartPopulation(new HammingRandomPopulation());
+        geneticAlgorithm.setCrossoverTemplate(new PartlyOrderCrossover(3, true));
+        geneticAlgorithm.setStopFunctionTemplate(new IterationsStop(15));
+        geneticAlgorithm.setMutationTemplate(new SwapMutation(0.8, 1));
 //        geneticAlgorithm.setSelection(new BestWithBestSelection());
         Result result = geneticAlgorithm.calculate();
         System.out.println(result.calcObjectiveFunction());
