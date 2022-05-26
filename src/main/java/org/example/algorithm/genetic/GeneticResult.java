@@ -42,5 +42,15 @@ public class GeneticResult extends Result {
 		return newResult;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if(!(o instanceof GeneticResult)) return false;
+		GeneticResult res = (GeneticResult) o;
+		for(int i = 0; i < res.problem.getSize(); i++) {
+			if(res.way[i] != way[i]) return false;
+		}
+		return true;
+	}
+
 
 }

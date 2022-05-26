@@ -10,14 +10,14 @@ public class RandomFiller implements Filler {
 
     @Override
     public void fillPopulation(List<GeneticResult> currentPopulation, List<GeneticResult> oldPopulation) {
-        int expectedSize = oldPopulation.size();
+        int expectedSize = oldPopulation!=null ? oldPopulation.size() : 0;
         ArrayList<Integer> usedIndexes = new ArrayList<>();
         while(currentPopulation.size() < expectedSize){
             int ind;
             do{
                 ind = ThreadLocalRandom.current().nextInt(0, expectedSize);
             }while(usedIndexes.contains(ind));
-            currentPopulation.add(currentPopulation.get(ind));
+            currentPopulation.add(oldPopulation.get(ind));
             usedIndexes.add(ind);
         }
     }

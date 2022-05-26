@@ -1,6 +1,7 @@
 package org.example.algorithm.genetic.selections;
 
 import org.example.algorithm.genetic.GeneticResult;
+import org.example.algorithm.genetic.selections.util.ResultCompare;
 import org.example.data.Pair;
 
 import java.util.ArrayList;
@@ -10,20 +11,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class SimpleBestSelection implements Selection {
 
-    static class resultCompare implements Comparator<GeneticResult> {
-
-        @Override
-        public int compare(GeneticResult o1, GeneticResult o2) {
-            int res1 = o1.objFuncResult;
-            int res2 = o2.objFuncResult;
-            return Integer.compare(res1, res2);
-        }
-    }
-
     @Override
     public List<Pair> getParents(List<GeneticResult> population) {
         List<Pair> parents = new ArrayList<>();
-        Comparator<GeneticResult> comparator = new resultCompare();
+        Comparator<GeneticResult> comparator = new ResultCompare();
         population.sort(comparator);
         int pairCount = population.size() / 2;
         int maxInd = population.size() / 3;
@@ -35,6 +26,7 @@ public class SimpleBestSelection implements Selection {
             }while(ind1 == ind2);
 
             Pair newPair = new Pair(population.get(ind1), population.get(ind2));
+            // TODO Do usuniecia albo edycji bo tu jest tworzona nowa klasa czyli nigdy nie jest w liscie
             if(!parents.contains(newPair)){
                 parents.add(newPair);
             }

@@ -1,10 +1,17 @@
 package org.example;
 
+import org.example.algorithm.KRandom;
 import org.example.algorithm.TwoOpt;
+import org.example.algorithm.genetic.GeneticAlgorithm;
+import org.example.algorithm.genetic.GeneticResult;
+import org.example.algorithm.genetic.mutations.SwapMutation;
+import org.example.algorithm.genetic.selections.BestWithBestSelection;
 import org.example.data.EucTspData;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
+import org.example.random.EuclideanTSPGen;
+import org.example.stopFunctions.IterationsStop;
 import org.example.tabooSearchAnalyses.AlgorithmsComparisonTS;
 
 import java.io.File;
@@ -29,10 +36,19 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
 
-        FileLoader fileLoader = new FileLoader(files[2]);
+        FileLoader fileLoader = new FileLoader(files[3]);
         fileLoader.load();
         TspData data = fileLoader.getTspData();
-        data.setName(names[2]);
+        data.setName(files[3]);
+
+        System.out.println(new TwoOpt(data).calculate().calcObjectiveFunction());
+        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(data);
+        geneticAlgorithm.setStopFunctionTemplate(new IterationsStop(1000));
+        geneticAlgorithm.setMutationTemplate(new SwapMutation(0.8));
+//        geneticAlgorithm.setSelection(new BestWithBestSelection());
+        Result result = geneticAlgorithm.calculate();
+        System.out.println(result.calcObjectiveFunction());
+
 
     }
 
