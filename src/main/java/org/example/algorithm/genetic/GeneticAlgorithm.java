@@ -91,7 +91,7 @@ public class GeneticAlgorithm extends Algorithm {
 		}
 		GeneticResult best = null;
 		for(SingleGeneticThread pass : passes){
-			GeneticResult thisBest = pass.bestResult;
+			GeneticResult thisBest = pass.getBestResult();
 			if(best == null || best.objFuncResult > thisBest.objFuncResult){
 				best = thisBest;
 			}
@@ -137,19 +137,30 @@ public class GeneticAlgorithm extends Algorithm {
 				List<Pair> parents = selection.getParents(currentPopulation);
 //				for(Pair p : parents) System.out.println(p.getParent1() + "      " + p.getParent2());
 				currentPopulation = crossover.getNewPopulation(parents);
-				bestResult = returnBest();
+				GeneticResult bestRes = returnBest();
+				if(bestResult == null || bestRes.objFuncResult < bestResult.objFuncResult) {
+					bestResult = bestRes.clone();
+				}
 //				System.out.println("Size: " + currentPopulation.size());
-				System.out.println("Best: " + bestResult + " (score: " + bestResult.objFuncResult + ")");
+//				System.out.println("Best: " + bestRes + " (score: " + bestRes.objFuncResult + ")");
+				System.out.println("Best score: " + bestRes.objFuncResult + " / " + bestResult.objFuncResult);
 				filler.fillPopulation(currentPopulation, oldPopulation);
 				if(mutation != null)
 					currentPopulation = mutation.getMutatedPopulation(currentPopulation);
 				oldPopulation = currentPopulation;
 			} while(!stopFunction.check());
-			bestResult = returnBest();
+			GeneticResult bestRes = returnBest();
+			if(bestResult == null || bestRes.objFuncResult < bestResult.objFuncResult) {
+				bestResult = bestRes;
+			}
 //			for(GeneticResult re : currentPopulation) System.out.println(re.toString());
 		}
 
-		GeneticResult returnBest(){
+		public GeneticResult getBestResult() {
+			return bestResult;
+		}
+
+		private GeneticResult returnBest(){
 			int bestObjFunc = Integer.MAX_VALUE;
 			GeneticResult bestResult = null;
 			for(GeneticResult result : currentPopulation){

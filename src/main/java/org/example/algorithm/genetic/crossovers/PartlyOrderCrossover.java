@@ -17,7 +17,10 @@ public class PartlyOrderCrossover implements Crossover {
 
 	/**
 	 * Example:
-	 *
+	 *			elements: 8,1,2,
+	 * par1		7 2 8 0 9 1 4 6 5 3
+	 * par2		8 0 1 9 5 3 7 6 2 4
+	 * res		7 8 1 0 9 2 4 6 5 3
 	 * @param randomElements number of elements which will be changed
 	 * @param bothChildren true if there should be added both children
 	 */
@@ -46,9 +49,9 @@ public class PartlyOrderCrossover implements Crossover {
 	}
 
 	private GeneticResult getNewGeneticResult(GeneticResult result1, GeneticResult result2, List<Integer> list) {
-//		System.out.print("elements: ");
-//		for(Integer i : list) System.out.print(i + ",");
-//		System.out.print('\n');
+		System.out.print("elements: ");
+		for(Integer i : list) System.out.print(i + ",");
+		System.out.print('\n');
 		System.out.println(result1.toString());
 		System.out.println(result2.toString());
 
