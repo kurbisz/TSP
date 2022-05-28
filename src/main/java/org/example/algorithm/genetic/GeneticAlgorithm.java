@@ -6,6 +6,8 @@ import org.example.algorithm.genetic.Fillers.Filler;
 import org.example.algorithm.genetic.Fillers.RandomFiller;
 import org.example.algorithm.genetic.crossovers.Crossover;
 import org.example.algorithm.genetic.crossovers.PartialCrossover;
+import org.example.algorithm.genetic.longterm.LongTermChecker;
+import org.example.algorithm.genetic.longterm.LongTermEditor;
 import org.example.algorithm.genetic.mutations.Mutation;
 import org.example.algorithm.genetic.selections.RandomSelection;
 import org.example.algorithm.genetic.selections.Selection;
@@ -30,14 +32,16 @@ public class GeneticAlgorithm extends Algorithm {
 	Crossover crossoverTemplate;
 	Evaluator evaluatorTemplate = null;
 	Filler fillerTemplate;
-	StopFunction stopFunctionTemplate = null;
+	StopFunction stopFunctionTemplate;
+	LongTermChecker longTermCheckerTemplate = null;
+	LongTermEditor longTermEditorTemplate = null;
 	int threadCount = 1;
 
 	public GeneticAlgorithm(TspData tspData) {
 		super(tspData);
 		// Initialize variables with default classes
 		int n = tspData.getSize();
-		populationGeneratorTemplate = new RandomPopulation(1000);
+		populationGeneratorTemplate = new RandomPopulation(100);
 		selectionTemplate = new SimpleBestSelection();
 		crossoverTemplate = new PartialCrossover(n/3, 2*n/3, true);
 		fillerTemplate = new RandomFiller();
@@ -50,10 +54,6 @@ public class GeneticAlgorithm extends Algorithm {
 
 	public void setStartPopulation(PopulationGenerator populationGenerator){
 		this.populationGeneratorTemplate = populationGenerator;
-	}
-
-	public void setSelection(Selection selection){
-		this.selectionTemplate = selection;
 	}
 
 	public void setMutationTemplate(Mutation mutationTemplate){
@@ -70,6 +70,26 @@ public class GeneticAlgorithm extends Algorithm {
 
 	public void setStopFunctionTemplate(StopFunction stopFunctionTemplate) {
 		this.stopFunctionTemplate = stopFunctionTemplate;
+	}
+
+	public void setFillerTemplate(Filler fillerTemplate) {
+		this.fillerTemplate = fillerTemplate;
+	}
+
+	public void setPopulationGeneratorTemplate(PopulationGenerator populationGeneratorTemplate) {
+		this.populationGeneratorTemplate = populationGeneratorTemplate;
+	}
+
+	public void setSelectionTemplate(Selection selectionTemplate) {
+		this.selectionTemplate = selectionTemplate;
+	}
+
+	public void setLongTermCheckerTemplate(LongTermChecker longTermCheckerTemplate) {
+		this.longTermCheckerTemplate = longTermCheckerTemplate;
+	}
+
+	public void setLongTermEditorTemplate(LongTermEditor longTermEditorTemplate) {
+		this.longTermEditorTemplate = longTermEditorTemplate;
 	}
 
 	@Override
@@ -99,7 +119,7 @@ public class GeneticAlgorithm extends Algorithm {
 		return best;
 	}
 
-	class SingleGeneticThread implements Runnable {
+	protected class SingleGeneticThread implements Runnable {
 
 		GeneticResult bestResult;
 
@@ -110,26 +130,34 @@ public class GeneticAlgorithm extends Algorithm {
 		Evaluator evaluator;
 		Filler filler;
 		StopFunction stopFunction;
+		LongTermChecker longTermChecker;
+		LongTermEditor longTermEditor;
 
 		List<GeneticResult> currentPopulation;
+		List<GeneticResult> oldPopulation;
 
-		SingleGeneticThread(){
+		public SingleGeneticThread(){
 			populationGenerator = populationGeneratorTemplate.copy();
 			selection = selectionTemplate.copy();
 			if(mutationTemplate != null)
 				mutation = mutationTemplate.copy();
 			crossover = crossoverTemplate.copy();
-			if(evaluator != null)
+			if(evaluatorTemplate != null)
 				evaluator = evaluatorTemplate.copy();
 			filler = fillerTemplate.copy();
 			stopFunction = stopFunctionTemplate.copy();
+			if(longTermCheckerTemplate != null)
+				longTermChecker = longTermCheckerTemplate.copy();
+			if(longTermEditorTemplate != null)
+				longTermEditor = longTermEditorTemplate.copy();
+
+			currentPopulation = populationGenerator.getNewPopulation(tspData);
+			oldPopulation = currentPopulation;
 		}
 
 		// Main code of genetic algorithm
 		@Override
 		public void run() {
-			currentPopulation = populationGenerator.getNewPopulation(tspData);
-			List<GeneticResult> oldPopulation = null;
 			do{
 //				for(GeneticResult re : currentPopulation) System.out.println(re.toString());
 				if(evaluator != null)
@@ -143,15 +171,20 @@ public class GeneticAlgorithm extends Algorithm {
 				}
 //				System.out.println("Size: " + currentPopulation.size());
 //				System.out.println("Best: " + bestRes + " (score: " + bestRes.objFuncResult + ")");
-				System.out.println("Best score: " + bestRes.objFuncResult + " / " + bestResult.objFuncResult);
+//				System.out.println("Best score: " + bestRes.objFuncResult + " / " + bestResult.objFuncResult);
 				filler.fillPopulation(currentPopulation, oldPopulation);
 				if(mutation != null)
 					currentPopulation = mutation.getMutatedPopulation(currentPopulation);
+				if(longTermEditor != null && longTermChecker != null) {
+					if(longTermChecker.check(currentPopulation, bestResult)) {
+						currentPopulation = longTermEditor.getChanged(currentPopulation);
+					}
+				}
 				oldPopulation = currentPopulation;
 			} while(!stopFunction.check());
 			GeneticResult bestRes = returnBest();
 			if(bestResult == null || bestRes.objFuncResult < bestResult.objFuncResult) {
-				bestResult = bestRes;
+				bestResult = bestRes.clone();
 			}
 //			for(GeneticResult re : currentPopulation) System.out.println(re.toString());
 		}
@@ -160,7 +193,7 @@ public class GeneticAlgorithm extends Algorithm {
 			return bestResult;
 		}
 
-		private GeneticResult returnBest(){
+		protected GeneticResult returnBest(){
 			int bestObjFunc = Integer.MAX_VALUE;
 			GeneticResult bestResult = null;
 			for(GeneticResult result : currentPopulation){

@@ -21,7 +21,7 @@ public class RandomPopulation implements PopulationGenerator {
      * ustawia rozmiar populacji na 100
      */
     public RandomPopulation() {
-        populationSize = 100;
+        this(100);
     }
 
     /**

@@ -1,13 +1,20 @@
 package org.example;
 
+import org.example.GAAnalyses.ResComp;
 import org.example.algorithm.TwoOpt;
 import org.example.algorithm.genetic.GeneticAlgorithm;
+import org.example.algorithm.genetic.IslandsGeneticAlgorithm;
 import org.example.algorithm.genetic.crossovers.NeighboursCrossover;
+import org.example.algorithm.genetic.crossovers.PartlyOrderCrossover;
+import org.example.algorithm.genetic.longterm.RandomLongTermEditor;
+import org.example.algorithm.genetic.longterm.SimpleLongTermChecker;
 import org.example.algorithm.genetic.mutations.SwapMutation;
+import org.example.algorithm.genetic.startPopulations.HammingRandomPopulation;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
 import org.example.random.EuclideanTSPGen;
+import org.example.stopFunctions.IterationsStop;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +30,9 @@ public class Main {
             fol + "S64.tsp", fol + "S80.tsp", fol + "S88.tsp", fol + "S104.tsp", fol + "S113.tsp",
             fol + "S114.tsp", fol + "S116.tsp"};
     public static String[] names = new String[files.length];
-    public static int[] best = {1530, 5620, 1613, 1776, 14422, 6905, 1608, 1839, 38673, 36230};
+    // Taken from TSPLib or from Concorde results
+    public static int[] best = {1530, 5620, 1613, 1776, 14422, 6905, 1608, 1839, 38673, 36230,
+                                1317, 1982, 1411, 1672, 1156, 2822, 2109, 2059, 2818, 3648};
 
     /**
      *
@@ -32,35 +41,42 @@ public class Main {
     public static void main(String[] args) throws IOException {
         initNames();
 
-        String f = "test2Metro.tsp";
-//        String f = files[1];
+//        String f = "test2Metro.tsp";
+        String f = files[19];
         FileLoader fileLoader = new FileLoader(f);
         fileLoader.load();
         TspData data = fileLoader.getTspData();
         data.setName(f);
 
-        System.out.println(new TwoOpt(data).calculate().calcObjectiveFunction());
-        int n = data.getSize();
-        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(data);
-//        geneticAlgorithm.setStartPopulation(new HammingRandomPopulation());
-//        geneticAlgorithm.setStartPopulation(new RandomAndTwoOptPopulation());
-//        geneticAlgorithm.setCrossoverTemplate(new PartlyOrderCrossover(3, true));
-        geneticAlgorithm.setCrossoverTemplate(new NeighboursCrossover(1));
-//        geneticAlgorithm.setStopFunctionTemplate(new IterationsStop(15));
-        geneticAlgorithm.setMutationTemplate(new SwapMutation(0.8, 1));
-//        geneticAlgorithm.setMutationTemplate(new InvertMutation(0.8, 1));
-//        geneticAlgorithm.setMutationTemplate(new NearestNeighbourMutation(0.1, n/8, 7*n/8));
-//        geneticAlgorithm.setSelection(new BestWithBestSelection());
-//        Result result = geneticAlgorithm.calculate();
-//        System.out.println(result.objFuncResult);
+//      testData(data);
 
-        Random r = new Random();
-        for(int i = 0; i < 10; i++) {
-            EuclideanTSPGen euclideanTSPGen = new EuclideanTSPGen(50 + r.nextInt(500), 50 + r.nextInt(500));
-            int rand = 40 + r.nextInt(80);
-            if (r.nextDouble() < 0.5) euclideanTSPGen.setType(EuclideanTSPGen.Type.METROPOLIS);
-            euclideanTSPGen.generate("dane/S" + rand, rand);
+        int size = files.length;
+        TspData dataArray[] = new TspData[size];
+        for(int i = 0; i < size; i++) {
+            FileLoader fl = new FileLoader(files[i]);
+            fl.load();
+            dataArray[i] = fl.getTspData();
+            dataArray[i].setName(names[i]);
         }
+
+
+//        ResComp.compareCrossovers("ga/crossovers.csv", dataArray, best, size);
+        ResComp.compareFillers("ga/fillers.csv", dataArray, best, size);
+
+
+//        Random r = new Random();
+//        for(int i = 0; i < 10; i++) {
+//            EuclideanTSPGen euclideanTSPGen = new EuclideanTSPGen(50 + r.nextInt(500), 50 + r.nextInt(500));
+//            int rand = 40 + r.nextInt(80);
+//            if (r.nextDouble() < 0.5) euclideanTSPGen.setType(EuclideanTSPGen.Type.METROPOLIS);
+//            euclideanTSPGen.generate("dane/S" + rand, rand);
+//        }
+
+//        for(int i = 10; i < 20; i++) {
+//            fileLoader.setFileName(files[i]);
+//            fileLoader.load();
+//            draw(new TwoOpt(fileLoader.getTspData()).calculate());
+//        }
 
 
     }
@@ -76,10 +92,30 @@ public class Main {
         System.out.println(loader.getTspData().toString());
     }
 
+    private static void testData(TspData data) {
+        System.out.println(new TwoOpt(data).calculate().calcObjectiveFunction());
+        int n = data.getSize();
+//        GeneticAlgorithm geneticAlgorithm = new IslandsGeneticAlgorithm(data, 8, 5);
+        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(data);
+        geneticAlgorithm.setLongTermCheckerTemplate(new SimpleLongTermChecker());
+        geneticAlgorithm.setLongTermEditorTemplate(new RandomLongTermEditor());
+//        geneticAlgorithm.setStartPopulation(new HammingRandomPopulation());
+//        geneticAlgorithm.setStartPopulation(new RandomAndTwoOptPopulation());
+//        geneticAlgorithm.setCrossoverTemplate(new PartlyOrderCrossover(3, true));
+        geneticAlgorithm.setCrossoverTemplate(new NeighboursCrossover(5));
+//        geneticAlgorithm.setStopFunctionTemplate(new IterationsStop(15));
+        geneticAlgorithm.setMutationTemplate(new SwapMutation(0.8, 1));
+//        geneticAlgorithm.setMutationTemplate(new InvertMutation(0.8, 1));
+//        geneticAlgorithm.setMutationTemplate(new NearestNeighbourMutation(0.1, n/8, 7*n/8));
+//        geneticAlgorithm.setSelection(new BestWithBestSelection());
+        Result result = geneticAlgorithm.calculate();
+        System.out.println(result.objFuncResult);
+    }
+
     private static void initNames() {
         int i = 0;
         for(String file : files) {
-            names[i++] = file.replaceAll(".tsp", "");
+            names[i++] = file.replaceAll(".atsp", "").replaceAll(".tsp", "").substring(fol.length());
         }
     }
 

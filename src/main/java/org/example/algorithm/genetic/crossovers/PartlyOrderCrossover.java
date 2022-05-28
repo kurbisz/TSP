@@ -49,11 +49,11 @@ public class PartlyOrderCrossover implements Crossover {
 	}
 
 	private GeneticResult getNewGeneticResult(GeneticResult result1, GeneticResult result2, List<Integer> list) {
-		System.out.print("elements: ");
-		for(Integer i : list) System.out.print(i + ",");
-		System.out.print('\n');
-		System.out.println(result1.toString());
-		System.out.println(result2.toString());
+//		System.out.print("elements: ");
+//		for(Integer i : list) System.out.print(i + ",");
+//		System.out.print('\n');
+//		System.out.println(result1.toString());
+//		System.out.println(result2.toString());
 
 		int n = result1.getProblemSize();
 		GeneticResult newRes = result1.clone();
@@ -69,8 +69,8 @@ public class PartlyOrderCrossover implements Crossover {
 				newRes.way[i] = order.remove();
 			}
 		}
-		System.out.println(newRes.toString());
-		System.out.println(" ");
+//		System.out.println(newRes.toString());
+//		System.out.println(" ");
 		newRes.calcObjectiveFunction();
 		return newRes;
 	}

@@ -1,4 +1,4 @@
-package org.example.tabooSearchAnalyses;
+package org.example.tabuSearchAnalyses;
 
 import org.example.Main;
 import org.example.algorithm.KRandom;

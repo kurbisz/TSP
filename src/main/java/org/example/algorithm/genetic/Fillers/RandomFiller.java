@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomFiller implements Filler {
 
+
     @Override
     public void fillPopulation(List<GeneticResult> currentPopulation, List<GeneticResult> oldPopulation) {
         int expectedSize = oldPopulation!=null ? oldPopulation.size() : 0;

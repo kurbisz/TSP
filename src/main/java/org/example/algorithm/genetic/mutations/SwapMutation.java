@@ -13,7 +13,7 @@ public class SwapMutation implements Mutation {
 	private ThreadLocalRandom r = ThreadLocalRandom.current();
 
 	public SwapMutation() {
-		this(0.5, 1);
+		this(0.8, 1);
 	}
 
 	public SwapMutation(double chance, int swapAm) {

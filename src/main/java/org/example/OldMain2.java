@@ -3,7 +3,7 @@ package org.example;
 import org.example.data.Result;
 import org.example.data.TspData;
 import org.example.drawer.Drawer;
-import org.example.tabooSearchAnalyses.AlgorithmsComparisonTS;
+import org.example.tabuSearchAnalyses.AlgorithmsComparisonTS;
 
 import java.io.File;
 import java.io.IOException;
