@@ -9,8 +9,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class PartialCrossover implements Crossover {
 
-	boolean bothChildren;
-	int from, to;
+	public boolean bothChildren;
+	public int from, to;
 
 	/**
 	 * Example:

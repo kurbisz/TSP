@@ -42,7 +42,7 @@ public class GeneticAlgorithm extends Algorithm {
 		// Initialize variables with default classes
 		int n = tspData.getSize();
 		populationGeneratorTemplate = new RandomPopulation(100);
-		selectionTemplate = new SimpleBestSelection();
+		selectionTemplate = new SimpleBestSelection(n/2, n/3);
 		crossoverTemplate = new PartialCrossover(n/3, 2*n/3, true);
 		fillerTemplate = new RandomFiller();
 		stopFunctionTemplate = new TimeStop(60000000000L); // 60s na wykonanie
@@ -90,6 +90,26 @@ public class GeneticAlgorithm extends Algorithm {
 
 	public void setLongTermEditorTemplate(LongTermEditor longTermEditorTemplate) {
 		this.longTermEditorTemplate = longTermEditorTemplate;
+	}
+
+	public Crossover getCrossoverTemplate() {
+		return crossoverTemplate;
+	}
+
+	public Filler getFillerTemplate() {
+		return fillerTemplate;
+	}
+
+	public Mutation getMutationTemplate() {
+		return mutationTemplate;
+	}
+
+	public PopulationGenerator getPopulationGeneratorTemplate() {
+		return populationGeneratorTemplate;
+	}
+
+	public Selection getSelectionTemplate() {
+		return selectionTemplate;
 	}
 
 	@Override

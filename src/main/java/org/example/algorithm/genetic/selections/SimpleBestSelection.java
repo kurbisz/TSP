@@ -11,13 +11,19 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class SimpleBestSelection implements Selection {
 
+    public int pairCount, maxInd;
+
+
+    public SimpleBestSelection(int pairCount, int maxInd) {
+        this.pairCount = pairCount;
+        this.maxInd = maxInd;
+    }
+
     @Override
     public List<Pair> getParents(List<GeneticResult> population) {
         List<Pair> parents = new ArrayList<>();
         Comparator<GeneticResult> comparator = new ResultCompare();
         population.sort(comparator);
-        int pairCount = population.size() / 2;
-        int maxInd = population.size() / 3;
         for(int i = 0 ; i < pairCount ; i++){
             int ind1 = ThreadLocalRandom.current().nextInt(0, maxInd);
             int ind2;
@@ -36,6 +42,6 @@ public class SimpleBestSelection implements Selection {
 
     @Override
     public Selection copy() {
-        return new SimpleBestSelection();
+        return new SimpleBestSelection(pairCount, maxInd);
     }
 }

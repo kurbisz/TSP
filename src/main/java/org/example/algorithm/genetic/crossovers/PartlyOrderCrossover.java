@@ -11,8 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class PartlyOrderCrossover implements Crossover {
 
-	boolean bothChildren;
-	int randomElements;
+	public boolean bothChildren;
+	public int randomElements;
 	private ThreadLocalRandom r = ThreadLocalRandom.current();
 
 	/**

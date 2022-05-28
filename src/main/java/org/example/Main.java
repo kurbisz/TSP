@@ -61,7 +61,12 @@ public class Main {
 
 
 //        ResComp.compareCrossovers("ga/crossovers.csv", dataArray, best, size);
-        ResComp.compareFillers("ga/fillers.csv", dataArray, best, size);
+//        ResComp.compareFillers("ga/fillers.csv", dataArray, best, size);
+//        ResComp.compareLongTerm("ga/longTerm.csv", dataArray, best, size);
+        ResComp.compareMutations("ga/mutations.csv", dataArray, best, size);
+        ResComp.compareSelections("ga/selections.csv", dataArray, best, size);
+        ResComp.compareStartPopulations("ga/startPopulations.csv", dataArray, best, size);
+        ResComp.comparePopulationSize("ga/populationSize.csv", dataArray, best, size);
 
 
 //        Random r = new Random();

@@ -14,7 +14,7 @@ public class SimpleLongTermChecker implements LongTermChecker {
 	 * Check if there is no upgrade after 'checkPeriod' steps
 	 */
 	public SimpleLongTermChecker() {
-		this(10000);
+		this(5000);
 	}
 
 	public SimpleLongTermChecker(int checkPeriod) {
