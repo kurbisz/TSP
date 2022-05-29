@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.GAAnalyses.RandResComp;
 import org.example.GAAnalyses.ResComp;
 import org.example.algorithm.TwoOpt;
 import org.example.algorithm.genetic.GeneticAlgorithm;
@@ -63,11 +64,12 @@ public class Main {
 //        ResComp.compareCrossovers("ga/crossovers.csv", dataArray, best, size);
 //        ResComp.compareFillers("ga/fillers.csv", dataArray, best, size);
 //        ResComp.compareLongTerm("ga/longTerm.csv", dataArray, best, size);
-        ResComp.compareMutations("ga/mutations.csv", dataArray, best, size);
-        ResComp.compareSelections("ga/selections.csv", dataArray, best, size);
-        ResComp.compareStartPopulations("ga/startPopulations.csv", dataArray, best, size);
-        ResComp.comparePopulationSize("ga/populationSize.csv", dataArray, best, size);
+//        ResComp.compareMutations("ga/mutations.csv", dataArray, best, size);
+//        ResComp.compareSelections("ga/selections.csv", dataArray, best, size);
+//        ResComp.compareStartPopulations("ga/startPopulations.csv", dataArray, best, size);
+//        ResComp.comparePopulationSize("ga/populationSize.csv", dataArray, best, size);
 
+        RandResComp.genRandIslands("ga/random.csv", dataArray, best, size, 150, 1);
 
 //        Random r = new Random();
 //        for(int i = 0; i < 10; i++) {

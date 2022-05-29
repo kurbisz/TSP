@@ -25,10 +25,10 @@ public class SimpleBestSelection implements Selection {
         Comparator<GeneticResult> comparator = new ResultCompare();
         population.sort(comparator);
         for(int i = 0 ; i < pairCount ; i++){
-            int ind1 = ThreadLocalRandom.current().nextInt(0, maxInd);
+            int ind1 = ThreadLocalRandom.current().nextInt(0, Math.min(population.size(), maxInd));
             int ind2;
             do{
-                ind2 = ThreadLocalRandom.current().nextInt(0, maxInd);
+                ind2 = ThreadLocalRandom.current().nextInt(0, Math.min(population.size(), maxInd));
             }while(ind1 == ind2);
 
             Pair newPair = new Pair(population.get(ind1), population.get(ind2));

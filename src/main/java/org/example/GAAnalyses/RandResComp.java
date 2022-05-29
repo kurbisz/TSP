@@ -31,9 +31,14 @@ public class RandResComp {
 	private static int repeats = 5;
 	private static String name;
 
+	// Not used - too many examples
 	public static void genRand(String fileName, TspData[] dataArray, int[] best, int dataSize, int rand) throws IOException {
 		FileWriter fileWriter = createNewFile(fileName);
-		writeToFile(fileWriter, "Problem;Crossover,Filler,Mutation,Selection,StartPopulation;AllResults\n",true);
+		writeToFile(fileWriter, "Threads;Crossover,Filler,Mutation,Selection,StartPopulation",true);
+		for(int i = 0; i < dataSize; i++) writeToFile(fileWriter, ";" + dataArray[i].getName(), false);
+		writeToFile(fileWriter, "\nNA;NA;NA;NA;NA;NA", false);
+		for(int i = 0; i < dataSize; i++) writeToFile(fileWriter, ";" + best[i], false);
+		writeToFile(fileWriter, "\n", true);
 		for(int c = 0; c < 3; c++) {
 			for(int f = 0; f < 2; f++) {
 				for(int m = 0; m < 3; m++) {
@@ -42,12 +47,12 @@ public class RandResComp {
 							for(int nr = 0; nr < rand; nr++) {
 								Long seed = r.nextLong();
 								r.setSeed(seed);
-								getGeneticAlgorithm(-1, c, f, m, sel, st, dataArray[0]);
+								getGeneticAlgorithm(1, c, f, m, sel, st, dataArray[0]);
 								writeToFile(fileWriter, name, true);
 								for(int i = 0; i < dataSize; i++) {
 									int res = 0;
 									r.setSeed(seed);
-									GeneticAlgorithm geneticAlgorithm = getGeneticAlgorithm(-1, c, f, m, sel, st, dataArray[i]);
+									GeneticAlgorithm geneticAlgorithm = getGeneticAlgorithm(1, c, f, m, sel, st, dataArray[i]);
 									for (int j = 0; j < repeats; j++) {
 										res+=geneticAlgorithm.calculate().objFuncResult;
 									}
@@ -64,8 +69,45 @@ public class RandResComp {
 		fileWriter.close();
 	}
 
+	// Use maxThreads = 1 to check for 1 thread examples
+	public static void genRandIslands(String fileName, TspData[] dataArray, int[] best, int dataSize, int rand, int maxThreads) throws IOException {
+		FileWriter fileWriter = createNewFile(fileName);
+		writeToFile(fileWriter, "Threads;Crossover,Filler,Mutation,Selection,StartPopulation",true);
+		for(int i = 0; i < dataSize; i++) writeToFile(fileWriter, ";" + dataArray[i].getName(), false);
+		writeToFile(fileWriter, "\nNA;NA;NA;NA;NA;NA", false);
+		for(int i = 0; i < dataSize; i++) writeToFile(fileWriter, ";" + best[i], false);
+		writeToFile(fileWriter, "\n", true);
+		for(int t = 1; t <= maxThreads; t++) {
+			for(int nr = 0; nr < rand; nr++) {
+				r.setSeed(r.nextLong());
+				int c = r.nextInt(3), f = r.nextInt(2), m = r.nextInt(3),
+						sel = r.nextInt(3), st = r.nextInt(3);
+				Long seed = r.nextLong();
+				r.setSeed(seed);
+				getGeneticAlgorithm(t, c, f, m, sel, st, dataArray[0]);
+				writeToFile(fileWriter, name, true);
+				for (int i = 0; i < dataSize; i++) {
+					int res = 0;
+					r.setSeed(seed);
+					GeneticAlgorithm geneticAlgorithm = getGeneticAlgorithm(t, c, f, m, sel, st, dataArray[i]);
+					for (int j = 0; j < repeats; j++) {
+						res += geneticAlgorithm.calculate().objFuncResult;
+					}
+					res /= repeats;
+					writeToFile(fileWriter, ";" + res, true);
+				}
+				writeToFile(fileWriter, "\n", true);
+			}
+		}
+		fileWriter.close();
+	}
+
+
+
+
+
 	private static GeneticAlgorithm getGeneticAlgorithm(int threads, int cross, int fill, int mut, int sel, int start, TspData tspData) {
-		name = "";
+		name = threads + ";";
 		int n = tspData.getSize();
 		GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(tspData);
 		if (threads > 1) geneticAlgorithm = new IslandsGeneticAlgorithm(tspData, threads, 50);
@@ -75,16 +117,16 @@ public class RandResComp {
 			RandomPair rp = new RandomPair(n);
 			boolean bool = r.nextBoolean();
 			geneticAlgorithm.setCrossoverTemplate(new PartialCrossover(rp.from, rp.to, bool));
-			name += "PC," + rounded(rp.from/n) + "," + rounded(rp.to/n) + "," + bool;
+			name += "PC-" + rounded((double) rp.from/n) + "-" + rounded((double) rp.to/n) + "-" + bool;
 		} else if (cross == 1) {
 			int k = r.nextInt(n);
 			boolean bool = r.nextBoolean();
 			geneticAlgorithm.setCrossoverTemplate(new PartlyOrderCrossover(k, bool));
-			name += "POC," + rounded(k/n) + "," + bool;
+			name += "POC-" + rounded((double) k/n) + "-" + bool;
 		} else {
 			int k = r.nextInt(n/2);
 			geneticAlgorithm.setCrossoverTemplate(new NeighboursCrossover(k));
-			name += "NC," + rounded(k/n);
+			name += "NC-" + rounded((double) k/n);
 		}
 		name += ";";
 		// Filler
@@ -95,7 +137,7 @@ public class RandResComp {
 		else {
 			int k1 = r.nextInt(n), k2 = r.nextInt(2*n);
 			geneticAlgorithm.setFillerTemplate(new BestFiller(k1, k2));
-			name += "BF," + rounded(k1/n) + "," + rounded(k2/n);
+			name += "BF-" + rounded((double) k1/n) + "-" + rounded((double) k2/n);
 		}
 		name += ";";
 		// Mutation
@@ -103,19 +145,19 @@ public class RandResComp {
 			double k = r.nextDouble();
 			int k2 = r.nextInt(n/2);
 			geneticAlgorithm.setMutationTemplate(new InvertMutation(k, k2));
-			name += "IM," + rounded(k) + "," + rounded(k2/n);
+			name += "IM-" + rounded(k) + "-" + rounded((double) k2/n);
 		}
 		else if(mut == 1) {
 			RandomPair rp = new RandomPair(n);
 			double k = r.nextDouble();
 			geneticAlgorithm.setMutationTemplate(new NearestNeighbourMutation(k, rp.from, rp.to));
-			name += "NNM," + rounded(k) + "," + rounded(rp.from/n) + "," + rounded(rp.to/n);
+			name += "NNM-" + rounded(k) + "-" + rounded((double) rp.from/n) + "-" + rounded((double) rp.to/n);
 		}
 		else {
 			double k = r.nextDouble();
 			int k2 = r.nextInt(n);
 			geneticAlgorithm.setMutationTemplate(new SwapMutation(k, k2));
-			name += "SM," + rounded(k) + "," + rounded(k2/n);
+			name += "SM-" + rounded(k) + "-" + rounded((double) k2/n);
 		}
 		name += ";";
 		int populationSize = 50 + r.nextInt(450);
@@ -124,32 +166,32 @@ public class RandResComp {
 		if(sel == 0) {
 			int k = r.nextInt(populationSize);
 			geneticAlgorithm.setSelectionTemplate(new RandomSelection(k));
-			name += "RS," + populationSize + "," + rounded(k/populationSize);
+			name += "RS-" + populationSize + "-" + rounded((double) k/populationSize);
 		}
 		else if(sel == 1) {
 			RandomPair rp = new RandomPair(populationSize);
 			geneticAlgorithm.setSelectionTemplate(new SimpleBestSelection(rp.to, rp.from));
-			name += "SBS," + populationSize + "," + rounded(rp.from/populationSize) + "," + rounded(rp.to/populationSize);
+			name += "SBS-" + populationSize + "-" + rounded((double) rp.from/populationSize) + "-" + rounded((double) rp.to/populationSize);
 		}
 		else {
 			int k = (int) (r.nextDouble()*populationSize);
 			geneticAlgorithm.setSelectionTemplate(new BestWithBestSelection(k));
-			name += "BWBS," + populationSize + "," + rounded(k/populationSize);
+			name += "BWBS-" + populationSize + "-" + rounded((double) k/populationSize);
 		}
 		name += ";";
 		// Start population
 		if(start == 0) {
 			geneticAlgorithm.setStartPopulation(new RandomPopulation(populationSize));
-			name += "RP," + populationSize;
+			name += "RP-" + populationSize;
 		}
 		else if(start == 1) {
 			int k = r.nextInt(20);
 			geneticAlgorithm.setStartPopulation(new RandomAndTwoOptPopulation(populationSize, k));
-			name += "RTOP," + populationSize + "," + k;
+			name += "RTOP-" + populationSize + "-" + k;
 		}
 		else {
 			geneticAlgorithm.setStartPopulation(new HammingRandomPopulation(populationSize, 0.9));
-			name += "HRP," + populationSize;
+			name += "HRP-" + populationSize;
 		}
 
 		geneticAlgorithm.setStopFunctionTemplate(new TimeStop(12000000000L));
@@ -170,7 +212,7 @@ public class RandResComp {
 	}
 
 	private static String rounded(double d) {
-		return String.format("%,.3f", d);
+		return String.format("%.3f", d);
 	}
 
 	static class RandomPair {

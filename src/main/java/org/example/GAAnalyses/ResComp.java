@@ -107,26 +107,26 @@ public class ResComp {
 	public static void compareLongTerm(String fileName, TspData[] dataArray, int[] best, int dataSize) throws IOException {
 		FileWriter fileWriter = createNewFile(fileName);
 		writeToFile(fileWriter, "Problem;BestResult;None;Random;Best\n", true);
-		for(int i = 0; i < dataSize; i++) {
+		for(int i = 10; i < dataSize; i++) {
 			writeToFile(fileWriter, dataArray[i].getName() + ";" + best[i], true);
 			int n = dataArray[i].getSize();
 			int res;
 			GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-			geneticAlgorithm.setStopFunctionTemplate(new TimeStop(300000000000L));
+			geneticAlgorithm.setStopFunctionTemplate(new TimeStop(150000000000L));
 			geneticAlgorithm.setLongTermCheckerTemplate(null);
 			geneticAlgorithm.setLongTermEditorTemplate(null);
 			res=geneticAlgorithm.calculate().objFuncResult;
 			writeToFile(fileWriter, ";" + res, true);
 
 			geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-			geneticAlgorithm.setStopFunctionTemplate(new TimeStop(300000000000L));
+			geneticAlgorithm.setStopFunctionTemplate(new TimeStop(150000000000L));
 			geneticAlgorithm.setLongTermCheckerTemplate(new SimpleLongTermChecker());
 			geneticAlgorithm.setLongTermEditorTemplate(new RandomLongTermEditor());
 			res=geneticAlgorithm.calculate().objFuncResult;
 			writeToFile(fileWriter, ";" + res, true);
 
 			geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-			geneticAlgorithm.setStopFunctionTemplate(new TimeStop(300000000000L));
+			geneticAlgorithm.setStopFunctionTemplate(new TimeStop(150000000000L));
 			geneticAlgorithm.setLongTermCheckerTemplate(new SimpleLongTermChecker());
 			geneticAlgorithm.setLongTermEditorTemplate(new BestLongTermEditor());
 			res=geneticAlgorithm.calculate().objFuncResult;
@@ -253,50 +253,71 @@ public class ResComp {
 
 	public static void comparePopulationSize(String fileName, TspData[] dataArray, int[] best, int dataSize) throws IOException {
 		FileWriter fileWriter = createNewFile(fileName);
-		writeToFile(fileWriter, "Problem;20;50;100;200;500\n", true);
+		writeToFile(fileWriter, "Problem;BestResult;20;50;100;200;500;1000\n", true);
 		for(int i = 0; i < dataSize; i++) {
 			writeToFile(fileWriter, dataArray[i].getName() + ";" + best[i], true);
 			int n = dataArray[i].getSize();
 			int res = 0;
+			int populationSize = 20;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setStartPopulation(new RandomPopulation(20));
+				geneticAlgorithm.setStartPopulation(new RandomPopulation(populationSize));
+				geneticAlgorithm.setSelectionTemplate(new SimpleBestSelection(populationSize/2, populationSize/3));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
 			res /= repeats;
 			writeToFile(fileWriter, ";" + res, true);
 
 			res = 0;
+			populationSize = 50;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setStartPopulation(new RandomPopulation(50));
+				geneticAlgorithm.setStartPopulation(new RandomPopulation(populationSize));
+				geneticAlgorithm.setSelectionTemplate(new SimpleBestSelection(populationSize/2, populationSize/3));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
 			res /= repeats;
 			writeToFile(fileWriter, ";" + res, true);
 
 			res = 0;
+			populationSize = 100;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setStartPopulation(new RandomPopulation(100));
+				geneticAlgorithm.setStartPopulation(new RandomPopulation(populationSize));
+				geneticAlgorithm.setSelectionTemplate(new SimpleBestSelection(populationSize/2, populationSize/3));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
 			res /= repeats;
 			writeToFile(fileWriter, ";" + res, true);
 
 			res = 0;
+			populationSize = 200;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setStartPopulation(new RandomPopulation(200));
+				geneticAlgorithm.setStartPopulation(new RandomPopulation(populationSize));
+				geneticAlgorithm.setSelectionTemplate(new SimpleBestSelection(populationSize/2, populationSize/3));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
 			res /= repeats;
 			writeToFile(fileWriter, ";" + res, true);
 
 			res = 0;
+			populationSize = 500;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setStartPopulation(new RandomPopulation(500));
+				geneticAlgorithm.setStartPopulation(new RandomPopulation(populationSize));
+				geneticAlgorithm.setSelectionTemplate(new SimpleBestSelection(populationSize/2, populationSize/3));
+				res+=geneticAlgorithm.calculate().objFuncResult;
+			}
+			res /= repeats;
+			writeToFile(fileWriter, ";" + res, true);
+
+			res = 0;
+			populationSize = 1000;
+			for(int j = 0; j < repeats; j++) {
+				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
+				geneticAlgorithm.setStartPopulation(new RandomPopulation(populationSize));
+				geneticAlgorithm.setSelectionTemplate(new SimpleBestSelection(populationSize/2, populationSize/3));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
 			res /= repeats;

@@ -15,7 +15,7 @@ public class HammingRandomPopulation implements PopulationGenerator {
     double minPercentage;
 
     public HammingRandomPopulation() {
-        this(100, 0.985);
+        this(100, 0.85  );
     }
 
     public HammingRandomPopulation(int populationSize, double minPercentage) {
