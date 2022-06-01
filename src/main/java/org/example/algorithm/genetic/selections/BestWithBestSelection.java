@@ -23,7 +23,7 @@ public class BestWithBestSelection implements Selection {
         Comparator<GeneticResult> comparator = new ResultCompare();
         population.sort(comparator);
         if(pairCount % 2 == 1) pairCount--;
-        for(int i = 0; i < pairCount; i+=2) {
+        for(int i = 0; i < pairCount && 2*i+1 < population.size(); i+=2) {
             Pair newPair = new Pair(population.get(2*i), population.get(2*i+1));
             parents.add(newPair);
         }

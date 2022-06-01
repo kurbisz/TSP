@@ -72,29 +72,33 @@ public class RandResComp {
 	// Use maxThreads = 1 to check for 1 thread examples
 	public static void genRandIslands(String fileName, TspData[] dataArray, int[] best, int dataSize, int rand, int maxThreads) throws IOException {
 		FileWriter fileWriter = createNewFile(fileName);
-		writeToFile(fileWriter, "Threads;Crossover,Filler,Mutation,Selection,StartPopulation",true);
-		for(int i = 0; i < dataSize; i++) writeToFile(fileWriter, ";" + dataArray[i].getName(), false);
-		writeToFile(fileWriter, "\nNA;NA;NA;NA;NA;NA", false);
-		for(int i = 0; i < dataSize; i++) writeToFile(fileWriter, ";" + best[i], false);
-		writeToFile(fileWriter, "\n", true);
+//		writeToFile(fileWriter, "Threads;Crossover,Filler,Mutation,Selection,StartPopulation",true);
+//		for(int i = 0; i < dataSize; i++) writeToFile(fileWriter, ";" + dataArray[i].getName(), false);
+//		writeToFile(fileWriter, "\nNA;NA;NA;NA;NA;NA", false);
+//		for(int i = 0; i < dataSize; i++) writeToFile(fileWriter, ";" + best[i], false);
+//		writeToFile(fileWriter, "\n", true);
 		for(int t = 1; t <= maxThreads; t++) {
 			for(int nr = 0; nr < rand; nr++) {
-				r.setSeed(r.nextLong());
-				int c = r.nextInt(3), f = r.nextInt(2), m = r.nextInt(3),
-						sel = r.nextInt(3), st = r.nextInt(3);
-				Long seed = r.nextLong();
-				r.setSeed(seed);
-				getGeneticAlgorithm(t, c, f, m, sel, st, dataArray[0]);
-				writeToFile(fileWriter, name, true);
-				for (int i = 0; i < dataSize; i++) {
-					int res = 0;
+				try {
+					r.setSeed(r.nextLong());
+					int c = r.nextInt(3), f = r.nextInt(2), m = r.nextInt(3),
+							sel = r.nextInt(3), st = r.nextInt(3);
+					Long seed = r.nextLong();
 					r.setSeed(seed);
-					GeneticAlgorithm geneticAlgorithm = getGeneticAlgorithm(t, c, f, m, sel, st, dataArray[i]);
-					for (int j = 0; j < repeats; j++) {
-						res += geneticAlgorithm.calculate().objFuncResult;
+					getGeneticAlgorithm(t, c, f, m, sel, st, dataArray[0]);
+					writeToFile(fileWriter, name, true);
+					for (int i = 0; i < dataSize; i++) {
+						int res = 0;
+						r.setSeed(seed);
+						GeneticAlgorithm geneticAlgorithm = getGeneticAlgorithm(t, c, f, m, sel, st, dataArray[i]);
+						for (int j = 0; j < repeats; j++) {
+							res += geneticAlgorithm.calculate().objFuncResult;
+						}
+						res /= repeats;
+						writeToFile(fileWriter, ";" + res, true);
 					}
-					res /= repeats;
-					writeToFile(fileWriter, ";" + res, true);
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				writeToFile(fileWriter, "\n", true);
 			}

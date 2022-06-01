@@ -28,7 +28,7 @@ public class BestFiller implements Filler {
 
         Comparator<GeneticResult> comparator = new ResultCompare();
         oldPopulation.sort(comparator);
-        for(int i = 0; i < copyAm && currentPopulation.size() < maxCities; i++) {
+        for(int i = 0; i < copyAm && i < oldPopulation.size() && currentPopulation.size() < maxCities; i++) {
             currentPopulation.add(oldPopulation.get(i));
         }
     }
