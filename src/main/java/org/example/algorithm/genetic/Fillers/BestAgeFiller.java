@@ -3,36 +3,38 @@ package org.example.algorithm.genetic.Fillers;
 import org.example.algorithm.genetic.GeneticResult;
 import org.example.algorithm.genetic.selections.util.ResultCompare;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class BestFiller implements Filler {
+public class BestAgeFiller implements Filler {
 
-    private int copyAm, maxCities;
+    int copyAm;
+    int criticalAge;
 
-    /**
-     * N best cities will be copied to the new list - list will not be the same size!
-     * @param copyAm amount of best cities
-     * @param maxCities maximum amount of cities on list
-     */
-    public BestFiller(int copyAm, int maxCities) {
+    public BestAgeFiller(int copyAm, int criticalAge) {
         this.copyAm = copyAm;
-        this.maxCities = maxCities;
+        this.criticalAge = criticalAge;
     }
 
     @Override
     public void fillPopulation(List<GeneticResult> currentPopulation, List<GeneticResult> oldPopulation) {
+        int maxCities = oldPopulation.size();
         Comparator<GeneticResult> comparator = new ResultCompare();
         oldPopulation.sort(comparator);
+        if(copyAm > maxCities) {
+            copyAm = maxCities;
+        }
+
         for(int i = 0; i < copyAm && i < oldPopulation.size() && currentPopulation.size() < maxCities; i++) {
-            currentPopulation.add(oldPopulation.get(i));
+            if(oldPopulation.get(i).getAge() < ThreadLocalRandom.current().nextInt(criticalAge)) {
+                currentPopulation.add(oldPopulation.get(i));
+            }
         }
     }
 
     @Override
     public Filler copy() {
-        return new BestFiller(copyAm, maxCities);
+        return new BestAgeFiller(copyAm, criticalAge);
     }
 }

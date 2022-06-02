@@ -6,6 +6,7 @@ import org.example.data.TspData;
 public class GeneticResult extends Result {
 
 	private double chanceToCross = 0.4;
+	int age = 0;
 
 	public GeneticResult(TspData tspData) {
 		super(tspData);
@@ -50,6 +51,14 @@ public class GeneticResult extends Result {
 			if(res.way[i] != way[i]) return false;
 		}
 		return true;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void incrementAge() {
+		age++;
 	}
 
 
