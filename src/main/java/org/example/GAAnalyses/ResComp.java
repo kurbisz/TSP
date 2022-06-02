@@ -348,7 +348,7 @@ public class ResComp {
 			res = 0;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setFillerTemplate(new AgeFiller(20));
+				geneticAlgorithm.setFillerTemplate(new AgeFiller(35));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
 			res /= repeats;
@@ -357,7 +357,7 @@ public class ResComp {
 			res = 0;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setFillerTemplate(new BestAgeFiller(n/5, 100));
+				geneticAlgorithm.setFillerTemplate(new BestAgeFiller(n/5, 35));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
 			res /= repeats;
@@ -378,15 +378,6 @@ public class ResComp {
 			int res = 0;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setFillerTemplate(new AgeFiller(5));
-				res+=geneticAlgorithm.calculate().objFuncResult;
-			}
-			res /= repeats;
-			writeToFile(fileWriter, ";" + res, true);
-
-			res = 0;
-			for(int j = 0; j < repeats; j++) {
-				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
 				geneticAlgorithm.setFillerTemplate(new AgeFiller(10));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
@@ -396,7 +387,7 @@ public class ResComp {
 			res = 0;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setFillerTemplate(new AgeFiller(20));
+				geneticAlgorithm.setFillerTemplate(new AgeFiller(30));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
 			res /= repeats;
@@ -405,7 +396,16 @@ public class ResComp {
 			res = 0;
 			for(int j = 0; j < repeats; j++) {
 				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
-				geneticAlgorithm.setFillerTemplate(new AgeFiller(40));
+				geneticAlgorithm.setFillerTemplate(new AgeFiller(60));
+				res+=geneticAlgorithm.calculate().objFuncResult;
+			}
+			res /= repeats;
+			writeToFile(fileWriter, ";" + res, true);
+
+			res = 0;
+			for(int j = 0; j < repeats; j++) {
+				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
+				geneticAlgorithm.setFillerTemplate(new AgeFiller(90));
 				res+=geneticAlgorithm.calculate().objFuncResult;
 			}
 			res /= repeats;

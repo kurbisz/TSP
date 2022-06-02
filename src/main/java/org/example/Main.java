@@ -68,8 +68,8 @@ public class Main {
 //        ResComp.compareSelections("ga/selections.csv", dataArray, best, size);
 //        ResComp.compareStartPopulations("ga/startPopulations.csv", dataArray, best, size);
 //        ResComp.comparePopulationSize("ga/populationSize.csv", dataArray, best, size);
-        ResComp.compareCriticalAge("ga/criticalAge.csv", dataArray, best, size);
-
+        ResComp.compareCriticalAge("ga/criticalAge2.csv", dataArray, best, size);
+          ResComp.compareAge("ga/age.csv", dataArray, best, size);
 //        RandResComp.genRandIslands("ga/random.csv", dataArray, best, size, 150, 1);
 
 //        Random r = new Random();
