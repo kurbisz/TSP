@@ -1,5 +1,7 @@
 package org.example.GAAnalyses;
 
+import org.example.algorithm.genetic.Fillers.AgeFiller;
+import org.example.algorithm.genetic.Fillers.BestAgeFiller;
 import org.example.algorithm.genetic.Fillers.BestFiller;
 import org.example.algorithm.genetic.Fillers.RandomFiller;
 import org.example.algorithm.genetic.GeneticAlgorithm;
@@ -328,6 +330,92 @@ public class ResComp {
 		fileWriter.close();
 	}
 
+	public static void compareAge(String fileName, TspData[] dataArray, int[] best, int dataSize) throws IOException {
+		FileWriter fileWriter = createNewFile(fileName);
+		writeToFile(fileWriter, "Problem;BestResult;Best; Age; Age + best\n", true);
+		for(int i = 0; i < dataSize; i++) {
+			writeToFile(fileWriter, dataArray[i].getName() + ";" + best[i], true);
+			int n = dataArray[i].getSize();
+			int res = 0;
+			for(int j = 0; j < repeats; j++) {
+				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
+				geneticAlgorithm.setFillerTemplate(new BestFiller(n/5, 100));
+				res+=geneticAlgorithm.calculate().objFuncResult;
+			}
+			res /= repeats;
+			writeToFile(fileWriter, ";" + res, true);
+
+			res = 0;
+			for(int j = 0; j < repeats; j++) {
+				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
+				geneticAlgorithm.setFillerTemplate(new AgeFiller(20));
+				res+=geneticAlgorithm.calculate().objFuncResult;
+			}
+			res /= repeats;
+			writeToFile(fileWriter, ";" + res, true);
+
+			res = 0;
+			for(int j = 0; j < repeats; j++) {
+				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
+				geneticAlgorithm.setFillerTemplate(new BestAgeFiller(n/5, 100));
+				res+=geneticAlgorithm.calculate().objFuncResult;
+			}
+			res /= repeats;
+			writeToFile(fileWriter, ";" + res, true);
+
+			writeToFile(fileWriter, "\n", true);
+		}
+		fileWriter.close();
+	}
+
+	public static void compareCriticalAge(String fileName, TspData[] dataArray, int[] best, int dataSize) throws IOException {
+		FileWriter fileWriter = createNewFile(fileName);
+		writeToFile(fileWriter, "Problem;BestResult;Best; Age; Age + best\n", true);
+		for(int i = 0; i < dataSize; i++) {
+			System.out.println(dataArray[i].getName());
+			writeToFile(fileWriter, dataArray[i].getName() + ";" + best[i], true);
+			int n = dataArray[i].getSize();
+			int res = 0;
+			for(int j = 0; j < repeats; j++) {
+				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
+				geneticAlgorithm.setFillerTemplate(new AgeFiller(5));
+				res+=geneticAlgorithm.calculate().objFuncResult;
+			}
+			res /= repeats;
+			writeToFile(fileWriter, ";" + res, true);
+
+			res = 0;
+			for(int j = 0; j < repeats; j++) {
+				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
+				geneticAlgorithm.setFillerTemplate(new AgeFiller(10));
+				res+=geneticAlgorithm.calculate().objFuncResult;
+			}
+			res /= repeats;
+			writeToFile(fileWriter, ";" + res, true);
+
+			res = 0;
+			for(int j = 0; j < repeats; j++) {
+				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
+				geneticAlgorithm.setFillerTemplate(new AgeFiller(20));
+				res+=geneticAlgorithm.calculate().objFuncResult;
+			}
+			res /= repeats;
+			writeToFile(fileWriter, ";" + res, true);
+
+			res = 0;
+			for(int j = 0; j < repeats; j++) {
+				GeneticAlgorithm geneticAlgorithm = getDefaultGeneticAlgorithm(dataArray[i]);
+				geneticAlgorithm.setFillerTemplate(new AgeFiller(40));
+				res+=geneticAlgorithm.calculate().objFuncResult;
+			}
+			res /= repeats;
+			writeToFile(fileWriter, ";" + res, true);
+
+			writeToFile(fileWriter, "\n", true);
+		}
+		fileWriter.close();
+	}
+
 	private static GeneticAlgorithm getDefaultGeneticAlgorithm(TspData tspData) {
 		int n = tspData.getSize();
 		GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(tspData);
@@ -339,7 +427,7 @@ public class ResComp {
 		geneticAlgorithm.setSelectionTemplate(new SimpleBestSelection(n/2, n/3));
 		geneticAlgorithm.setStartPopulation(new RandomPopulation(100));
 		geneticAlgorithm.setThreadCount(1);
-		geneticAlgorithm.setStopFunctionTemplate(new TimeStop(12000000000L));
+		geneticAlgorithm.setStopFunctionTemplate(new TimeStop(1200000000L));
 		return geneticAlgorithm;
 	}
 
